@@ -1,9 +1,10 @@
-import './App.css';
+import logo from './Logo.svg';
 
 function App() {
   return (
     <div className="App">
-      <h1>React App</h1>
+      <h1>Holidaze</h1>
+      <img src={logo} alt="Holidaze Logo" />
     </div>
   );
 }
