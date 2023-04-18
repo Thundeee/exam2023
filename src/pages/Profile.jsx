@@ -1,15 +1,15 @@
 import logo from '../Logo.svg';
 
 
-const Home =  () => {
+const Profile =  () => {
   
     return (
 
 <div className="App">
-<h1>Holidaze</h1>
+<h1>profil</h1>
 <img src={logo} alt="Holidaze Logo" />
 </div>
     );
   };
   
-  export default Home;
+  export default Profile;

@@ -2,7 +2,11 @@ import { Routes, Route } from "react-router-dom";
 import { theme } from "./theme/theme";
 import { ThemeProvider } from "@mui/material";
 import Layout from './components/Layout';
-import logo from './Logo.svg';
+import Home from './pages/Home';
+import Profile from './pages/Profile';
+import Venue from './pages/Venue';
+import VenueCreate from './pages/VenueCreate';
+import VenueList from './pages/VenueList';
 
 function App() {
   return (
@@ -10,10 +14,14 @@ function App() {
     <ThemeProvider theme={theme}>
           <Layout>
       <Routes>
-        <Route index element={    <div className="App">
-      <h1>Holidaze</h1>
-      <img src={logo} alt="Holidaze Logo" />
-</div>} />
+        <Route index element={<Home/>} />
+        <Route path="/profile" element={<Profile/>} />
+        <Route path="/Venue" element={<Venue/>} />
+        <Route path="/VenueCreate" element={<VenueCreate/>} />
+        <Route path="/VenueList" element={<VenueList/>} />
+        <Route path="*" element={<div>Route not found</div>} />
+
+
       </Routes>
       </Layout>
   </ThemeProvider>
