@@ -1,4 +1,6 @@
 import { Link } from 'react-router-dom';
+import Logo from '../Logo.svg';
+import useApi from '../hooks/useApi';
 
 
 const Header = () => {
@@ -6,26 +8,11 @@ const Header = () => {
 
     return (
         <header>
-        <nav>
-        <ul>
-          <li>
-            <Link to='/'>Home</Link>
-          </li>
-          <li>
-            <Link to='/VenueCreate'>VenueCreate</Link>
-          </li>
-          <li>
-            <Link to='/Venue'>Venue</Link>
-          </li>
-          <li>
-            <Link to='/VenueList'>VenueList</Link>
-          </li>
-            <li>
-            <Link to='/Profile'>Profile</Link>
-            </li>
-        </ul>
 
-      </nav>
+          <img src={Logo} alt="Holidaze Logo" />
+            <h1>Holidaze</h1>
+            <button>Sign up</button>
+            <button>Log in</button>
       </header>
     );
   };

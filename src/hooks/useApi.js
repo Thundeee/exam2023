@@ -1,20 +1,20 @@
 import { useState, useEffect } from "react";
 
-const useApi = (url) => {
+const useApi = (url, options = {}) => {
   const [data, setData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [isError, setIsError] = useState(false);
 
   useEffect(() => {
-    const getData = async () => {
+    const accesData = async () => {
       try {
         setIsLoading(true);
         setIsError(false);
-        const fetchedData = await fetch(url);
-        if (!fetchedData.ok) {
-          throw new Error(fetchedData.status);
+        const response = await fetch(url, options);
+        if (!response.ok) {
+          throw new Error(response.status);
         }
-        const json = await fetchedData.json();
+        const json = await response.json();
         setData(json);
       } catch (error) {
         console.log(error);
@@ -24,8 +24,9 @@ const useApi = (url) => {
       }
     };
 
-    getData();
-  }, [url]);
+    accesData();
+  }, [url, options]);
+
   return { data, isLoading, isError };
 };
 
