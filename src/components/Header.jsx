@@ -1,9 +1,39 @@
 import { Link } from 'react-router-dom';
+import React from 'react';
+import { useState } from "react";
+import { Button } from "@mui/material";
 import Logo from '../Logo.svg';
 import useApi from '../hooks/useApi';
+import SwipeableDrawer from '@mui/material/SwipeableDrawer';
+
+
+
+
+
+
 
 
 const Header = () => {
+
+  const CorrectForm = ({ type }) => {
+    return (
+      <div>
+        {type === 'login' ? <h1>login form</h1> : <h1>signup form</h1>}
+      </div>
+    );
+  }
+
+
+  const [drawer, setDrawer] = useState(false);
+  const [formType, setFormType] = useState('');
+ const toggleDrawer = (type) => (event) => {
+    if (event && event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
+      return;
+    }
+  
+    setFormType(type);
+    setDrawer(true);
+  };
 
 
     return (
@@ -11,8 +41,16 @@ const Header = () => {
 
           <img src={Logo} alt="Holidaze Logo" />
             <h1>Holidaze</h1>
-            <button>Sign up</button>
-            <button>Log in</button>
+            <Button onClick={toggleDrawer('signup')}>Sign up</Button>
+      <Button onClick={toggleDrawer('login')}>Log in</Button>
+      <SwipeableDrawer
+  anchor={"right"}
+  open={drawer}
+  onClose={() => setDrawer(false)}
+  onOpen={toggleDrawer(true)}
+>
+  <CorrectForm type={formType} />
+</SwipeableDrawer>
       </header>
     );
   };
