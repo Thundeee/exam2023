@@ -25,6 +25,7 @@ const loginSchema = yup
     email: yup
       .string()
       .email("Email needs to be valid")
+        .matches(/^[a-zA-Z0-9_.+-]+@(stud\.)?noroff\.no$/gmi, "Email must be a valid noroff email.")
       .required("Please enter your email address."),
 
       avatar: yup

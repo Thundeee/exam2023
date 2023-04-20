@@ -2,7 +2,6 @@ import React from 'react';
 import { useState } from "react";
 import { Button } from "@mui/material";
 import Logo from '../Logo.svg';
-import useApi from '../hooks/useApi';
 import SwipeableDrawer from '@mui/material/SwipeableDrawer';
 import Login from './Login';
 import Register from './Register';

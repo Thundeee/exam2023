@@ -1,11 +1,13 @@
 import { FormField } from "./formfield/Formfield";
-import {React, useRef, useState} from "react";
+import {React, useState} from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { registerSchema } from "../utils/yupSchema";
 import { Button } from "@mui/material";
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Switch from '@mui/material/Switch';
+import useApi from '../hooks/useApi';
+import {BASE_URL_AUTH} from '../utils/constants';
 
 
 
@@ -24,17 +26,27 @@ const Register = () => {
 
 const [manager, setManager] = useState(false);
 
+const { data, isLoading, isError } = useApi()
 
 function toggler() {
     setManager(!manager);
     
 }
+    
 
 
       function onSubmit(data) {
         data.venueManager = manager;
         console.log(data);
-    
+        const options = {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data),
+        };
+            useApi(`${BASE_URL_AUTH}/register`, options);
+
       } 
     
   
@@ -44,7 +56,7 @@ function toggler() {
 <h1>Register!</h1>
       <form id="loginForm" onSubmit={handleSubmit(onSubmit)}>
       <FormField
-          name="username"
+          name="name"
           label="Username"
             type="text"
           register={register}
