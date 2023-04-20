@@ -17,8 +17,8 @@ function App() {
         <Route index element={<Home/>} />
         <Route path="/profile" element={<Profile/>} />
         <Route path="/Venue" element={<Venue/>} />
-        <Route path="/VenueCreate" element={<VenueCreate/>} />
-        <Route path="/VenueList" element={<VenueList/>} />
+        <Route path="/Venue/Create" element={<VenueCreate/>} />
+        <Route path="/Venue/All" element={<VenueList/>} />
         <Route path="*" element={<div>Route not found</div>} />
 
 

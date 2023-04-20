@@ -45,6 +45,7 @@ const Header = () => {
             <Button onClick={toggleDrawer('signup')}>Sign up</Button>
       <Button onClick={toggleDrawer('login')}>Log in</Button>
       <SwipeableDrawer
+      PaperProps={{ style: { width: '30%' } }}
   anchor={"right"}
   open={drawer}
   onClose={() => setDrawer(false)}

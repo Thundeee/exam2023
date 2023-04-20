@@ -1,4 +1,6 @@
 import logo from '../Logo.svg';
+import { Button } from '@mui/material';
+import { Link } from 'react-router-dom';
 
 
 const Home =  () => {
@@ -7,7 +9,9 @@ const Home =  () => {
 
 <div className="App">
 <h1>Holidaze</h1>
-<img src={logo} alt="Holidaze Logo" />
+<Button variant="contained" color="primary" component={Link} to="/Venue/All">Explore Venues</Button>
+<Button variant="contained" color="primary" component={Link} to="/Venue/Create">List your Venue</Button>
+
 </div>
     );
   };
