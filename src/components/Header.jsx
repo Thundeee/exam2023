@@ -1,10 +1,11 @@
-import { Link } from 'react-router-dom';
 import React from 'react';
 import { useState } from "react";
 import { Button } from "@mui/material";
 import Logo from '../Logo.svg';
 import useApi from '../hooks/useApi';
 import SwipeableDrawer from '@mui/material/SwipeableDrawer';
+import Login from './Login';
+import Register from './Register';
 
 
 
@@ -18,7 +19,7 @@ const Header = () => {
   const CorrectForm = ({ type }) => {
     return (
       <div>
-        {type === 'login' ? <h1>login form</h1> : <h1>signup form</h1>}
+        {type === 'login' ? <Login/> : <Register/>}
       </div>
     );
   }
