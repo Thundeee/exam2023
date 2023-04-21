@@ -5,14 +5,26 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { loginSchema } from "../utils/yupSchema";
 import { Button } from "@mui/material";
 import {BASE_URL_AUTH} from '../utils/constants';
-
+import useLocalStorage from "../hooks/useLocalStorage";
 
 
 
 
 
 const Login = () => {
-    const {
+   
+  // eslint-disable-next-line no-unused-vars
+  const [accessToken, setAccessToken] = useLocalStorage('accessToken', '');
+    // eslint-disable-next-line no-unused-vars
+  const [name, setName] = useLocalStorage('username', '');
+    // eslint-disable-next-line no-unused-vars
+  const [avatar, setAvatar] = useLocalStorage('avatar', '');
+    // eslint-disable-next-line no-unused-vars
+  const [venueManager, setVenueManager] = useLocalStorage('venueManager', '');
+
+  
+  
+  const {
         register,
         handleSubmit,
         formState: { errors },
@@ -35,7 +47,15 @@ const Login = () => {
             console.log(response);
             const json = await response.json();
             console.log(json);
-            
+           await setAccessToken(json.accessToken); 
+           await setName(json.name);
+            if (json.avatar) {
+            await  setAvatar(json.avatar); 
+            }
+            if (json.venueManager) {
+           await   setVenueManager(json.venueManager);
+            }
+            window.location.reload();
           }
           )
       }

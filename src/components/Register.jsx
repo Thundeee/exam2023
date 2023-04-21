@@ -25,7 +25,6 @@ const Register = () => {
   }
 
   async function onSubmit(data) {
-    console.log("dwx");
     data.venueManager = manager;
     console.log(data);
     const options = {

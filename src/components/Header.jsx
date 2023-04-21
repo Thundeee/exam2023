@@ -5,12 +5,7 @@ import Logo from '../Logo.svg';
 import SwipeableDrawer from '@mui/material/SwipeableDrawer';
 import Login from './Login';
 import Register from './Register';
-
-
-
-
-
-
+import useLocalStorage from '../hooks/useLocalStorage';
 
 
 const Header = () => {
@@ -23,6 +18,34 @@ const Header = () => {
     );
   }
 
+  const [storage] = useLocalStorage('accessToken');
+
+
+ function logout() {
+   localStorage.removeItem ('accessToken');
+   localStorage.removeItem ('username');
+   localStorage.removeItem ('avatar');
+   localStorage.removeItem ('venueManager');
+  window.location.reload();
+}
+  
+  const CorrectButtons = () => {
+    const isLoggedIn = storage;
+    const buttons = isLoggedIn
+      ? (
+        <>
+          <img src={Logo} alt="Holidaze Logo" />
+          <Button onClick={logout}>Log out</Button>
+        </>
+      )
+      : (
+        <>
+          <Button onClick={toggleDrawer('signup')}>Sign up</Button>
+          <Button onClick={toggleDrawer('login')}>Log in</Button>
+        </>
+      );
+    return <div>{buttons}</div>;
+  };
 
   const [drawer, setDrawer] = useState(false);
   const [formType, setFormType] = useState('');
@@ -41,8 +64,9 @@ const Header = () => {
 
           <img src={Logo} alt="Holidaze Logo" />
             <h1>Holidaze</h1>
-            <Button onClick={toggleDrawer('signup')}>Sign up</Button>
-      <Button onClick={toggleDrawer('login')}>Log in</Button>
+            <CorrectButtons/>
+            
+
       <SwipeableDrawer
       PaperProps={{ style: { width: '30%' } }}
   anchor={"right"}
