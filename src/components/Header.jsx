@@ -34,7 +34,7 @@ const Header = () => {
     const buttons = isLoggedIn
       ? (
         <>
-          <img src={Logo} alt="Holidaze Logo" />
+          <img src=''  alt="Profile Pic" />
           <Button onClick={logout}>Log out</Button>
         </>
       )
