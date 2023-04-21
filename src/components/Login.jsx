@@ -4,6 +4,7 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { loginSchema } from "../utils/yupSchema";
 import { Button } from "@mui/material";
+import {BASE_URL_AUTH} from '../utils/constants';
 
 
 
@@ -19,10 +20,25 @@ const Login = () => {
         resolver: yupResolver(loginSchema),
       });
 
-      function onSubmit(data) {
+      async function onSubmit(data) {
         console.log(data);
+        const options = {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(data),
+        };
     
-      } 
+        fetch(BASE_URL_AUTH + 'login', options)
+          .then(async (response) => {
+            console.log(response);
+            const json = await response.json();
+            console.log(json);
+            
+          }
+          )
+      }
     
   
 

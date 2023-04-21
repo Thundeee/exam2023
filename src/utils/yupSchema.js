@@ -16,7 +16,7 @@ const loginSchema = yup
   const registerSchema = yup
   .object({
 
-    username: yup
+    name: yup
         .string()
         .min(3, "Your username must be atleast 3 characters.")
         .required("Please enter your username.")
@@ -30,13 +30,13 @@ const loginSchema = yup
 
       avatar: yup
         .string()
-        .matches(/(http(s?):)([/|.|\w|\s|-])*\.(?:jpg|jpeg|gif|png)/, "Please enter a valid image url."),
+        .matches(/(^(http(s?):)([/|.|\w|\s|-])*\.(?:jpg|jpeg|gif|png)$)|(^$)/, "Please enter a valid image url."),
+        
 
     password: yup
       .string()
       .min(8, "Your password must be atleast 8 characters.")
       .required("Please enter your password."),
   })
-  .required();
 
 export { loginSchema, registerSchema };
