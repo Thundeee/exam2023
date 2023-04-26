@@ -1,18 +1,20 @@
-  import {React, useState } from 'react';
+  import {React, useState, useContext } from 'react';
   import { Button } from "@mui/material";
   import Logo from '../Logo.svg';
   import SwipeableDrawer from '@mui/material/SwipeableDrawer';
   import Login from './Login';
   import Register from './Register';
-  import useLocalStorage from '../hooks/useLocalStorage';
+  import { AuthContext } from "../context/auth";
+
 
   const Header = () => {
-    const [storage, setStorage] = useLocalStorage('accessToken');
     const [drawer, setDrawer] = useState(false);
     const [formType, setFormType] = useState('');
+    const { token, setToken } = useContext(AuthContext);
 
     function logout() {
-      setStorage('');
+      localStorage.removeItem('accessToken');
+      setToken(false);
       localStorage.removeItem('username');
       localStorage.removeItem('avatar');
       localStorage.removeItem('venueManager');
@@ -33,7 +35,7 @@
         <img src={Logo} alt="Holidaze Logo" />
         <h1>Holidaze</h1>
         <div>
-          {storage ? (
+          {token ? (
             <>
               <img src='' alt="Profile Pic" />
               <Button onClick={logout}>Log out</Button>
@@ -53,7 +55,7 @@
           onClose={() => setDrawer(false)}
           onOpen={toggleDrawer(true)}
         >
-          {formType === 'login' ? <Login children= {setStorage} /> : <Register />}
+          {formType === 'login' ? <Login children= {setDrawer} /> : <Register children= {setDrawer} />}
         </SwipeableDrawer>
       </header>
     );

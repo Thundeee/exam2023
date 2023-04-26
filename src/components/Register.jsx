@@ -9,7 +9,7 @@ import Switch from '@mui/material/Switch';
 import useCallApi from '../hooks/useCallApi';
 import {BASE_URL_AUTH} from '../utils/constants';
 
-const Register = () => {
+const Register = (props) => {
   const {
     register,
     handleSubmit,
@@ -40,6 +40,8 @@ const Register = () => {
 
     await startFetch(BASE_URL_AUTH + 'register', options);
     console.log(data);
+    props.children(false)
+
   }
 
   return (

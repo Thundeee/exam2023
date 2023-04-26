@@ -1,5 +1,5 @@
 import { FormField } from "./formfield/Formfield";
-import {React, useEffect} from "react";
+import {React, useEffect, useContext} from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { loginSchema } from "../utils/yupSchema";
@@ -7,11 +7,15 @@ import { Button } from "@mui/material";
 import {BASE_URL_AUTH} from '../utils/constants';
 import useLocalStorage from "../hooks/useLocalStorage";
 import useCallApi from "../hooks/useCallApi";
+import { AuthContext } from "../context/auth";
 
 
 const Login = (props) => {
   // eslint-disable-next-line no-unused-vars
   const [accessToken, setAccessToken] = useLocalStorage('accessToken', '');
+    // eslint-disable-next-line no-unused-vars
+  const { token, setToken } = useContext(AuthContext);
+
   // eslint-disable-next-line no-unused-vars
   const [name, setName] = useLocalStorage('username', '');
   // eslint-disable-next-line no-unused-vars
@@ -47,7 +51,8 @@ const Login = (props) => {
 
   useEffect(() => {
     if (data) {
-      props.children(data.accessToken);
+      setAccessToken(data.accessToken);
+      setToken(true);
       setName(data.name);
       if (data.avatar) {
         setAvatar(data.avatar);
@@ -56,6 +61,7 @@ const Login = (props) => {
         setVenueManager(data.venueManager);
       }
       console.log(data);
+      props.children(false)
     }
   }, [data]);
     return (
