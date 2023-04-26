@@ -1,69 +1,66 @@
 import { FormField } from "./formfield/Formfield";
-import React from "react";
+import {React, useEffect} from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { loginSchema } from "../utils/yupSchema";
 import { Button } from "@mui/material";
 import {BASE_URL_AUTH} from '../utils/constants';
 import useLocalStorage from "../hooks/useLocalStorage";
+import useCallApi from "../hooks/useCallApi";
 
 
-
-
-
-const Login = () => {
-   
+const Login = (props) => {
   // eslint-disable-next-line no-unused-vars
   const [accessToken, setAccessToken] = useLocalStorage('accessToken', '');
-    // eslint-disable-next-line no-unused-vars
+  // eslint-disable-next-line no-unused-vars
   const [name, setName] = useLocalStorage('username', '');
-    // eslint-disable-next-line no-unused-vars
+  // eslint-disable-next-line no-unused-vars
   const [avatar, setAvatar] = useLocalStorage('avatar', '');
-    // eslint-disable-next-line no-unused-vars
+  // eslint-disable-next-line no-unused-vars
   const [venueManager, setVenueManager] = useLocalStorage('venueManager', '');
-
-  
   
   const {
-        register,
-        handleSubmit,
-        formState: { errors },
-      } = useForm({
-        resolver: yupResolver(loginSchema),
-      });
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
+    resolver: yupResolver(loginSchema),
+  });
 
-      async function onSubmit(data) {
-        console.log(data);
-        const options = {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(data),
-        };
-    
-        fetch(BASE_URL_AUTH + 'login', options)
-          .then(async (response) => {
-            console.log(response);
-            const json = await response.json();
-            console.log(json);
-           await setAccessToken(json.accessToken); 
-           await setName(json.name);
-            if (json.avatar) {
-            await  setAvatar(json.avatar); 
-            }
-            if (json.venueManager) {
-           await   setVenueManager(json.venueManager);
-            }
-            window.location.reload();
-          }
-          )
-      }
-    
   
+  
+  const { startFetch, data, isLoading, isError } = useCallApi();
 
+  async function onSubmit(userData) {
+    console.log(userData);
+    const options = {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(userData),
+    };
+
+    await startFetch(BASE_URL_AUTH + 'login', options);
+  }
+
+
+  useEffect(() => {
+    if (data) {
+      props.children(data.accessToken);
+      setName(data.name);
+      if (data.avatar) {
+        setAvatar(data.avatar);
+      }
+      if (data.venueManager) {
+        setVenueManager(data.venueManager);
+      }
+      console.log(data);
+    }
+  }, [data]);
     return (
 <div>
+  
 <h1>Log in!</h1>
       <form id="loginForm" onSubmit={handleSubmit(onSubmit)}>
         <FormField

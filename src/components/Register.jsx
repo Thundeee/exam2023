@@ -6,7 +6,7 @@ import { registerSchema } from "../utils/yupSchema";
 import { Button } from "@mui/material";
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Switch from '@mui/material/Switch';
-import useApi from '../hooks/useApi';
+import useCallApi from '../hooks/useCallApi';
 import {BASE_URL_AUTH} from '../utils/constants';
 
 const Register = () => {
@@ -19,6 +19,9 @@ const Register = () => {
   });
 
   const [manager, setManager] = useState(false);
+
+  const { startFetch, data, isLoading, isError } = useCallApi();
+
 
   function toggler() {
     setManager(!manager);
@@ -35,13 +38,8 @@ const Register = () => {
       body: JSON.stringify(data),
     };
 
-    fetch(BASE_URL_AUTH + 'register', options)
-      .then(async (response) => {
-        console.log(response);
-        const json = await response.json();
-        console.log(json);
-      }
-      )
+    await startFetch(BASE_URL_AUTH + 'register', options);
+    console.log(data);
   }
 
   return (
