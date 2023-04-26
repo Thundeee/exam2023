@@ -30,14 +30,14 @@ See the section about [deployment](https://facebook.github.io/create-react-app/d
 2. A user may search for a specific Venue :x:
 3. A user may view a specific Venue page by id :x:
 4. A user may view a calendar with available dates for a Venue :x:
-5. A user with a stud.noroff.no email may register as a customer :x:
+5. A user with a stud.noroff.no email may register as a customer ✔️
 6. A registered customer may create a booking at a Venue :x:
 7. A registered customer may view their upcoming bookings :x:
-8. A user with a stud.noroff.no email may register as a Venue manager :x:
+8. A user with a stud.noroff.no email may register as a Venue manager ✔️
 9. A registered Venue manager may create a Venue :x:
 10. A registered Venue manager may update a Venue they manage :x:
 11. A registered Venue manager may delete a Venue they manage :x:
 12. A registered Venue manager may view bookings for a Venue they manage :x:
-13. A registered user may login :x:
+13. A registered user may login ✔️
 14. A registered user may update their avatar :x:
-15. A registered user may logout :x:
+15. A registered user may logout ✔️
