@@ -28,6 +28,7 @@ const Register = (props) => {
   }
 
   async function onSubmit(data) {
+    
     data.venueManager = manager;
     console.log(data);
     const options = {

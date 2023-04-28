@@ -13,11 +13,9 @@
     const { token, setToken } = useContext(AuthContext);
 
     function logout() {
-      localStorage.removeItem('accessToken');
+      localStorage.removeItem('userInfo');
       setToken(false);
-      localStorage.removeItem('username');
-      localStorage.removeItem('avatar');
-      localStorage.removeItem('venueManager');
+
     }
 
     const toggleDrawer = (type) => (event) => {
@@ -29,6 +27,8 @@
       setDrawer(true);
     };
 
+  
+    const userInfo = JSON.parse(localStorage.getItem('userInfo'));
 
     return (
       <header>
@@ -37,8 +37,8 @@
         <div>
           {token ? (
             <>
-              <img src='' alt="Profile Pic" />
-              <Button onClick={logout}>Log out</Button>
+            <img src={userInfo.avatar} width={100} height={100} alt="Profile Pic" />
+              <Button onClick={logout}>Log out </Button>
             </>
           ) : (
             <>
