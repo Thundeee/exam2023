@@ -8,7 +8,6 @@ import {BASE_URL_AUTH} from '../utils/constants';
 import useLocalStorage from "../hooks/useLocalStorage";
 import useCallApi from "../hooks/useCallApi";
 import { AuthContext } from "../context/auth";
-import { json } from "react-router-dom";
 
 
 const Login = (props) => {
@@ -16,7 +15,7 @@ const Login = (props) => {
   const [accessToken, setAccessToken] = useLocalStorage('accessToken', '');
     // eslint-disable-next-line no-unused-vars
   const { token, setToken } = useContext(AuthContext);
-
+    // eslint-disable-next-line no-unused-vars
   const [userInfo, setUserInfo] = useLocalStorage('userInfo', '')
   // eslint-disable-next-line no-unused-vars
   const [name, setName] = useLocalStorage('username', '');
