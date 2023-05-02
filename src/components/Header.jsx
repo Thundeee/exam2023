@@ -5,9 +5,13 @@
   import Login from './Login';
   import Register from './Register';
   import { AuthContext } from "../context/auth";
+  import { useTheme } from '@mui/material';
 
 
   const Header = () => {
+  
+    const theme = useTheme();
+
     const [drawer, setDrawer] = useState(false);
     const [formType, setFormType] = useState('');
     const { token, setToken } = useContext(AuthContext);
@@ -31,19 +35,19 @@
     const userInfo = JSON.parse(localStorage.getItem('userInfo'));
 
     return (
-      <header>
+      <header style={{ backgroundColor: theme.palette.secondary.main }}>
         <img src={Logo} alt="Holidaze Logo" />
         <h1>Holidaze</h1>
         <div>
           {token ? (
             <>
             <img src={userInfo.avatar} width={100} height={100} alt="Profile Pic" />
-              <Button onClick={logout}>Log out </Button>
+              <Button variant="contained" color="terrtiary" onClick={logout}>Log out </Button>
             </>
           ) : (
             <>
-              <Button onClick={toggleDrawer('signup')}>Sign up</Button>
-              <Button onClick={toggleDrawer('login')}>Log in</Button>
+              <Button variant="contained" color="terrtiary" onClick={toggleDrawer('signup')}>Sign up</Button>
+              <Button variant="contained" color="terrtiary" onClick={toggleDrawer('login')}>Log in</Button>
             </>
           )}
         </div>

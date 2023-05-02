@@ -1,13 +1,13 @@
 import { Link } from 'react-router-dom';
 import { Typography } from "@mui/material";
+import { useTheme } from '@mui/material';
 
 
-
-const Footer = () => {
-
+const Footer = ({onToggleDarkMode}) => {
+  const theme = useTheme();
 
     return (
-<footer>
+<footer style={{ backgroundColor: theme.palette.secondary.main }}>
 <Typography variant="h6" align="center" gutterBottom>
         @ {new Date().getFullYear()} - Holidaze
       </Typography>
@@ -29,6 +29,7 @@ const Footer = () => {
             <Link to='/Profile'>Profile</Link>
             </li>
         </ul>
+        <button onClick={onToggleDarkMode}>Toggle Dark Mode</button>
 
       </nav>
 </footer>    
