@@ -11,10 +11,11 @@ const Venue =  () => {
 <div className="App">
 {isLoading && <p>Loading...</p>}
 {isError && <p>Something went wrong</p>}
+{data && <>
 <h1>{data.name}</h1>
 <p>{data.description}</p>
 <p>{data.maxGuests}</p>
-
+</> }
 
 
 </div>
