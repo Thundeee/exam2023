@@ -1,10 +1,14 @@
 import { Link } from 'react-router-dom';
 import { Typography } from "@mui/material";
 import { useTheme } from '@mui/material';
+import { useContext } from 'react';
+import { themeContext } from "../context/themeSelect";
 
 
-const Footer = ({onToggleDarkMode}) => {
+const Footer = () => {
   const theme = useTheme();
+
+  const {toggleDarkMode} = useContext(themeContext);
 
     return (
 <footer style={{ backgroundColor: theme.palette.secondary.main }}>
@@ -14,13 +18,7 @@ const Footer = ({onToggleDarkMode}) => {
         <nav>
         <ul>
           <li>
-            <Link to='/'>Home</Link>
-          </li>
-          <li>
             <Link to='/Venue/Create'>VenueCreate</Link>
-          </li>
-          <li>
-            <Link to='/Venue'>Venue</Link>
           </li>
           <li>
             <Link to='/Venue/All'>VenueList</Link>
@@ -29,7 +27,7 @@ const Footer = ({onToggleDarkMode}) => {
             <Link to='/Profile'>Profile</Link>
             </li>
         </ul>
-        <button onClick={onToggleDarkMode}>Toggle Dark Mode</button>
+        <button onClick={toggleDarkMode}>Toggle Dark Mode</button>
 
       </nav>
 </footer>    

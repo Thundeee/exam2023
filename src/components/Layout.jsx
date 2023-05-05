@@ -2,13 +2,13 @@ import React from "react";
 import Header from "./Header";
 import Footer from "./Footer";
 
-const Layout = ({ children, onToggleDarkMode }) => {
+const Layout = ({ children}) => {
   return (
     <>
       <Header />
       <main>{children}</main>
 
-      <Footer onToggleDarkMode={onToggleDarkMode} />
+      <Footer/>
     </>
   );
 };

@@ -6,6 +6,7 @@
   import Register from './Register';
   import { AuthContext } from "../context/auth";
   import { useTheme } from '@mui/material';
+  import { Link } from 'react-router-dom';
 
 
   const Header = () => {
@@ -36,12 +37,12 @@
 
     return (
       <header style={{ backgroundColor: theme.palette.secondary.main }}>
-        <img src={Logo} alt="Holidaze Logo" />
+        <Link to='/'><img src={Logo} alt="Holidaze Logo" /></Link>
         <h1>Holidaze</h1>
         <div>
           {token ? (
             <>
-            <img src={userInfo.avatar} width={100} height={100} alt="Profile Pic" />
+            <Link to={'/Profile'}><img src={userInfo.avatar} width={100} height={100} alt="Profile Pic" /></Link>
               <Button variant="contained" color="terrtiary" onClick={logout}>Log out </Button>
             </>
           ) : (

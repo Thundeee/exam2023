@@ -1,7 +1,7 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, } from "react";
 
 const useApi = (url, options = {}) => {
-  const [data, setData] = useState([]);
+  const [data, setData] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [isError, setIsError] = useState(false);
 
@@ -25,7 +25,7 @@ const useApi = (url, options = {}) => {
     };
 
     accesData();
-  }, [url, options]);
+  }, [url]);
 
   return { data, isLoading, isError };
 };
