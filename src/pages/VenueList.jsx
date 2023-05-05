@@ -15,7 +15,7 @@ const VenueList =  () => {
 <h1>venuelist</h1>
 {isLoading && <p>Loading...</p>}
 {isError && <p>Something went wrong</p>}
-{data && data.map((venue) => <div><p key={venue.id}>{venue.name}</p> <Link to={`/Venue/${venue.id}`}>View</Link> </div>)}
+{data && data.map((venue) => <div key={venue.id}><h2>{venue.name}</h2> <Link to={`/Venue/${venue.id}`}>View</Link> </div>)}
 
 </div>
     );
