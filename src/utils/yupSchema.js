@@ -40,4 +40,45 @@ const loginSchema = yup
       .required("Please enter your password."),
   })
 
-export { loginSchema, registerSchema };
+  const venueSchema = yup
+  .object({
+
+    name: yup
+        .string()
+        .min(3, "Your venue name must be atleast 3 characters.")
+        .required("Please enter a name for your venue."),
+    description: yup
+      .string()
+      .min(3, "Your description must be atleast 3 characters.")
+      .required("Please describe your venue."),
+
+      media: yup
+        .string()
+        .matches(/(^(http(s?):)([/|.|\w|\s|-])*\.(?:jpg|jpeg|gif|png)$)|(^$)/, "Please enter a valid image url."),
+        
+
+      price: yup
+      .number()
+      .required("Please enter price per night."),
+
+        
+      maxGuests: yup
+      .number()
+      .required("Please enter maximum guests at your venue."),
+      
+      address: yup
+      .string(),
+
+      city: yup
+      .string(),
+
+      zip: yup
+      .string(),
+      
+
+      country: yup
+      .string(),
+
+  })
+
+export { loginSchema, registerSchema, venueSchema };

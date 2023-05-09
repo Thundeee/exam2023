@@ -8,7 +8,7 @@ const Profile =  () => {
     const {token} = useContext(AuthContext)
     const userInfo = JSON.parse(localStorage.getItem('userInfo'));
     let options;
-    let name
+    let name;
     if (userInfo) {
         options = {
             headers: {
