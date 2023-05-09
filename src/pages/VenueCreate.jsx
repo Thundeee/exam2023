@@ -25,25 +25,25 @@ const VenueCreate =  () => {
   const { startFetch, data, isLoading, isError } = useCallApi();
 
   async function onSubmit(venueData) {
-
+console.log(venueData);
     const modifiedData = {
         ...venueData,
+        meta: {
+          wifi: true, 
+          parking: true, 
+          breakfast: true, 
+          pets: true 
+        },
         location: {
-            "address": venueData.address,
-          "city": venueData.city,
-          "country": venueData.country,
-          "zip": venueData.zip,
-          "continent": "Unknown",
-          "lat": 0,
-          "lng": 0 
+          address: venueData.address,
+          city: venueData.city,
+          country: venueData.country,
+          zip: venueData.zip,
+          continent: "Unknown",
+          lat: 0,
+          lng: 0 
 
         },
-        meta: {
-            wifi: true, 
-            parking: true, 
-            breakfast: true, 
-            pets: true 
-          },
         rating: 0,
         media : [venueData.media]
       };
@@ -62,7 +62,6 @@ const VenueCreate =  () => {
       },
       body: JSON.stringify(modifiedData),
     };
-console.log(options);
     await startFetch(BASE_URL_VENUES, options);
   }
 

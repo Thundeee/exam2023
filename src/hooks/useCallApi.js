@@ -12,10 +12,11 @@ const useCallApi = () => {
       setIsError(false);
       const response = await fetch(url, options);
       console.log(response)
-      if (!response.ok) {
-        throw new Error(response.status);
-      }
+
       const json = await response.json();
+            if (!response.ok) {
+        throw new Error(json.errors[0].message);
+      }
       setData(json);
     } catch (error) {
       console.log(error);
