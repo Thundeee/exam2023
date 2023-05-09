@@ -26,9 +26,9 @@ See the section about [deployment](https://facebook.github.io/create-react-app/d
 
 ## Todo
 
- 1. A user may view a list of Venues :x:
+ 1. A user may view a list of Venues ✔️
 2. A user may search for a specific Venue :x:
-3. A user may view a specific Venue page by id :x:
+3. A user may view a specific Venue page by id ✔️
 4. A user may view a calendar with available dates for a Venue :x:
 5. A user with a stud.noroff.no email may register as a customer ✔️
 6. A registered customer may create a booking at a Venue :x:
