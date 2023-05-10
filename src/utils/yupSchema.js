@@ -59,12 +59,16 @@ const loginSchema = yup
 
       price: yup
       .number()
+      .typeError('Price must be a number.')
       .required("Please enter price per night."),
 
         
       maxGuests: yup
       .number()
-      .required("Please enter maximum guests at your venue."),
+      .required("Please enter maximum guests at your venue.")
+      .max(100, 'Maximum guests can not be more than 100.')
+      .typeError('Maximum guests must be a number.'),
+
       
       address: yup
       .string(),

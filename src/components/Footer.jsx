@@ -16,17 +16,6 @@ const Footer = () => {
         @ {new Date().getFullYear()} - Holidaze
       </Typography>
         <nav>
-        <ul>
-          <li>
-            <Link to='/Venue/Create'>VenueCreate</Link>
-          </li>
-          <li>
-            <Link to='/Venue/All'>VenueList</Link>
-          </li>
-            <li>
-            <Link to='/Profile'>Profile</Link>
-            </li>
-        </ul>
         <button onClick={toggleDarkMode}>Toggle Dark Mode</button>
 
       </nav>

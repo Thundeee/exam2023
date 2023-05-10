@@ -5,10 +5,16 @@ import { venueSchema } from "../utils/yupSchema";
 import useCallApi from "../hooks/useCallApi";
 import { AuthContext } from "../context/auth";
 import {BASE_URL_VENUES} from '../utils/constants';
-import { useContext } from "react";
-
+import { useState, useContext } from "react";
+import FormControlLabel from '@mui/material/FormControlLabel';
+import Switch from '@mui/material/Switch';
 
 const VenueCreate =  () => {
+  const {token} = useContext(AuthContext)
+  const [internet, setInternet] = useState(false);
+  const [parkingSpace, setParkingSpace] = useState(false);
+  const [breakfastMeal, setbreakfastMeal] = useState(false);
+  const [petFriendly, setpetFriendly] = useState(false);
 
     
   const {
@@ -29,10 +35,10 @@ console.log(venueData);
     const modifiedData = {
         ...venueData,
         meta: {
-          wifi: true, 
-          parking: true, 
-          breakfast: true, 
-          pets: true 
+          wifi: internet, 
+          parking: parkingSpace, 
+          breakfast: breakfastMeal, 
+          pets: petFriendly 
         },
         location: {
           address: venueData.address,
@@ -70,85 +76,98 @@ console.log(venueData);
     return (
 
 <div className="App">
-<h1>venueCreate</h1>
+{!token && <p>please log in before trying to create a venue</p>}
+{token && !userInfo.venueManager && <p>Only Venue managers can list venues.</p>}
+{token && userInfo.venueManager &&
+ <>
+  <form id="venueForm" onSubmit={handleSubmit(onSubmit)}>
+  <FormField
+    name="name"
+    label="Venue Name"
+    type="text"
+    register={register}
+    errors={errors}
+  />
 
-<form id="venueForm" onSubmit={handleSubmit(onSubmit)}>
-        <FormField
-          name="name"
-          label="Venue Name"
-            type="name"
-          register={register}
-          errors={errors}
-        />
-
-        <FormField
-          name="description"
-          label="Venue Description"
-          type="description"
-          register={register}
-          errors={errors}
-        />
-
-<FormField
-          name="media"
-          label="Media"
-          type="media"
-          register={register}
-          errors={errors}
-        />
+  <FormField
+    name="description"
+    label="Venue Description"
+    type="text"
+    register={register}
+    errors={errors}
+  />
 
 <FormField
-          name="price"
-          label="Price per night"
-          type="price"
-          register={register}
-          errors={errors}
-        />
+    name="media"
+    label="Media"
+    type="text"
+    register={register}
+    errors={errors}
+  />
 
 <FormField
-          name="maxGuests"
-          label="Maximum Guests"
-          type="maxGuests"
-          register={register}
-          errors={errors}
-        />
-<FormField
-          name="address"
-          label="Address"
-          type="address"
-          register={register}
-          errors={errors}
-        />
+    name="price"
+    label="Price per night"
+    type="text"
+    register={register}
+    errors={errors}
+  />
 
 <FormField
-          name="city"
-          label="City"
-          type="city"
-          register={register}
-          errors={errors}
-        />
+    name="maxGuests"
+    label="Maximum Guests"
+    type="text"
+    register={register}
+    errors={errors}
+  />
+          <FormControlLabel control={<Switch onChange={()=>setInternet(!internet)} />} label="Wifi?" />
+          <FormControlLabel control={<Switch onChange={()=>setParkingSpace(!parkingSpace)} />} label="Parking?" />
+          <FormControlLabel control={<Switch onChange={()=>setbreakfastMeal(!breakfastMeal)} />} label="Breakfast?" />
+          <FormControlLabel control={<Switch onChange={()=>setpetFriendly(!petFriendly)} />} label="Pets?" />
+<FormField
+    name="address"
+    label="Address"
+    type="text"
+    register={register}
+    errors={errors}
+  />
 
 <FormField
-          name="zip"
-          label="Zip Code"
-          type="zip"
-          register={register}
-          errors={errors}
-        />
+    name="city"
+    label="City"
+    type="text"
+    register={register}
+    errors={errors}
+  />
 
 <FormField
-          name="country"
-          label="Country"
-          type="country"
-          register={register}
-          errors={errors}
-        />
-        
-        <button type="submit" variant="contained" color="primary">
-            Submit
-            </button>
+    name="zip"
+    label="Zip Code"
+    type="text"
+    register={register}
+    errors={errors}
+  />
 
-        </form>
+<FormField
+    name="country"
+    label="Country"
+    type="text"
+    register={register}
+    errors={errors}
+  />
+  
+  <button type="submit" variant="contained" color="primary">
+      Submit
+      </button>
+
+  </form>
+
+</>
+    }
+
+
+      
+
 </div>
     );
   };

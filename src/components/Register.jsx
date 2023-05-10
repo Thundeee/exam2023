@@ -1,5 +1,5 @@
 import { FormField } from "./formfield/Formfield";
-import {React, useState} from "react";
+import {useState} from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { registerSchema } from "../utils/yupSchema";
@@ -21,11 +21,6 @@ const Register = (props) => {
   const [manager, setManager] = useState(false);
 
   const { startFetch, data, isLoading, isError } = useCallApi();
-
-
-  function toggler() {
-    setManager(!manager);
-  }
 
   async function onSubmit(data) {
     
@@ -73,7 +68,7 @@ const Register = (props) => {
           errors={errors}
         />
 
-        <FormControlLabel control={<Switch onChange={toggler} />} label="Are you a Venue manager?" />
+        <FormControlLabel control={<Switch onChange={()=>setManager(!manager)} />} label="Are you a Venue manager?" />
 
         <FormField
           name="password"

@@ -16,17 +16,25 @@ const Profile =  () => {
             },
         };
         name = userInfo.name;
-    }
+    } 
 
-    const { data, isLoading, isError } = useApi(BASE_URL_PROFILES + name, options);
+    const { data, isLoading, isError } = useApi(BASE_URL_PROFILES + name + "?_bookings=true&_venues=true", options);
     console.log(data);
-
+    
+    if (isLoading) {
+        return <p>Loading...</p>;
+      }
+      if (isError) {
+        return <p>An error occured please try again.</p>;
+      }
+      if (!userInfo) {
+        return <p>please log in before viewing your profile</p>;
+      }
+      
     return (
 
 <div className="App">
-    {isLoading && <p>Loading...</p>}
-    {isError && <p>Something went wrong</p>}
-    {!userInfo && <p>please log in before viewing your profile</p>}
+
     {data && <>
     <h1>{data.name}'s profile</h1>
     <img src={data.avatar}></img>

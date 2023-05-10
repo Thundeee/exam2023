@@ -6,11 +6,17 @@ const Venue =  () => {
     const { id } = useParams();
     const { data, isLoading, isError } = useApi(BASE_URL_VENUES + id);
     console.log(data);
+
+
+    if (isLoading) {
+        return <p>Loading...</p>;
+      }
+      if (isError) {
+        return <p>An error occured please try again.</p>;
+      }
     return (
 
 <div className="App">
-{isLoading && <p>Loading...</p>}
-{isError && <p>Something went wrong</p>}
 {data && <>
 <h1>{data.name}</h1>
 <p>{data.description}</p>
