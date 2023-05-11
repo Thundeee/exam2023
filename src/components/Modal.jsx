@@ -1,7 +1,6 @@
 import React from 'react';
 import { Modal } from "@mui/material/";
 import { Button } from "@mui/material";
-import { useState } from 'react';
 import styled from 'styled-components';
 import Fade from '@mui/material/Fade';
 import Backdrop from '@mui/material/Backdrop';
@@ -10,7 +9,7 @@ import { useContext } from 'react';
 import { ModalContext } from "../context/modalContent";
 
 
-const SimpleModal = ({ open, handleClose }) => {
+const InfoModal = ({ open, handleClose }) => {
     
     const { modalInfo, modalTitle} = useContext(ModalContext);
     
@@ -54,4 +53,4 @@ const ModalContainer = styled.div`
       </Modal>
     );
   };
-  export default SimpleModal;
+  export default InfoModal;

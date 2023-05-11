@@ -7,7 +7,7 @@
   import { AuthContext } from "../context/auth";
   import { useTheme } from '@mui/material';
   import { Link } from 'react-router-dom';
-  import SimpleModal from './Modal';
+  import InfoModal from './Modal';
   import { ModalContext } from "../context/modalContent";
 
 
@@ -49,7 +49,7 @@ const {openModal, setOpenModal, setModalInfo, setModalTitle} = useContext(ModalC
         <Button variant="contained" color="primary" onClick={()=> {setOpenModal(true)}}>
         Open Modal
       </Button>
-      <SimpleModal open={openModal} handleClose={()=> {setOpenModal(false)}} />
+      <InfoModal open={openModal} handleClose={()=> {setOpenModal(false)}} />
         <div>
           {token ? (
             <>

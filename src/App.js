@@ -1,5 +1,5 @@
 import { Routes, Route } from "react-router-dom";
-import { useState, useContext } from "react";
+import { useContext } from "react";
 import { lightTheme, darkTheme } from "./theme/theme";
 import { ThemeProvider } from "@mui/material";
 import CssBaseline from "@mui/material/CssBaseline";
@@ -9,7 +9,6 @@ import Profile from './pages/Profile';
 import Venue from './pages/Venue';
 import VenueCreate from './pages/VenueCreate';
 import VenueList from './pages/VenueList';
-import useLocalStorage from "./hooks/useLocalStorage";
 import { ThemeContext } from "./context/themeSelect";
 
 function App() {

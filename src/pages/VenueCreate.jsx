@@ -8,8 +8,11 @@ import {BASE_URL_VENUES} from '../utils/constants';
 import { useState, useContext } from "react";
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Switch from '@mui/material/Switch';
+import { ModalContext } from "../context/modalContent";
+
 
 const VenueCreate =  () => {
+  const {setOpenModal, setModalInfo, setModalTitle} = useContext(ModalContext);
   const {token} = useContext(AuthContext)
   const [internet, setInternet] = useState(false);
   const [parkingSpace, setParkingSpace] = useState(false);
@@ -69,6 +72,13 @@ console.log(venueData);
       body: JSON.stringify(modifiedData),
     };
     await startFetch(BASE_URL_VENUES, options);
+
+    if (data && !isLoading && !isError) {
+      setOpenModal(true);
+      setModalTitle('Success!');
+      setModalInfo('Venue was created');
+      
+    }
     
   }
 

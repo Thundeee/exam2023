@@ -28,25 +28,25 @@ const Register = (props) => {
 
   const { startFetch, data, isLoading, isError } = useCallApi();
 
-  async function onSubmit(data) {
+  async function onSubmit(registrationData) {
     
-    data.venueManager = manager;
-    console.log(data);
+    registrationData.venueManager = manager;
+    console.log(registrationData);
     const options = {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify(data),
+      body: JSON.stringify(registrationData),
     };
 
     await startFetch(BASE_URL_AUTH + 'register', options);
-    console.log(data);
+    console.log(registrationData);
 
       
     
 
-    if (!isLoading &&!isError && data ) {
+    if (!isLoading &&!isError) {
       console.log(isError)
       setOpenModal(true);
       setModalTitle('Registration was a success! ');

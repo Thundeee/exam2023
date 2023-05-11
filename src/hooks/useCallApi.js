@@ -9,14 +9,13 @@ const useCallApi = () => {
   const [isError, setIsError] = useState(false);
 
   const startFetch = async (url, options = {}) => {
-    console.log(options)
     try {
       setIsLoading(true);
       setIsError(false);
       const response = await fetch(url, options);
-      console.log(response)
 
       const json = await response.json();
+      console.log(json)
             if (!response.ok) {
         throw new Error(json.errors[0].message);
       }
