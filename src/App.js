@@ -10,11 +10,11 @@ import Venue from './pages/Venue';
 import VenueCreate from './pages/VenueCreate';
 import VenueList from './pages/VenueList';
 import useLocalStorage from "./hooks/useLocalStorage";
-import { themeContext } from "./context/themeSelect";
+import { ThemeContext } from "./context/themeSelect";
 
 function App() {
 
-  const {isDarkMode} = useContext(themeContext);
+  const {isDarkMode} = useContext(ThemeContext);
 
 
 

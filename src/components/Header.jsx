@@ -7,10 +7,14 @@
   import { AuthContext } from "../context/auth";
   import { useTheme } from '@mui/material';
   import { Link } from 'react-router-dom';
+  import SimpleModal from './Modal';
+  import { ModalContext } from "../context/modalContent";
 
 
   const Header = () => {
   
+const {openModal, setOpenModal, setModalInfo, setModalTitle} = useContext(ModalContext);
+
     const theme = useTheme();
 
     const [drawer, setDrawer] = useState(false);
@@ -20,6 +24,9 @@
     function logout() {
       localStorage.removeItem('userInfo');
       setToken(false);
+      setOpenModal(true);
+      setModalTitle('Success!');
+      setModalInfo('You have been logged out');
 
     }
 
@@ -39,6 +46,10 @@
       <header style={{ backgroundColor: theme.palette.secondary.main }}>
         <Link to='/'><img src={Logo} alt="Holidaze Logo" /></Link>
         <h1>Holidaze</h1>
+        <Button variant="contained" color="primary" onClick={()=> {setOpenModal(true)}}>
+        Open Modal
+      </Button>
+      <SimpleModal open={openModal} handleClose={()=> {setOpenModal(false)}} />
         <div>
           {token ? (
             <>

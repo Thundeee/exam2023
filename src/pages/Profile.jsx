@@ -24,12 +24,13 @@ const Profile =  () => {
     if (isLoading) {
         return <p>Loading...</p>;
       }
-      if (isError) {
-        return <p>An error occured please try again.</p>;
-      }
       if (!userInfo) {
         return <p>please log in before viewing your profile</p>;
       }
+      if (isError) {
+        return <p>An error occured please try again.</p>;
+      }
+
       
     return (
 

@@ -2,13 +2,12 @@ import { Link } from 'react-router-dom';
 import { Typography } from "@mui/material";
 import { useTheme } from '@mui/material';
 import { useContext } from 'react';
-import { themeContext } from "../context/themeSelect";
-
+import { ThemeContext } from "../context/themeSelect";
 
 const Footer = () => {
   const theme = useTheme();
 
-  const {toggleDarkMode} = useContext(themeContext);
+  const {toggleDarkMode} = useContext(ThemeContext);
 
     return (
 <footer style={{ backgroundColor: theme.palette.secondary.main }}>

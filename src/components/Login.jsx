@@ -8,21 +8,16 @@ import {BASE_URL_AUTH} from '../utils/constants';
 import useLocalStorage from "../hooks/useLocalStorage";
 import useCallApi from "../hooks/useCallApi";
 import { AuthContext } from "../context/auth";
+import { ModalContext } from "../context/modalContent";
 
 
 const Login = (props) => {
-  // eslint-disable-next-line no-unused-vars
-  const [accessToken, setAccessToken] = useLocalStorage('accessToken', '');
-    // eslint-disable-next-line no-unused-vars
-  const { token, setToken } = useContext(AuthContext);
+  
+  const {setOpenModal, setModalInfo, setModalTitle} = useContext(ModalContext);
+
+  const {setToken } = useContext(AuthContext);
     // eslint-disable-next-line no-unused-vars
   const [userInfo, setUserInfo] = useLocalStorage('userInfo', '')
-  // eslint-disable-next-line no-unused-vars
-  const [name, setName] = useLocalStorage('username', '');
-  // eslint-disable-next-line no-unused-vars
-  const [avatar, setAvatar] = useLocalStorage('avatar', '');
-  // eslint-disable-next-line no-unused-vars
-  const [venueManager, setVenueManager] = useLocalStorage('venueManager', '');
   
   const {
     register,
@@ -56,6 +51,9 @@ const Login = (props) => {
       setUserInfo(data);
       console.log(data);
       props.children(false)
+      setOpenModal(true);
+      setModalTitle('Success!');
+      setModalInfo('Welcome ' + data.name);
     }
   }, [data]);
     return (

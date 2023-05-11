@@ -1,7 +1,7 @@
 import React, { createContext, useState } from 'react';
 import useLocalStorage from "../hooks/useLocalStorage";
 
-export const themeContext = createContext();
+export const ThemeContext = createContext();
 
 export const ThemeChangerProvider = ({ children }) => {
     const [mode , setMode] = useLocalStorage('Darkmode', '');
@@ -13,8 +13,8 @@ export const ThemeChangerProvider = ({ children }) => {
     };
 
   return (
-    <themeContext.Provider value={{ isDarkMode,  toggleDarkMode}}>
+    <ThemeContext.Provider value={{ isDarkMode,  toggleDarkMode}}>
       {children}
-    </themeContext.Provider>
+    </ThemeContext.Provider>
   );
 };

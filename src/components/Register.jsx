@@ -8,8 +8,14 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import Switch from '@mui/material/Switch';
 import useCallApi from '../hooks/useCallApi';
 import {BASE_URL_AUTH} from '../utils/constants';
+import { ModalContext } from "../context/modalContent";
+import { useContext } from "react";
+
 
 const Register = (props) => {
+
+  const {setOpenModal, setModalInfo, setModalTitle} = useContext(ModalContext);
+
   const {
     register,
     handleSubmit,
@@ -36,8 +42,17 @@ const Register = (props) => {
 
     await startFetch(BASE_URL_AUTH + 'register', options);
     console.log(data);
-    props.children(false)
 
+      
+    
+
+    if (!isLoading &&!isError && data ) {
+      console.log(isError)
+      setOpenModal(true);
+      setModalTitle('Registration was a success! ');
+      setModalInfo('Welcome ' + data.name + ' you can now login!');
+      props.children(false)
+    }
   }
 
   return (

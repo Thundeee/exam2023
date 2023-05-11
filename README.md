@@ -34,7 +34,7 @@ See the section about [deployment](https://facebook.github.io/create-react-app/d
 6. A registered customer may create a booking at a Venue :x:
 7. A registered customer may view their upcoming bookings :x:
 8. A user with a stud.noroff.no email may register as a Venue manager ✔️
-9. A registered Venue manager may create a Venue :x:
+9. A registered Venue manager may create a Venue ✔️
 10. A registered Venue manager may update a Venue they manage :x:
 11. A registered Venue manager may delete a Venue they manage :x:
 12. A registered Venue manager may view bookings for a Venue they manage :x:
