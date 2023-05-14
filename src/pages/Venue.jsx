@@ -4,10 +4,10 @@ import { useParams } from "react-router-dom";
 
 const Venue =  () => {
     const { id } = useParams();
-    const { data, isLoading, isError } = useApi(BASE_URL_VENUES + id);
+    const { data, isLoading, isError } = useApi(BASE_URL_VENUES + id + "?_bookings=true");
     console.log(data);
 
-
+console.log(data?.bookings);
     if (isLoading) {
         return <p>Loading...</p>;
       }

@@ -38,7 +38,7 @@ const Profile =  () => {
 
     {data && <>
     <h1>{data.name}'s profile</h1>
-    <img src={data.avatar}></img>
+    <img src={data.avatar} alt={`${data.name}'s profile picture`} ></img>
     <p>is manager?: {data.venueManager ? "true" : "false"}</p>
 </>
 }
