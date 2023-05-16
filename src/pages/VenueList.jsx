@@ -41,7 +41,7 @@ const VenueList =  () => {
 
 <div className="App">
 <h1>venuelist</h1>
-<TextField id="searchField" label="Search for a Venue or City" variant="outlined" color="secondary" onChange={searcher}
+<TextField id="searchField" label="Search for a Venue or City" variant="outlined" color="secondary" type="search" onChange={searcher}
  />
 {search && search.length > 0 ? (
       search.map((venue) => (

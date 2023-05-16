@@ -3,6 +3,7 @@ import { BASE_URL_VENUES } from "../utils/constants";
 import { useParams } from "react-router-dom";
 import React, { useEffect, useRef, useState } from 'react';
 import { Box, Button, Calendar, Text } from 'grommet';
+import GuestField from "../components/formfield/GuestField";
 
 const Venue = () => {
   const { id } = useParams();
@@ -128,6 +129,7 @@ console.log(booked);
           range="array"
         />
       </Box>
+      <GuestField props={data.maxGuests}  />
     </div>
   );
 };
