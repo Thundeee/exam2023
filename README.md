@@ -29,7 +29,7 @@ See the section about [deployment](https://facebook.github.io/create-react-app/d
  1. A user may view a list of Venues ✔️
 2. A user may search for a specific Venue ✔️
 3. A user may view a specific Venue page by id ✔️
-4. A user may view a calendar with available dates for a Venue :x:
+4. A user may view a calendar with available dates for a Venue ✔️
 5. A user with a stud.noroff.no email may register as a customer ✔️
 6. A registered customer may create a booking at a Venue :x:
 7. A registered customer may view their upcoming bookings :x:
