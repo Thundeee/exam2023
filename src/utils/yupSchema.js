@@ -85,4 +85,21 @@ const loginSchema = yup
 
   })
 
-export { loginSchema, registerSchema, venueSchema };
+  const bookingSchema = yup
+  .object({
+    dateFrom: yup
+      .date()
+      .min(new Date(), "Date must be in the future.")
+      .required("Please pick a date."),
+    dateTo: yup
+      .date()
+      .min(yup.ref("dateFrom"), "Date must be after start date.")
+      .required("Please pick a date."),
+      guests: yup
+      .number()
+      .typeError('Guests must be a number.')
+      .required("Please enter number of guests."),
+  })
+  .required();
+
+export { loginSchema, registerSchema, venueSchema, bookingSchema };
