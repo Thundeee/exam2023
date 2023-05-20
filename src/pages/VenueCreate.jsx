@@ -31,7 +31,7 @@ const VenueCreate =  () => {
   
   const userInfo = JSON.parse(localStorage.getItem('userInfo'));
 
-  const { startFetch, data, isLoading, isError } = useCallApi();
+  const { startFetch, information, isItLoading, isItError } = useCallApi();
 
   async function onSubmit(venueData) {
 console.log(venueData);
@@ -73,7 +73,7 @@ console.log(venueData);
     };
     await startFetch(BASE_URL_VENUES, options);
 
-    if (data && !isLoading && !isError) {
+    if (information && !isItLoading && !isItError) {
       setOpenModal(true);
       setModalTitle('Success!');
       setModalInfo('Venue was created');

@@ -1,19 +1,24 @@
 import useApi from "../hooks/useApi";
-import { BASE_URL_VENUES } from "../utils/constants";
+import useCallApi from "../hooks/useCallApi";
+import { BASE_URL_VENUES, BASE_URL_BOOKINGS } from "../utils/constants";
 import { useParams } from "react-router-dom";
 import React, { useEffect, useRef, useState } from 'react';
 import { Box, Button, Calendar, Text } from 'grommet';
 import GuestField from "../components/formfield/GuestField";
-
+import { ModalContext } from "../context/modalContent";
+import { useContext } from "react";
 const Venue = () => {
   const { id } = useParams();
+  const {setOpenModal, setModalInfo, setModalTitle} = useContext(ModalContext);
   const { data, isLoading, isError } = useApi(BASE_URL_VENUES + id + "?_bookings=true");
-console.log(data);
 
-  const [datesD, setDatesD] = useState();
+  const { startFetch, information, isItLoading, isItError } = useCallApi();
+
+  const [pickedDates, setPickedDates] = useState();
   const [activeDate, setActiveDate] = useState(undefined);
   const [booked, setBooked] = useState([]);
-console.log(booked);
+  const [guests, setGuests] = useState(1);
+ console.log(booked);
   useEffect(() => {
     if (data) {
       const bookingDates = data.bookings.map((booking) => {
@@ -26,18 +31,42 @@ console.log(booked);
     }
   }, [data]);
 
+  const userInfo = JSON.parse(localStorage.getItem('userInfo'));
 
+  async function submitter(event) {
+    event.preventDefault();
+    if (!pickedDates || !pickedDates[0][0] || !pickedDates[0][1]) {
+      setOpenModal(true);
+      setModalTitle('Error!');
+      setModalInfo('Please select a start date and an end date!');
+      return;
+    }
 
-  const isDateDisabled = (date) => {
-    return booked.some((booking) => {
-      const [from, to] = booking;
-      return date >= from && date <= to;
-    });
-  };
+    const options = {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${userInfo.accessToken}`,
+      },
+      body: JSON.stringify({
+        dateFrom: new Date(pickedDates[0][0]).toDateString(),
+        dateTo: new Date(pickedDates[0][1]).toDateString(),
+        guests: guests,
+        venueId: id
+      }),
+  }
+  console.log(options);
+  await startFetch(BASE_URL_BOOKINGS, options);
+  if (information && !isItLoading && !isItError) {
+    setOpenModal(true);
+    setModalTitle('Success!');
+    setModalInfo('Booking was created, you can view it in your profile! Enjoy your stay!');
+    
+  }
+}
+
 
   function dateCheck(test) {
-    console.log( new Date( test[0][0]).toDateString())
-    console.log( new Date( test[0][1]).toDateString())
 
     if (!test || !test[0][0] || !test[0][1]) {
       return;
@@ -59,12 +88,18 @@ console.log(booked);
   
     if (hasBookedDateBetween) {
       console.log("booking inbetween");
-      setDatesD();
+      setPickedDates();
+ setOpenModal(true);
+      setModalTitle('Date selection failed. Please try again');
+      setModalInfo('A booking already exists between these dates. Please select another date.');
     }
   }
 
   const startDateButton = useRef();
   const endDateButton = useRef();
+
+
+
 
   if (isLoading) {
     return <p>Loading...</p>;
@@ -75,13 +110,13 @@ console.log(booked);
 
   return (
     <div className="App">
-      {data && (
+
         <>
-          <h1>{data.name}</h1>
-          <p>{data.description}</p>
-          <p>{data.maxGuests}</p>
+          <h1>{data?.name}</h1>
+          <p>{data?.description}</p>
+          <p>{data?.maxGuests}</p>
         </>
-      )}
+      <form id="venueForm" onSubmit={submitter}>
       <Box gap="small" pad="large">
         <Box direction="row" gap="small">
           <Button
@@ -91,9 +126,9 @@ console.log(booked);
               <Box>
                 <Text>Start Date</Text>
                 <Text>
-                  {datesD &&
-                    datesD[0][0] &&
-                    new Date(datesD[0][0]).toDateString()}
+                  {pickedDates &&
+                    pickedDates[0][0] &&
+                    new Date(pickedDates[0][0]).toDateString()}
                 </Text>
               </Box>
             }
@@ -106,9 +141,9 @@ console.log(booked);
               <Box>
                 <Text>End Date</Text>
                 <Text>
-                  {datesD &&
-                    datesD[0][1] &&
-                    new Date(datesD[0][1]).toDateString()}
+                  {pickedDates &&
+                    pickedDates[0][1] &&
+                    new Date(pickedDates[0][1]).toDateString()}
                 </Text>
               </Box>
             }
@@ -117,9 +152,9 @@ console.log(booked);
         </Box>
         <Calendar
           activeDate={activeDate}
-          dates={datesD}
+          dates={pickedDates}
           onSelect={(arg) => {
-            setDatesD(arg);
+            setPickedDates(arg);
             setActiveDate('end');
             dateCheck(arg);
 
@@ -129,7 +164,9 @@ console.log(booked);
           range="array"
         />
       </Box>
-      <GuestField props={data.maxGuests}  />
+      <GuestField props={data.maxGuests} guests={guests} setGuests={setGuests}  />
+      <Button type="submit" label="Book" />
+</form>
     </div>
   );
 };

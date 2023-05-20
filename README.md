@@ -31,7 +31,7 @@ See the section about [deployment](https://facebook.github.io/create-react-app/d
 3. A user may view a specific Venue page by id ✔️
 4. A user may view a calendar with available dates for a Venue ✔️
 5. A user with a stud.noroff.no email may register as a customer ✔️
-6. A registered customer may create a booking at a Venue :x:
+6. A registered customer may create a booking at a Venue ✔️
 7. A registered customer may view their upcoming bookings :x:
 8. A user with a stud.noroff.no email may register as a Venue manager ✔️
 9. A registered Venue manager may create a Venue ✔️

@@ -1,23 +1,22 @@
-import {useState} from 'react';
+import { useState } from 'react';
 import TextField from '@mui/material/TextField';
 import InputAdornment from '@mui/material/InputAdornment';
 import IconButton from '@mui/material/IconButton';
 import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
 
-const GuestField = (props) => {
-  const maxGuests = props.props
-const [guests, setGuests] = useState(1);
+const GuestField = ({ props, guests, setGuests }) => {
+  const maxGuests = props;
 
-const handleIncrease = () => {
-
+  const handleIncrease = () => {
     if (guests >= maxGuests) return;
-    setGuests(guests+1);
+    setGuests(guests + 1);
   };
 
   const handleDecrease = () => {
     if (guests <= 1) return;
-    setGuests(guests-1);  };
+    setGuests(guests - 1);
+  };
 
   return (
     <TextField
@@ -26,8 +25,8 @@ const handleIncrease = () => {
       value={guests}
       InputProps={{
         inputProps: {
-          min: 1, // Optional: Minimum value
-          max: 10, // Optional: Maximum value
+          min: 1,
+          max: maxGuests,
         },
         endAdornment: (
           <InputAdornment position="end">

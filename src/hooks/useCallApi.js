@@ -4,14 +4,14 @@ import { ModalContext } from "../context/modalContent";
 const useCallApi = () => {
 
   const { setModalInfo, setModalTitle, setOpenModal } = useContext(ModalContext);
-  const [data, setData] = useState();
-  const [isLoading, setIsLoading] = useState(true);
-  const [isError, setIsError] = useState(false);
+  const [information, setInformation] = useState();
+  const [isItLoading, setIsItLoading] = useState(true);
+  const [isItError, setIsItError] = useState(false);
 
   const startFetch = async (url, options = {}) => {
     try {
-      setIsLoading(true);
-      setIsError(false);
+      setIsItLoading(true);
+      setIsItError(false);
       const response = await fetch(url, options);
 
       const json = await response.json();
@@ -19,19 +19,19 @@ const useCallApi = () => {
             if (!response.ok) {
         throw new Error(json.errors[0].message);
       }
-      setData(json);
+      setInformation(json);
     } catch (error) {
       setModalInfo(error.message);
       setModalTitle("Error");
       setOpenModal(true);
       console.log(error);
-      setIsError(true);
+      setIsItError(true);
     } finally {
-      setIsLoading(false);
+      setIsItLoading(false);
     }
   };
 
-  return { data, isLoading, isError, startFetch };
+  return { information, isItLoading, isItError, startFetch };
 };
 
 export default useCallApi;

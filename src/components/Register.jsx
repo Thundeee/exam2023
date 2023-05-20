@@ -26,7 +26,7 @@ const Register = (props) => {
 
   const [manager, setManager] = useState(false);
 
-  const { startFetch, data, isLoading, isError } = useCallApi();
+  const { startFetch, information, isItLoading, isItError } = useCallApi();
 
   async function onSubmit(registrationData) {
     
@@ -46,11 +46,10 @@ const Register = (props) => {
       
     
 
-    if (!isLoading &&!isError) {
-      console.log(isError)
+    if (!isItLoading &&!isItError) {
       setOpenModal(true);
-      setModalTitle('Registration was a success! ');
-      setModalInfo('Welcome ' + data.name + ' you can now login!');
+      setModalTitle('Registration was a success!');
+      setModalInfo('Welcome ' + information.name + ' you can now login!');
       props.children(false)
     }
   }

@@ -29,7 +29,7 @@ const Login = (props) => {
 
   
   
-  const { startFetch, data, isLoading, isError } = useCallApi();
+  const { startFetch, information, isItLoading, isItError } = useCallApi();
 
   async function onSubmit(userData) {
     console.log(userData);
@@ -46,16 +46,16 @@ const Login = (props) => {
 
 
   useEffect(() => {
-    if (data) {
+    if (information) {
       setToken(true);
-      setUserInfo(data);
-      console.log(data);
+      setUserInfo(information);
+      console.log(information);
       props.children(false)
       setOpenModal(true);
       setModalTitle('Success!');
-      setModalInfo('Welcome ' + data.name);
+      setModalInfo('Welcome ' + information.name);
     }
-  }, [data]);
+  }, [information]);
     return (
 <div>
   
