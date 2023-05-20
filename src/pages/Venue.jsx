@@ -10,7 +10,7 @@ import { useContext } from "react";
 const Venue = () => {
   const { id } = useParams();
   const {setOpenModal, setModalInfo, setModalTitle} = useContext(ModalContext);
-  const { data, isLoading, isError } = useApi(BASE_URL_VENUES + id + "?_bookings=true");
+  const { data, isLoading, isError } = useApi(BASE_URL_VENUES + id + "?_bookings=true&_owner=true");
 
   const { startFetch, information, isItLoading, isItError } = useCallApi();
 
@@ -18,7 +18,8 @@ const Venue = () => {
   const [activeDate, setActiveDate] = useState(undefined);
   const [booked, setBooked] = useState([]);
   const [guests, setGuests] = useState(1);
- console.log(booked);
+  const [owner , setOwner] = useState();
+ console.log(data);
   useEffect(() => {
     if (data) {
       const bookingDates = data.bookings.map((booking) => {
@@ -28,9 +29,10 @@ const Venue = () => {
         ];
       });
       setBooked(bookingDates);
+      setOwner(data.owner);
     }
   }, [data]);
-
+console.log(owner);
   const userInfo = JSON.parse(localStorage.getItem('userInfo'));
 
   async function submitter(event) {
