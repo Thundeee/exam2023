@@ -5,7 +5,7 @@ import { venueSchema } from "../utils/yupSchema";
 import useCallApi from "../hooks/useCallApi";
 import { AuthContext } from "../context/auth";
 import {BASE_URL_VENUES} from '../utils/constants';
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Switch from '@mui/material/Switch';
 import { ModalContext } from "../context/modalContent";
@@ -19,7 +19,10 @@ const VenueCreate =  () => {
   const [breakfastMeal, setbreakfastMeal] = useState(false);
   const [petFriendly, setpetFriendly] = useState(false);
 
-    
+  const [media, setMedia] = useState([]);
+  
+  
+
   const {
     register,
     handleSubmit,
@@ -35,6 +38,11 @@ const VenueCreate =  () => {
 
   async function onSubmit(venueData) {
 console.log(venueData);
+if (media[0]) {
+  venueData.media = [media[0]];
+  console.log("bilder",venueData.media);
+} 
+
     const modifiedData = {
         ...venueData,
         meta: {
@@ -54,7 +62,7 @@ console.log(venueData);
 
         },
         rating: 0,
-        media : [venueData.media]
+        media : venueData.media,
       };
       
       delete modifiedData.address;
@@ -72,16 +80,28 @@ console.log(venueData);
       body: JSON.stringify(modifiedData),
     };
     await startFetch(BASE_URL_VENUES, options);
+  }
 
+  useEffect(() => {
     if (information && !isItLoading && !isItError) {
       setOpenModal(true);
       setModalTitle('Success!');
       setModalInfo('Venue was created');
-      
     }
-    
-  }
+  }, [information, isItLoading, isItError]);
 
+  
+  const handleMediaInputChange = (event) => {
+    const imageValue = event.target.value;
+    if (imageValue.match(/^(http(s?):)([/|.|\w|\s|-])*\.(?:jpg|jpeg|gif|png)$/i)) {
+      setMedia([...media, imageValue]);
+      event.target.value = '';
+    }
+  };
+
+  const removeMedia = (mediaValue) => {
+    setMedia(media.filter((item) => item !== mediaValue));
+  };
 
   
     return (
@@ -108,13 +128,22 @@ console.log(venueData);
     errors={errors}
   />
 
+
 <FormField
-    name="media"
-    label="Media"
-    type="text"
-    register={register}
-    errors={errors}
-  />
+        name="media"
+        label="Media"
+        type="text"
+        register={register}
+        errors={errors}
+        inputProps={{ onChange: handleMediaInputChange }}
+      />
+      {media.map((mediaItem, index) => (
+        <div key={index}>
+          <img src={mediaItem} alt={`Media ${index}`} />
+          <button onClick={() => removeMedia(mediaItem)}>Remove</button>
+        </div>
+      ))}
+
 
 <FormField
     name="price"

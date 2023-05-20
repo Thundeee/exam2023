@@ -46,16 +46,15 @@ const Login = (props) => {
 
 
   useEffect(() => {
-    if (information) {
+    if (information && !isItLoading && !isItError) {
       setToken(true);
       setUserInfo(information);
-      console.log(information);
-      props.children(false)
       setOpenModal(true);
       setModalTitle('Success!');
       setModalInfo('Welcome ' + information.name);
+      props.children(false)
     }
-  }, [information]);
+  }, [information, isItLoading, isItError]);
     return (
 <div>
   

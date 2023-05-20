@@ -66,6 +66,14 @@ console.log(owner);
     
   }
 }
+useEffect(() => {
+  if (information && !isItLoading && !isItError) {
+    setOpenModal(true);
+    setModalTitle('Success!');
+    setModalInfo('Booking was created, you can view it in your profile! Enjoy your stay!');
+
+  }
+}, [information, isItLoading, isItError]);
 
 
   function dateCheck(test) {

@@ -54,8 +54,7 @@ const loginSchema = yup
 
       media: yup
         .string()
-        .matches(/(^(http(s?):)([/|.|\w|\s|-])*\.(?:jpg|jpeg|gif|png)$)|(^$)/, "Please enter a valid image url."),
-        
+        .matches(/^(http(s?):)([/|.|\w|\s|-])*\.(?:jpg|jpeg|gif|png)$/i, "Please enter a valid image url."),        
 
       price: yup
       .number()

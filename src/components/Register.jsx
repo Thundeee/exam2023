@@ -1,5 +1,5 @@
 import { FormField } from "./formfield/Formfield";
-import {useState} from "react";
+import {useState, useEffect} from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { registerSchema } from "../utils/yupSchema";
@@ -42,18 +42,16 @@ const Register = (props) => {
 
     await startFetch(BASE_URL_AUTH + 'register', options);
     console.log(registrationData);
-
-      
-    
-
-    if (!isItLoading &&!isItError) {
+  }
+  useEffect(() => {
+    if (information && !isItLoading && !isItError) {
       setOpenModal(true);
       setModalTitle('Registration was a success!');
       setModalInfo('Welcome ' + information.name + ' you can now login!');
       props.children(false)
-    }
-  }
 
+    }
+  }, [information, isItLoading, isItError]);
   return (
     <div>
       <h1>Register!</h1>
