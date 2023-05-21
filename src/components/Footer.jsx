@@ -19,9 +19,7 @@ const Footer = () => {
         {" "}
         @ {new Date().getFullYear()} - Holidaze
       </Typography>
-      <nav>
         <button onClick={toggleDarkMode}>Toggle Dark Mode</button>
-      </nav>
     </footer>
   );
 };
