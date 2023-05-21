@@ -47,7 +47,7 @@ const ModalContainer = styled.div`
         <ModalContainer>
           <h2 style={{color: "white"}}>{modalTitle}</h2>
           <p style={{color: "white"}}>{modalInfo}</p>
-          <Button style={{margin: "auto 0 auto auto"}} variant="contained" color="terrtiary" onClick={handleClose}>Close</Button>
+          <Button style={{margin: "auto 0 auto auto"}} variant="contained" color="tertiary" onClick={handleClose}>Close</Button>
         </ModalContainer>
         </Fade>
       </Modal>

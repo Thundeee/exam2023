@@ -4,7 +4,7 @@ import { lightTheme, darkTheme } from "./theme/theme";
 import { ThemeProvider } from "@mui/material";
 import CssBaseline from "@mui/material/CssBaseline";
 import Layout from './components/Layout';
-import Home from './pages/Home';
+import Home from './pages/home/Home';
 import Profile from './pages/Profile';
 import Venue from './pages/Venue';
 import VenueCreate from './pages/VenueCreate';

@@ -2,3 +2,8 @@ header h1,
 footer h6 {
   color: white;
 }
+
+
+.MuiButton-root {
+  border-radius: 100px !important;
+}

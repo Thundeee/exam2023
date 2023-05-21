@@ -175,7 +175,7 @@ useEffect(() => {
         />
       </Box>
       <GuestField props={data.maxGuests} guests={guests} setGuests={setGuests}  />
-      <Button type="submit" label="Book" />
+      <Button type="submit" label="Book Venue!" />
 </form>
     </div>
   );

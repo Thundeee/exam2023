@@ -9,7 +9,7 @@ const lightTheme = createTheme({
     secondary: {
       main: '#005573',
     },
-  terrtiary: {
+  tertiary: {
       main: '#F5DEB3',
   },
     background: {
@@ -32,7 +32,7 @@ const darkTheme = createTheme({
       main: '#005573',
     },
 
-    terrtiary: {
+    tertiary: {
       main: '#00a8d6',
     },
 
