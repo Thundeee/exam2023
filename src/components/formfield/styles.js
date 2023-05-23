@@ -13,7 +13,6 @@ export const FormFieldContainer = styled.div`
 
 export const TextInput = styled.input`
   display: block;
-  width: 100%;
   font-size: 1rem;
   padding: 0.5rem;
   border: 1px solid gray;

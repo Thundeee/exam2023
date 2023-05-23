@@ -7,7 +7,6 @@ const useCallApi = () => {
   const [information, setInformation] = useState();
   const [isItLoading, setIsItLoading] = useState(true);
   const [isItError, setIsItError] = useState(false);
-
   const startFetch = async (url, options = {}) => {
     try {
       setIsItLoading(true);

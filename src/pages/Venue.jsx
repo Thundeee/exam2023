@@ -129,13 +129,13 @@ const Venue = () => {
     if (isError) {
         return <p>An error occurred. Please try again.</p>;
     }
-
     return (
         <div className="App">
             <>
                 <h1>{data?.name}</h1>
                 <p>{data?.description}</p>
                 <p>{data?.maxGuests}</p>
+                <p>{data?.name} currently has {booked.length -1} booking(s).</p>
             </>
             <form id="venueForm" onSubmit={submitter}>
                 <Box gap="small" pad="large">

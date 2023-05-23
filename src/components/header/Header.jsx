@@ -78,21 +78,29 @@ const Header = () => {
 
       <InfoModal open={openModal} handleClose={()=> {setOpenModal(false)}} />
       <SwipeableDrawer
- PaperProps={{
-  sx: {
-    width: '25%',
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-    padding: '16px',
-  },
-}}        anchor="right"
-        open={drawer}
-        onClose={() => setDrawer(false)}
-        onOpen={toggleDrawer(true)}
-      >
-        {formType === 'login' ? <Login children={setDrawer} /> : <Register children={setDrawer} />}
-      </SwipeableDrawer>
+  PaperProps={{
+    sx: {
+      width: '25%',
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'center',
+      padding: '16px',
+      '@media (max-width: 1024px)': {
+        width: '40%',
+      },
+      '@media (max-width: 728px)': {
+        width: '50%',
+      },
+    },
+  }}
+  anchor="right"
+  open={drawer}
+  onClose={() => setDrawer(false)}
+  onOpen={toggleDrawer(true)}
+>
+  {formType === 'login' ? <Login children={setDrawer} /> : <Register children={setDrawer} />}
+</SwipeableDrawer>
+
     </div>
   );
 };

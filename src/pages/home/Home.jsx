@@ -3,6 +3,12 @@ import { Link } from 'react-router-dom';
 import { BodyContainer, ButtonWrapper } from './home.styles';
 import { useTheme } from '@mui/material';
 
+//only here for pre-loading the images
+//eslint-disable-next-line
+import {homeBgDark} from '../../assets/homeBgDark.avif';
+//eslint-disable-next-line
+import {homeBgLight} from '../../assets/homeBgLight.avif';
+
 
 const Home = () => {
 
