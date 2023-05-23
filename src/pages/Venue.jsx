@@ -116,6 +116,7 @@ const Venue = () => {
             setModalInfo(
                 "A booking already exists between these dates. Please select another date."
             );
+            console.log("bookingqwudhuuhqw");
         }
     }
 

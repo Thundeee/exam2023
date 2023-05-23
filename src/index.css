@@ -6,4 +6,5 @@ footer h6 {
 
 .MuiButton-root {
   border-radius: 100px !important;
+  padding: 12px 16px !important;
 }

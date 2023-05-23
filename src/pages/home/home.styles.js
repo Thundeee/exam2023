@@ -1,8 +1,6 @@
 import styled from 'styled-components';
-import bg from '../../assets/homebg.avif';
 
 const BodyContainer = styled.div`
-  background-image: url(${bg});
   background-size: cover;
   background-position: center;
   height: 80vh;
@@ -11,12 +9,13 @@ const BodyContainer = styled.div`
   justify-content: flex-end;
   align-items: center;
   padding-bottom: 20vh;
+  transition: background-image 0.5s ease-in-out;
 `;
 
 const ButtonWrapper = styled.div`
   margin-top: auto;
   display: flex;
-  gap: 16px; /* Added: Sets the spacing between buttons */
+  gap: 16px;
 `;
 
 export { BodyContainer, ButtonWrapper };

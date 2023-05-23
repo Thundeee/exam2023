@@ -31,7 +31,10 @@ const Profile =  () => {
         return <p>An error occured please try again.</p>;
       }
 
-      
+      if (!data.avatar) {
+        data.avatar = 'https://www.pngitem.com/pimgs/m/146-1468479_my-profile-icon-blank-profile-picture-circle-hd.png';
+
+      }
     return (
 
 <div className="App">

@@ -4,26 +4,38 @@ export const HeaderContainer = styled.header`
   background-color: ${(props) => props.backgroundColor};
   display: flex;
   align-items: center;
-  padding-bottom: 10px;
+  padding-bottom: 5px;
   padding-top: 5px;
 `;
 
+export const LogoContainer = styled.div`
+  margin-left: 20px;
+`;
+
+export const LogoImage = styled.img`
+  width: 100px;
+`;
+
+export const TitleContainer = styled.div`
+  display: flex;
+  align-items: center;
+  flex-grow: 1;
+`;
+
 export const Title = styled.h1`
-  flex: 1;
-  text-align: center;
+  margin: 0;
 `;
 
 export const HeaderButtons = styled.div`
   display: flex;
   align-items: center;
-  margin-right: 20px;
+  padding-right: 20px;
 `;
 
 export const ProfileImage = styled.img`
-  width: 100px;
-  height: 100px;
+  width: 75px;
+  height: 75px;
   border-radius: 50%;
   object-fit: cover;
   margin-right: 20px;
 `;
-

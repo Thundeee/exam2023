@@ -47,6 +47,11 @@ const Login = (props) => {
 
   useEffect(() => {
     if (information && !isItLoading && !isItError) {
+      if (!information.avatar) {
+        information.avatar = 'https://www.pngitem.com/pimgs/m/146-1468479_my-profile-icon-blank-profile-picture-circle-hd.png';
+
+      }
+
       setToken(true);
       setUserInfo(information);
       setOpenModal(true);
