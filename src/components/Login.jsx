@@ -9,6 +9,7 @@ import useLocalStorage from "../hooks/useLocalStorage";
 import useCallApi from "../hooks/useCallApi";
 import { AuthContext } from "../context/auth";
 import { ModalContext } from "../context/modalContent";
+import defaultPfp from '../assets/defaultPfp.png';
 
 
 const Login = (props) => {
@@ -48,7 +49,7 @@ const Login = (props) => {
   useEffect(() => {
     if (information && !isItLoading && !isItError) {
       if (!information.avatar) {
-        information.avatar = 'https://www.pngitem.com/pimgs/m/146-1468479_my-profile-icon-blank-profile-picture-circle-hd.png';
+        information.avatar = defaultPfp;
 
       }
 

@@ -47,7 +47,7 @@ const Header = () => {
   const userInfo = JSON.parse(localStorage.getItem('userInfo'));
 
   return (
-    <div>
+    <>
     <HeaderContainer backgroundColor={theme.palette.secondary.main}>
         <Link to='/'>
           <img src={Logo} alt="Holidaze Logo"  style={{marginLeft: '20px'}} width={100} />
@@ -71,7 +71,7 @@ const Header = () => {
               <Button variant="contained" color="tertiary" style={{ marginRight: '20px' }} onClick={toggleDrawer('signup')}>Sign up</Button>
 
             <Button variant="contained" color="tertiary" onClick={toggleDrawer('login')}>Log in</Button>
-          </>
+          </> 
         )}
       </HeaderButtons>
       </HeaderContainer>
@@ -101,7 +101,7 @@ const Header = () => {
   {formType === 'login' ? <Login children={setDrawer} /> : <Register children={setDrawer} />}
 </SwipeableDrawer>
 
-    </div>
+    </>
   );
 };
 
