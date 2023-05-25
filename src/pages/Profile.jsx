@@ -29,17 +29,8 @@ const Profile = () => {
 
   const [tabValue, setTabValue] = useState(0);
 
-  if (isLoading) {
-    return <p>Loading...</p>;
-  }
-  if (!userInfo) {
-    return <p>Please log in before viewing your profile</p>;
-  }
-  if (isError) {
-    return <p>An error occurred. Please try again.</p>;
-  }
 
-  if (!data.avatar) {
+  if (data && !data.avatar) {
     data.avatar =
       'https://www.pngitem.com/pimgs/m/146-1468479_my-profile-icon-blank-profile-picture-circle-hd.png';
   }
@@ -47,6 +38,30 @@ const Profile = () => {
   const handleTabChange = (event, newValue) => {
     setTabValue(newValue);
   };
+
+  if (isLoading) {
+    
+    return (
+      <div className="App">
+
+    <p>Loading...</p>;
+      
+      </div>
+    )
+  }
+  if (!userInfo) {
+    return(
+      <div className="App">
+      <p>Please log in before viewing your profile</p>;
+      </div>
+    )
+  }
+  if (isError) {
+    return(        <div className="App">
+    <p>An error occurred. Please try again.</p>;
+    </div>)
+
+  }
 
   return (
     <div className="App">

@@ -14,7 +14,7 @@ const Home = () => {
 
   const theme = useTheme();
   return (
-    <BodyContainer  style={{  backgroundImage: `url(${theme.palette.background.pic})`}}>
+    <BodyContainer className='App'  style={{  backgroundImage: `url(${theme.palette.background.pic})`}}>
       <ButtonWrapper>
         <Button variant="contained" color="primary" component={Link} to="/Venue/All">
           Explore Venues

@@ -3,6 +3,12 @@ footer h6 {
   color: white;
 }
 
+.App {
+
+  min-height: 85vh;
+
+}
+
 
 .MuiButton-root {
   border-radius: 100px !important;

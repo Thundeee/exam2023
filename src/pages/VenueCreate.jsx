@@ -102,15 +102,23 @@ if (media[0]) {
   const removeMedia = (mediaValue) => {
     setMedia(media.filter((item) => item !== mediaValue));
   };
-
+  if (!token ) {
+    return (
+    <div className="App">
+<p>please log in before trying to create a venue</p>
+</div>
+    );
+  }
+  if (!userInfo?.venueManager) {
+    return (
+    <div className="App">
+<p>Only Venue managers can list venues.</p></div>
+  )}
   
     return (
 
 <div className="App">
-{!token && <p>please log in before trying to create a venue</p>}
-{token && !userInfo.venueManager && <p>Only Venue managers can list venues.</p>}
-{token && userInfo.venueManager &&
- <>
+
   <form id="venueForm" onSubmit={handleSubmit(onSubmit)}>
   <FormField
     name="name"
@@ -200,13 +208,7 @@ if (media[0]) {
       Submit
       </button>
 
-  </form>
-
-</>
-    }
-
-
-      
+  </form> 
 
 </div>
     );

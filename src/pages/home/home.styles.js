@@ -3,7 +3,6 @@ import styled from 'styled-components';
 const BodyContainer = styled.div`
   background-size: cover;
   background-position: center;
-  height: 80vh;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;

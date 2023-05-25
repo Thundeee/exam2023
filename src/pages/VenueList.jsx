@@ -27,27 +27,36 @@ const VenueList = () => {
   };
 
   if (isLoading) {
-    return <p>Loading...</p>;
+    
+    return(
+    <div className="App">
+    <p>Loading...</p>;
+    </div>)
   }
   if (isError) {
-    return <p>An error occurred. Please try again.</p>;
+    return(
+    <div className="App">
+    <p>An error occurred. Please try again.</p>;
+    </div>)
   }
 
   return (
     <Box sx={{ width: "75%", margin: "0 auto", mt: "5px", }}
     >
       <Typography variant="h4" align="center" gutterBottom>
-        All Venues
+        Browse Venues
+      </Typography>
+      <Typography variant="subtitle1" align="center" gutterBottom>
+        A good time starts with a great venue!
       </Typography>
       <TextField
         id="searchField"
         label="Search for a Venue or City"
-        variant="outlined"
         color="tertiary"
         type="search"
         fullWidth
         onChange={searcher}
-        sx={{ mb: 2, }}
+        sx={{ mb: 5, }}
       />
       {search.length > 0 ? (
         search.map((venue) => (
@@ -64,17 +73,17 @@ const VenueList = () => {
               backgroundColor: "tertiary.main",
               color: "black",
               inlineSize: "fit-content",
+              minWidth: "100%",
             }}
           >
             <div style={{ marginRight: "1rem" }}>
               <Typography variant="h5">{venue.name}</Typography>
-              <Typography variant="subtitle1">
-                Price: {venue.price},- / Night | Max Guests: {venue.maxGuests}
+              <Typography variant="subtitle1" sx={{ fontStyle: 'italic' }}>
+              Price: {venue.price},- | Max Guests: {venue.maxGuests}
               </Typography>
               <Typography variant="body1" style={{ fontSize: "14px", maxHeight: "60px", overflow: "hidden" }}>
                 {venue.description}
               </Typography>
-              <Typography variant="subtitle2">Meta:</Typography>
               <ul>
                 <li>WiFi: {venue.meta.wifi ? "Available" : "Not Available"}</li>
                 <li>Parking: {venue.meta.parking ? "Available" : "Not Available"}</li>
@@ -83,19 +92,12 @@ const VenueList = () => {
               </ul>
             </div>
             <div style={{ flex: 1, marginLeft: "1rem", display: "flex", flexDirection: "column", alignItems: "flex-end" }}>
-            {venue.media[0] ? (
                 <img
-                  src={venue.media[0]}
+                  src={venue.media[0] ? venue.media[0] : defaultVenue}
                   alt={venue.name}
                   style={{ width: "250px", height: "250px", objectFit: "cover", marginBottom: "1rem" }}
                 />
-              ) : (
-                <img
-                  src={defaultVenue}
-                  alt={venue.name}
-                  style={{ width: "250px", height: "250px", objectFit: "cover", marginBottom: "1rem" }}
-                />
-              )}
+
               <Button variant="contained" color="primary" component={Link} to={`/Venue/${venue.id}`}>
                 View Details
               </Button>
