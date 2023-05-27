@@ -1,4 +1,4 @@
-import React from "react";
+import { useState, useEffect } from "react";	
 import { TextField, InputAdornment, IconButton, Box } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 import heroImage from "../../assets/heroImage.avif";
@@ -18,28 +18,36 @@ import {
   VenueInfoWrapper,
   VenueImageWrapper,
 } from "./venueList.styles";
+import { debounce } from "lodash";
+
 
 const VenueList = () => {
   const theme = useTheme();
   const { data, isLoading, isError } = useApi(BASE_URL_VENUES);
-  const [search, setSearch] = React.useState([]);
+  const [search, setSearch] = useState([]);
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (data) {
       setSearch(data);
     }
   }, [data]);
 
+  const delayedSearch = (
+    debounce((value) => {
+      const searchFilter = data.filter(
+        (item) =>
+          item.name.toLowerCase().includes(value) ||
+          item.location.city.toLowerCase().includes(value)
+      );
+      setSearch(searchFilter);
+    }, 250)
+    
+  );
+
   const handleSearch = (event) => {
     const value = event.target.value.toLowerCase();
-    const searchFilter = data.filter(
-      (item) =>
-        item.name.toLowerCase().includes(value) ||
-        item.location.city.toLowerCase().includes(value)
-    );
-    setSearch(searchFilter);
+    delayedSearch(value);
   };
-
   const descDecreaser = (description) => {
     if (description.length <= 300) {
       return description;
@@ -109,7 +117,6 @@ const VenueList = () => {
                   </IconButton>
                 </InputAdornment>
               ),
-              disableUnderline: true,
               style: { color: "black" },
             }}
           />
