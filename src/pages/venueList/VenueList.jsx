@@ -25,6 +25,8 @@ const VenueList = () => {
   const theme = useTheme();
   const { data, isLoading, isError } = useApi(BASE_URL_VENUES);
   const [search, setSearch] = useState([]);
+  const [loading, setLoading] = useState(false);
+
 
   useEffect(() => {
     if (data) {
@@ -40,6 +42,8 @@ const VenueList = () => {
           item.location.city.toLowerCase().includes(value)
       );
       setSearch(searchFilter);
+      setLoading(false);
+
     }, 250)
     
   );
@@ -64,7 +68,7 @@ const VenueList = () => {
   }
 
   return (
-    <div>
+    <div className="App">
       <Typography variant="h4" align="center" gutterBottom marginTop={1}>
         Browse Venues
       </Typography>
@@ -137,7 +141,9 @@ const VenueList = () => {
 
         }}
       >
-        {search.length > 0 ? (
+        {loading ? (
+          <p>loading...</p>
+        ) : search.length > 0 ? (
           search.map((venue) => (
             <VenueWrapper
               key={venue.id}
