@@ -53,9 +53,14 @@ const loginSchema = yup
       .required("Please describe your venue."),
 
       media: yup
-        .string()
-        .matches(/^(http(s?):)([/|.|\w|\s|-])*\.(?:jpg|jpeg|gif|png)$/i, "Please enter a valid image url."),        
-
+      .string()
+      .matches(
+        /^(http(s?):)?([/|.|\w|\s|-])*\.(?:jpg|jpeg|gif|png)?$/i,
+        {
+          message: "Please enter a valid image URL or leave the field empty.",
+          excludeEmptyString: true,
+        }
+      ),
       price: yup
       .number()
       .typeError('Price must be a number.')

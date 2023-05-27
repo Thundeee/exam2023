@@ -7,7 +7,7 @@ import Layout from './components/Layout';
 import Home from './pages/home/Home';
 import Profile from './pages/Profile';
 import Venue from './pages/Venue';
-import VenueCreate from './pages/VenueCreate';
+import VenueCreate from './pages/venueCreate/VenueCreate';
 import VenueList from './pages/venueList/VenueList';
 import { ThemeContext } from "./context/themeSelect";
 

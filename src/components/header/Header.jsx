@@ -10,7 +10,6 @@ import { ThemeContext } from "../../context/themeSelect";
 import InfoModal from '../Modal';	
 import {
   HeaderContainer,
-  LogoContainer,
   Title,
   HeaderButtons,
   ProfileImage,

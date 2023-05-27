@@ -1,5 +1,4 @@
 import { Box } from "@mui/system";
-import { Typography } from "@mui/material";
 import styled from "styled-components";
 
 export const VenueWrapper = styled(Box)`
@@ -17,7 +16,6 @@ export const VenueWrapper = styled(Box)`
 
 export const VenueInfoWrapper = styled.div`
   margin-right: 1rem;
-  flex: 1;
 `;
 
 export const VenueImageWrapper = styled.div`
@@ -26,10 +24,4 @@ export const VenueImageWrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: flex-end;
-`;
-
-export const Description = styled(Typography)`
-  font-size: 14px;
-  max-height: 60px;
-  overflow: hidden;
 `;

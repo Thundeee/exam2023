@@ -8,9 +8,6 @@ export const HeaderContainer = styled.header`
   padding-top: 5px;
 `;
 
-export const LogoContainer = styled.div`
-  margin-left: 20px;
-`;
 
 export const LogoImage = styled.img`
   width: 100px;

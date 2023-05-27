@@ -26,7 +26,7 @@ const Venue = () => {
     const today = new Date();
     const yesterday = new Date(today);
     yesterday.setDate(yesterday.getDate() - 1);
-
+console.log(data);
     const thePast = ["1970-01-01", yesterday.toISOString().split("T")[0]];
 
     useEffect(() => {
