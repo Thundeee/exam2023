@@ -153,9 +153,7 @@ const VenueList = () => {
                 >
                   {descDecreaser(venue.description)}
                 </Typography>
-                <ul style={{          display: "grid",
-          gridTemplateColumns: "repeat(2, 1fr)",
-          gap: "16px",}}>
+                <ul>
                   <li>
                     <Tooltip
                       title="WiFi"

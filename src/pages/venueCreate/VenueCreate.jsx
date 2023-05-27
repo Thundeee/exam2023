@@ -300,9 +300,7 @@ const theme = useTheme();
           >
   {previewData.description ? previewData.description : "Your description goes here"}
           </Typography>
-          <ul style={{          display: "grid",
-          gridTemplateColumns: "repeat(2, 1fr)",
-          gap: "16px",}}>
+          <ul>
                   <li>
                     <Tooltip
                       title="WiFi"
