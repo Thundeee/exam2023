@@ -160,9 +160,10 @@ const theme = useTheme();
       <FormField
         name="description"
         label="Venue Description"
-        type="text"
+        type="textarea"
         register={register}
         errors={errors}
+        inputProps={{ rows: 3 }}
       />
     </FieldContainer>
 
@@ -171,7 +172,7 @@ const theme = useTheme();
         <FormField
           name="price"
           label="Price per night"
-          type="text"
+          type="number"
           register={register}
           errors={errors}
         />
@@ -181,7 +182,7 @@ const theme = useTheme();
         <FormField
           name="maxGuests"
           label="Maximum Guests"
-          type="text"
+          type="number"
           register={register}
           errors={errors}
         />

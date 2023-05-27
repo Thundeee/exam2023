@@ -61,11 +61,21 @@ const VenueList = () => {
   };
 
   if (isLoading) {
-    return <p>Loading...</p>;
+    
+    return (
+      <div className="App">
+
+    <p>Loading...</p>;
+      
+      </div>
+    )
   }
 
   if (isError) {
-    return <p>An error occurred. Please try again.</p>;
+    return(        <div className="App">
+    <p>An error occurred. Please try again.</p>;
+    </div>)
+
   }
 
   return (
