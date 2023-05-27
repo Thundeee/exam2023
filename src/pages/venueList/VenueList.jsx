@@ -25,12 +25,14 @@ const VenueList = () => {
   const theme = useTheme();
   const { data, isLoading, isError } = useApi(BASE_URL_VENUES);
   const [search, setSearch] = useState([]);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
 
 
   useEffect(() => {
     if (data) {
       setSearch(data);
+      setLoading(false);
+
     }
   }, [data]);
 
@@ -42,7 +44,6 @@ const VenueList = () => {
           item.location.city.toLowerCase().includes(value)
       );
       setSearch(searchFilter);
-      setLoading(false);
 
     }, 250)
     
