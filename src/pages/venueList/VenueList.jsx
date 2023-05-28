@@ -54,7 +54,7 @@ const VenueList = () => {
     delayedSearch(value);
   };
   const descDecreaser = (description) => {
-    if (description.length <= 300) {
+    if (description.length <= 150) {
       return description;
     }
     return description.substring(0, 150) + "...";
@@ -142,7 +142,7 @@ const VenueList = () => {
         sx={{
           width: "75%",
           margin: " 0 auto",
-          mt: "50px",
+          mt: "30px",
           display: "grid",
           gridTemplateColumns: "repeat(2, 1fr)",
           gap: "16px",

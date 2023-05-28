@@ -14,3 +14,7 @@ footer h6 {
   border-radius: 100px !important;
   padding: 16px 16px !important;
 }
+
+.Mui-selected {
+  color: black !important;
+}
