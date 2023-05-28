@@ -12,7 +12,7 @@ const Venue = () => {
     const { setOpenModal, setModalInfo, setModalTitle } =
         useContext(ModalContext);
     const { data, isLoading, isError } = useApi(
-        BASE_URL_VENUES + id + "?_bookings=true&_owner=true"
+        BASE_URL_VENUES + id + "?_bookings=true&_owner=true&?_customer=true"
     );
     const { startFetch, information, isItLoading, isItError } = useCallApi();
     const [pickedDates, setPickedDates] = useState();
@@ -70,16 +70,10 @@ const Venue = () => {
         };
         console.log(options);
         await startFetch(BASE_URL_BOOKINGS, options);
-        if (information && !isItLoading && !isItError) {
-            setOpenModal(true);
-            setModalTitle("Success!");
-            setModalInfo(
-                "Booking was created, you can view it in your profile! Enjoy your stay!"
-            );
-        }
+
     }
     useEffect(() => {
-        if (information && !isItLoading && !isItError) {
+        if (information && !isItLoading && !isItError && !owner) {
             setOpenModal(true);
             setModalTitle("Success!");
             setModalInfo(
@@ -123,6 +117,8 @@ const Venue = () => {
     const endDateButton = useRef();
 console.log(data);
  async function upcoming() {
+
+
     setModalTitle(`Upcoming bookings for ${data.name}`);
     setModalInfo(
         data.bookings.map((booking) => {
@@ -132,7 +128,7 @@ console.log(data);
                         {new Date(booking.dateFrom).toDateString()} - {new Date(booking.dateTo).toDateString()}
                     </p>
                     <p>Guests: {booking.guests}</p>
-                    <p></p>
+                    <Button onClick={() => moreInfo(booking.id)}>More info</Button>
                 </div>
             
 
@@ -141,6 +137,38 @@ console.log(data);
         );
     setOpenModal(true);
  }
+
+
+ async function moreInfo(BookId) {
+    const options = {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${userInfo.accessToken}`,
+        },
+    };
+    await startFetch(BASE_URL_BOOKINGS  + BookId + '?_customer=true', options);
+ }
+
+ useEffect(() => {
+    if (information && !isItLoading && !isItError && owner) {
+      console.log(information);
+      setOpenModal(true);
+      setModalTitle("Booking information");
+      setModalInfo(
+        <>
+          <div style={{ marginBottom: '10px', border: '1px black solid', textAlign: 'center' }}>
+            <p>{information.customer.name}</p>
+            <p>{information.customer.email}</p>
+            <p>{new Date(information.dateFrom).toDateString()} - {new Date(information.dateTo).toDateString()}</p>
+            <p>Guests: {information.guests}</p>
+            <Button onClick={upcoming}>Return</Button>
+          </div>
+        </>
+      );
+    }
+  }, [information, isItLoading, isItError]);
+  
 
     if (isLoading) {
         
@@ -216,18 +244,18 @@ console.log(data);
                     />
                 </Box>
 
-                
-                
-                        <GuestField
-                        props={data.maxGuests}
-                        guests={guests}
-                        setGuests={setGuests}
-                    />
-    
-                    <Button type="submit" label="Book Venue!" />
-                    {owner && (
-                    <Button label="See upcoming bookings" onClick={upcoming} />)}
-
+                {owner ? (
+  <Button label="See upcoming bookings" onClick={upcoming} />
+) : (
+  <>
+    <GuestField
+      props={data.maxGuests}
+      guests={guests}
+      setGuests={setGuests}
+    />
+    <Button type="submit" label="Book Venue!" />
+  </>
+)}
             </form>
         </div>
     );
