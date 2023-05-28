@@ -37,7 +37,7 @@ See the section about [deployment](https://facebook.github.io/create-react-app/d
 9. A registered Venue manager may create a Venue ✔️
 10. A registered Venue manager may update a Venue they manage :x:
 11. A registered Venue manager may delete a Venue they manage :x:
-12. A registered Venue manager may view bookings for a Venue they manage :x:
+12. A registered Venue manager may view bookings for a Venue they manage ✔️
 13. A registered user may login ✔️
 14. A registered user may update their avatar ✔️
 15. A registered user may logout ✔️

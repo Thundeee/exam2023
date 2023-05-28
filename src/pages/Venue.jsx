@@ -19,14 +19,12 @@ const Venue = () => {
     const [activeDate, setActiveDate] = useState(undefined);
 
     const [booked, setBooked] = useState([]);
-    console.log(booked);
     const [guests, setGuests] = useState(1);
     const [owner, setOwner] = useState();
 
     const today = new Date();
     const yesterday = new Date(today);
     yesterday.setDate(yesterday.getDate() - 1);
-console.log(data);
     const thePast = ["1970-01-01", yesterday.toISOString().split("T")[0]];
 
     useEffect(() => {
@@ -38,13 +36,14 @@ console.log(data);
                 ];
             });
 
-            const allBookedDates = [thePast, ...bookingDates]; // Wrap thePast in an array and concatenate with bookingDates
-
+            const allBookedDates = [thePast, ...bookingDates]; 
             setBooked(allBookedDates);
-            setOwner(data.owner);
+            if (data.owner.name === userInfo?.name) {
+                setOwner(data.owner);
+            }
+            
         }
     }, [data]);
-    console.log(owner);
     const userInfo = JSON.parse(localStorage.getItem("userInfo"));
 
     async function submitter(event) {
@@ -122,6 +121,26 @@ console.log(data);
 
     const startDateButton = useRef();
     const endDateButton = useRef();
+console.log(data);
+ async function upcoming() {
+    setModalTitle(`Upcoming bookings for ${data.name}`);
+    setModalInfo(
+        data.bookings.map((booking) => {
+            return (
+                <div style={{marginBottom: '10px', border: '1px black solid', textAlign: 'center'}}>
+                    <p>
+                        {new Date(booking.dateFrom).toDateString()} - {new Date(booking.dateTo).toDateString()}
+                    </p>
+                    <p>Guests: {booking.guests}</p>
+                    <p></p>
+                </div>
+            
+
+    );
+            })
+        );
+    setOpenModal(true);
+ }
 
     if (isLoading) {
         
@@ -137,6 +156,7 @@ console.log(data);
         <p>An error occurred. Please try again.</p>;
         </div>)
     }
+
     return (
         <div className="App">
             <>
@@ -195,12 +215,19 @@ console.log(data);
                         range="array"
                     />
                 </Box>
-                <GuestField
-                    props={data.maxGuests}
-                    guests={guests}
-                    setGuests={setGuests}
-                />
-                <Button type="submit" label="Book Venue!" />
+
+                
+                
+                        <GuestField
+                        props={data.maxGuests}
+                        guests={guests}
+                        setGuests={setGuests}
+                    />
+    
+                    <Button type="submit" label="Book Venue!" />
+                    {owner && (
+                    <Button label="See upcoming bookings" onClick={upcoming} />)}
+
             </form>
         </div>
     );
