@@ -52,7 +52,6 @@ const Profile = () => {
 
 
   const pfpChanger = () => {
-    console.log('pfpChanger');
     setOpenModal(true);
     setModalTitle('Change profile picture');
     setModalInfo( 
@@ -73,7 +72,6 @@ const Profile = () => {
         link.avatar = event.target.avatar.value;
     let validLink = link.avatar.match(/(^(http(s?):)([/|.|\w|\s|-])*\.(?:jpg|jpeg|gif|png)$)|(^$)/)
     if (!validLink) {
-      console.log('invalid link');
       setOpenModal(true);
       setModalTitle('Invalid link');
       setModalInfo(
@@ -92,7 +90,6 @@ const Profile = () => {
       },
       body: JSON.stringify(link),
     };
-    console.log('options', options);
     await startFetch(BASE_URL_PROFILES + name + '/media', options);
     
   }
@@ -101,7 +98,6 @@ const Profile = () => {
       setOpenModal(true);
       setModalTitle('Success!');
       setModalInfo('Your profile picture has been changed!');
-      console.log('information', information);
       setUserInfo(userInfo => ({...userInfo, avatar: information.avatar}));
 
       
