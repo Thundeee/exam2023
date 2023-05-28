@@ -167,7 +167,6 @@ const theme = useTheme();
       />
     </FieldContainer>
 
-    <RowContainer>
       <FieldContainer>
         <FormField
           name="price"
@@ -187,7 +186,6 @@ const theme = useTheme();
           errors={errors}
         />
       </FieldContainer>
-    </RowContainer>
 
     <RowContainer>
       <SwitchContainer>

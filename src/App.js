@@ -5,7 +5,7 @@ import { ThemeProvider } from "@mui/material";
 import CssBaseline from "@mui/material/CssBaseline";
 import Layout from './components/Layout';
 import Home from './pages/home/Home';
-import Profile from './pages/Profile';
+import Profile from './pages/profile/Profile';
 import Venue from './pages/Venue';
 import VenueCreate from './pages/venueCreate/VenueCreate';
 import VenueList from './pages/venueList/VenueList';

@@ -253,6 +253,7 @@ const VenueList = () => {
                     height: "250px",
                     objectFit: "cover",
                     marginBottom: "1rem",
+                    border : "1px solid black"
                   }}
                 />
 

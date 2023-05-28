@@ -63,12 +63,14 @@ const loginSchema = yup
       ),
       price: yup
       .number()
+      .min(1, 'Price must be atleast 1.')
       .typeError('Price must be a number.')
       .required("Please enter price per night."),
 
         
       maxGuests: yup
       .number()
+      .min(1, 'Maximum guests must be atleast 1.')
       .required("Please enter maximum guests at your venue.")
       .max(100, 'Maximum guests can not be more than 100.')
       .typeError('Maximum guests must be a number.'),
@@ -88,6 +90,6 @@ const loginSchema = yup
       .string(),
 
   })
+  
   .required();
-
 export { loginSchema, registerSchema, venueSchema };

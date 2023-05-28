@@ -33,5 +33,4 @@ export const TextArea = styled.textarea`
 
 export const ErrorMessage = styled.p`
   color: red;
-  text-align: center;
 `;

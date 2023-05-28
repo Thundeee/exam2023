@@ -11,8 +11,8 @@ import { ModalContext } from "../context/modalContent";
 
 const InfoModal = ({ open, handleClose }) => {
     
-    const { modalInfo, modalTitle} = useContext(ModalContext);
-    
+    const { modalInfo, modalTitle, rerender} = useContext(ModalContext);
+
     const theme = useTheme();
 
 // Define styles for the modal
@@ -46,7 +46,7 @@ const ModalContainer = styled.div`
 
         <ModalContainer>
           <h2 style={{color: "white"}}>{modalTitle}</h2>
-          <p style={{color: "white"}}>{modalInfo}</p>
+          <div style={{color: "white"}}>{modalInfo}</div>
           <Button style={{margin: "auto 0 auto auto"}} variant="contained" color="tertiary" onClick={handleClose}>Close</Button>
         </ModalContainer>
         </Fade>

@@ -7,7 +7,7 @@ const BodyContainer = styled.div`
   flex-direction: column;
   justify-content: flex-end;
   align-items: center;
-  padding-bottom: 20vh;
+  padding-bottom: 25vh;
   transition: background-image 0.5s ease-in-out;
 `;
 

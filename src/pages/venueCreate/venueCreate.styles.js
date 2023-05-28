@@ -9,6 +9,8 @@ export const BoxContainer = styled.div`
 
 export const FormContainer = styled.div`
   flex: 1;
+  margin-top: 1rem;
+  margin-left: 1rem;
 `;
 
 export const Form = styled.form`
@@ -36,11 +38,11 @@ export const SwitchContainer = styled.div`
 export const MediaContainer = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 5px;
 
   img {
-    width: 100px;
-    height: 100px;
+    width: 50px;
+    height: 50px;
   }
 `;
 
