@@ -12,6 +12,7 @@ import {
   VenueWrapper,
   VenueInfoWrapper,
   VenueImageWrapper,
+  StyledImage,
 } from "./venueList.styles";
 import { debounce } from "lodash";
 import Loader from "../../components/Loader";
@@ -127,13 +128,17 @@ const VenueList = () => {
 
       <Box
         sx={{
-          width: "75%",
+          width: "80%",
+          '@media (max-width: 728px)': {
+            width: "90%",
+          },
+
           margin: " 0 auto",
           mt: "30px",
           display: "grid",
           gridTemplateColumns: "repeat(2, 1fr)",
           gap: "16px",
-          '@media (max-width: 1200px)': {
+          '@media (max-width: 1300px)': {
             gridTemplateColumns: "repeat(1, 1fr)",
           },
 
@@ -167,16 +172,9 @@ const VenueList = () => {
                 <Metas path={venue.meta} />
               </VenueInfoWrapper>
               <VenueImageWrapper>
-                <img
+                <StyledImage
                   src={venue.media[0] ? venue.media[0] : defaultVenue}
                   alt={venue.name}
-                  style={{
-                    width: "250px",
-                    height: "250px",
-                    objectFit: "cover",
-                    marginBottom: "1rem",
-                    border : "1px solid black"
-                  }}
                 />
 
                 <Button

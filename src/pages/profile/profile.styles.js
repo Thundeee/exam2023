@@ -8,7 +8,11 @@ border-radius: 50%;
 cursor: pointer;
 object-fit: cover;
 margin-top: 20px;
-margin-left: 20px;
+@media (max-width: 728px) {
+  display: flex;
+  margin-left: auto;
+  margin-right: auto;
+}
 `;
 
 export const VenueWrapper = styled(Box)`
@@ -35,4 +39,17 @@ export const VenueImageWrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: flex-end;
+`;
+
+export const StyledImage = styled.img`
+  width: 250px;
+  height: 250px;
+  object-fit: cover;
+  margin-bottom: 1rem;
+  border: 1px solid black;
+  @media (max-width: 728px) {
+    width: 100px !important;
+    height: 100px !important;
+  }
+
 `;

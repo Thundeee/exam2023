@@ -10,7 +10,7 @@ import TabPanel from '../../components/TabPanel';
 import useCallApi from '../../hooks/useCallApi';
 import { ModalContext } from '../../context/modalContent';
 import useLocalStorage from '../../hooks/useLocalStorage';
-import { ProfilePicture, VenueWrapper, VenueInfoWrapper, VenueImageWrapper } from './profile.styles';
+import { ProfilePicture, VenueWrapper, VenueInfoWrapper, VenueImageWrapper, StyledImage } from './profile.styles';
 import Metas from '../../components/Metas';
 import Loader from "../../components/Loader";
 import Errorer from "../../components/Errorer";
@@ -183,16 +183,10 @@ const Profile = () => {
 
                   </VenueInfoWrapper>
                   <VenueImageWrapper>
-                    <img
+                    <StyledImage
                       src={booking.venue.media[0] ? booking.venue.media[0] : defaultVenue}
                       alt={booking.venue.name}
-                      style={{
-                        width: "250px",
-                        height: "250px",
-                        objectFit: "cover",
-                        marginBottom: "1rem",
-                        border: "1px solid black",
-                      }}
+
                     />
                     <Button
                       variant="contained"
@@ -244,16 +238,9 @@ const Profile = () => {
                   <Metas path={venue.meta} />
                   </VenueInfoWrapper>
                   <VenueImageWrapper>
-                    <img
+                    <StyledImage
                       src={venue.media[0] ? venue.media[0] : defaultVenue}
                       alt={venue.name}
-                      style={{
-                        width: "250px",
-                        height: "250px",
-                        objectFit: "cover",
-                        marginBottom: "1rem",
-                        border: "1px solid black",
-                      }}
                     />
                     <Button
                       variant="contained"

@@ -11,7 +11,9 @@ import InfoModal from '../Modal';
 import {
   HeaderContainer,
   Title,
+  MenuButton,
   HeaderButtons,
+  MobileButtons,
   ProfileImage,
 } from './header.styles';
 import Login from '../Login';
@@ -45,6 +47,32 @@ const Header = () => {
 
   const userInfo = JSON.parse(localStorage.getItem('userInfo'));
 
+const ButtonForm = (props) => {
+  console.log('ButtonForm');
+  return(
+    <MobileButtons>
+    <Button onClick={toggleDarkMode} variant="contained" color="tertiary"   style={{ marginTop: '20px' }}>Toggle Dark Mode</Button>
+      {token ? (
+        <>
+        <Link to='/profile'>
+          <ProfileImage src={userInfo.avatar} style={{ marginTop: '20px', display: 'flex', marginLeft: 'auto', marginRight: 'auto' }} alt="Profile Pic" />
+        </Link>
+          <Button variant="contained" color="tertiary" style={{ marginTop: '20px' }} onClick={logout}>Log out</Button>
+        </>
+      ) : (
+        <>
+
+            <Button variant="contained" color="tertiary" style={{ marginTop: '20px' }}   onClick={() => {
+    setDrawer(false);
+    toggleDrawer('signup')();
+  }}>Sign up</Button>
+
+          <Button variant="contained" color="tertiary" style={{ marginTop: '20px' }} onClick={toggleDrawer('login')}>Log in</Button>
+        </> 
+      )}
+    </MobileButtons>
+  )
+}
   return (
     <>
     <HeaderContainer backgroundColor={theme.palette.secondary.main}>
@@ -55,6 +83,11 @@ const Header = () => {
       <Title>Holidaze</Title>
       </Link>
       <span style={{flexGrow: '1'}} ></span>
+          <MenuButton
+          onClick={toggleDrawer('buttons')}
+          >
+          </MenuButton>
+
       <HeaderButtons>
       <Button onClick={toggleDarkMode} variant="contained" color="tertiary"   style={{ marginRight: '20px' }}>Toggle Dark Mode</Button>
         {token ? (
@@ -74,7 +107,6 @@ const Header = () => {
         )}
       </HeaderButtons>
       </HeaderContainer>
-
       <InfoModal open={openModal} handleClose={()=> {setOpenModal(false)}} />
       <SwipeableDrawer
   PaperProps={{
@@ -90,6 +122,10 @@ const Header = () => {
       '@media (max-width: 728px)': {
         width: '50%',
       },
+      '@media (max-width: 480px)': {
+        width: '75%',
+
+      },
     },
   }}
   anchor="right"
@@ -97,8 +133,13 @@ const Header = () => {
   onClose={() => setDrawer(false)}
   onOpen={toggleDrawer(true)}
 >
-  {formType === 'login' ? <Login children={setDrawer} /> : <Register children={setDrawer} />}
-</SwipeableDrawer>
+{formType === 'login' ? (
+  <Login children={setDrawer} />
+) : formType === 'signup' ? (
+  <Register children={setDrawer} />
+) : (
+  <ButtonForm children={setDrawer} />
+)}</SwipeableDrawer>
 
     </>
   );

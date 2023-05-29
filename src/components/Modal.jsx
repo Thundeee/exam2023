@@ -28,6 +28,9 @@ const InfoModal = ({ open, handleClose }) => {
     display: grid;
     max-height: 80vh;
     overflow: auto; 
+    @media (max-width: 768px) {
+      width: 75vw;
+    }
   `;
 
   return (

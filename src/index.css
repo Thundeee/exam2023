@@ -10,9 +10,17 @@ footer h6 {
 }
 
 
+
+
 .MuiButton-root {
   border-radius: 100px !important;
-  padding: 16px 16px !important;
+  padding: 16px !important;
+}
+@media (max-width: 728px) {
+  .MuiButton-root {
+    font-size: 12px !important;
+    padding: 6px !important;
+  }
 }
 
 .Mui-selected {
