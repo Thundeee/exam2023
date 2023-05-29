@@ -152,6 +152,7 @@ const theme = useTheme();
         name="name"
         label="Venue Name"
         type="text"
+        placeholder={"Venue Name"}
         register={register}
         errors={errors}
       />
@@ -162,6 +163,7 @@ const theme = useTheme();
         name="description"
         label="Venue Description"
         type="textarea"
+        placeholder={"Venue Description"}
         register={register}
         errors={errors}
         inputProps={{ rows: 3 }}
@@ -173,6 +175,7 @@ const theme = useTheme();
           name="price"
           label="Price per night"
           type="number"
+          placeholder={"Price per night"}
           register={register}
           errors={errors}
         />
@@ -183,6 +186,7 @@ const theme = useTheme();
           name="maxGuests"
           label="Maximum Guests"
           type="number"
+          placeholder={"Maximum Guests"}
           register={register}
           errors={errors}
         />
@@ -223,6 +227,7 @@ const theme = useTheme();
         name="media"
         label="Media (Optional)"
         type="text"
+        placeholder={"Media URL"}
         register={register}
         errors={errors}
         inputProps={{ onChange: handleMediaInputChange }}
@@ -240,6 +245,7 @@ const theme = useTheme();
         name="address"
         label="Address (Optional)"
         type="text"
+        placeholder={"Address"}
         register={register}
         errors={errors}
       />
@@ -250,6 +256,7 @@ const theme = useTheme();
         name="city"
         label="City (Optional)"
         type="text"
+        placeholder={"City"}
         register={register}
         errors={errors}
       />
@@ -260,6 +267,7 @@ const theme = useTheme();
         name="zip"
         label="Zip Code (Optional)"
         type="text"
+        placeholder={"Zip Code"}
         register={register}
         errors={errors}
       />
@@ -270,6 +278,7 @@ const theme = useTheme();
         name="country"
         label="Country (Optional)"
         type="text"
+        placeholder={"Country"}
         register={register}
         errors={errors}
       />

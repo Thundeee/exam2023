@@ -7,16 +7,37 @@ import {
   ErrorMessage,
 } from "./styles";
 
-const FormField = ({ name, label, register, errors, type, inputProps = {} }) => {
+const FormField = ({
+  name,
+  label,
+  register,
+  errors,
+  type,
+  inputProps = {},
+  placeholder,
+}) => {
   const { ...rest } = inputProps;
   const isTextarea = type === "textarea";
+
+
   return (
     <FormFieldContainer>
       <FieldLabel htmlFor={name}>{label}</FieldLabel>
       {isTextarea ? (
-        <TextArea {...register(name)} {...rest} aria-label={`${name} field`} />
+        <TextArea
+          {...register(name)}
+          {...rest}
+          aria-label={`${name} field`}
+          placeholder={placeholder}
+        />
       ) : (
-        <TextInput {...register(name)} {...rest} aria-label={`${name} field`} type={type} />
+        <TextInput
+          {...register(name)}
+          {...rest}
+          aria-label={`${name} field`}
+          type={type}
+          placeholder={placeholder}
+        />
       )}
       {errors[name]?.message && (
         <ErrorMessage>{errors[name].message}</ErrorMessage>
@@ -25,4 +46,4 @@ const FormField = ({ name, label, register, errors, type, inputProps = {} }) => 
   );
 };
 
-export { FormField };
+export  {FormField};

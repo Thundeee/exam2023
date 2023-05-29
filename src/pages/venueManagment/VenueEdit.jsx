@@ -2,7 +2,9 @@ import { useState, useContext, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { FormField } from "../../components/formfield/Formfield";
 import { yupResolver } from "@hookform/resolvers/yup";
+import { useParams } from "react-router-dom";
 import { venueSchema } from "../../utils/yupSchema";
+import useApi from "../../hooks/useApi";
 import useCallApi from "../../hooks/useCallApi";
 import { AuthContext } from "../../context/auth";
 import { Typography, useTheme } from "@mui/material";
@@ -29,7 +31,10 @@ import Metas from "../../components/Metas";
 
 const VenueCreate = () => {
 const theme = useTheme();
-
+const { id } = useParams();
+const { data, isLoading, isError } = useApi(
+    BASE_URL_VENUES + id);
+    console.log(data);
   const { setOpenModal, setModalInfo, setModalTitle } = useContext(ModalContext);
   const { token } = useContext(AuthContext);
   const [internet, setInternet] = useState(false);
@@ -38,6 +43,7 @@ const theme = useTheme();
   const [petFriendly, setpetFriendly] = useState(false);
 
   const [media, setMedia] = useState([]);
+console.log(media);
 
   let metaCollection = {
     wifi: internet,
@@ -50,9 +56,30 @@ const theme = useTheme();
     handleSubmit,
     formState: { errors },
     watch,
+    setValue,
   } = useForm({
     resolver: yupResolver(venueSchema),
   });
+
+  useEffect(() => {
+    if (data) {
+      setValue("name", data.name);
+      setValue("description", data.description);
+      setValue("price", data.price);
+      setValue("maxGuests", data.maxGuests);
+      setInternet(data.meta.wifi);
+      setParkingSpace(data.meta.parking);
+      setbreakfastMeal(data.meta.breakfast);
+      setpetFriendly(data.meta.pets);
+      setMedia(data.media);
+      setValue("address", data.location.address);
+      setValue("city", data.location.city);
+      setValue("country", data.location.country);
+      setValue("zip", data.location.zip);
+      
+      // Set other form fields using setValue
+    }
+  }, [data, setValue]);
 
   const userInfo = JSON.parse(localStorage.getItem("userInfo"));
 
@@ -93,14 +120,14 @@ const theme = useTheme();
 
     console.log(modifiedData);
     const options = {
-      method: "POST",
+      method: "PUT",
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${userInfo.accessToken}`,
       },
       body: JSON.stringify(modifiedData),
     };
-    await startFetch(BASE_URL_VENUES, options);
+    await startFetch(BASE_URL_VENUES + id, options);
    
   };
 
@@ -108,7 +135,7 @@ const theme = useTheme();
     if (information && !isItLoading && !isItError) {
       setOpenModal(true);
       setModalTitle("Success!");
-      setModalInfo("Venue was created");
+      setModalInfo("Venue was Modified!");
     }
   }, [information, isItLoading, isItError, setOpenModal, setModalInfo, setModalTitle]);
 
@@ -140,8 +167,12 @@ const theme = useTheme();
     );
   }
 
+  
+
   const previewData = watch();
+  console.log(data?.media);
   previewData.media = media;
+
 
   return (
     <BoxContainer className="App">
@@ -152,6 +183,7 @@ const theme = useTheme();
         name="name"
         label="Venue Name"
         type="text"
+        placeholder={"Venue Name"}
         register={register}
         errors={errors}
       />
@@ -162,6 +194,7 @@ const theme = useTheme();
         name="description"
         label="Venue Description"
         type="textarea"
+        placeholder={"Venue Description"}
         register={register}
         errors={errors}
         inputProps={{ rows: 3 }}
@@ -173,6 +206,7 @@ const theme = useTheme();
           name="price"
           label="Price per night"
           type="number"
+          placeholder={"Price per night"}
           register={register}
           errors={errors}
         />
@@ -183,6 +217,7 @@ const theme = useTheme();
           name="maxGuests"
           label="Maximum Guests"
           type="number"
+          placeholder={"Maximum Guests"}
           register={register}
           errors={errors}
         />
@@ -191,28 +226,28 @@ const theme = useTheme();
     <RowContainer>
       <SwitchContainer>
         <FormControlLabel
-          control={<Switch onChange={() => setInternet(!internet)} />}
+          control={<Switch onChange={() => setInternet(!internet)} checked={internet} />}
           label="Wifi?"
         />
       </SwitchContainer>
 
       <SwitchContainer>
         <FormControlLabel
-          control={<Switch onChange={() => setParkingSpace(!parkingSpace)} />}
+          control={<Switch onChange={() => setParkingSpace(!parkingSpace)} checked={parkingSpace} />}
           label="Parking?"
         />
       </SwitchContainer>
 
       <SwitchContainer>
         <FormControlLabel
-          control={<Switch onChange={() => setbreakfastMeal(!breakfastMeal)} />}
+          control={<Switch onChange={() => setbreakfastMeal(!breakfastMeal)} checked={breakfastMeal} />}
           label="Breakfast?"
         />
       </SwitchContainer>
 
       <SwitchContainer>
         <FormControlLabel
-          control={<Switch onChange={() => setpetFriendly(!petFriendly)} />}
+          control={<Switch onChange={() => setpetFriendly(!petFriendly)} checked={petFriendly}/>}
           label="Pets?"
         />
       </SwitchContainer>
@@ -223,6 +258,7 @@ const theme = useTheme();
         name="media"
         label="Media (Optional)"
         type="text"
+        placeholder={"Media URL"}
         register={register}
         errors={errors}
         inputProps={{ onChange: handleMediaInputChange }}
@@ -240,6 +276,7 @@ const theme = useTheme();
         name="address"
         label="Address (Optional)"
         type="text"
+        placeholder={"Address"}
         register={register}
         errors={errors}
       />
@@ -250,6 +287,7 @@ const theme = useTheme();
         name="city"
         label="City (Optional)"
         type="text"
+        placeholder={"City"}
         register={register}
         errors={errors}
       />
@@ -260,6 +298,7 @@ const theme = useTheme();
         name="zip"
         label="Zip Code (Optional)"
         type="text"
+        placeholder={"Zip Code"}
         register={register}
         errors={errors}
       />
@@ -270,6 +309,7 @@ const theme = useTheme();
         name="country"
         label="Country (Optional)"
         type="text"
+        placeholder={"Country"}
         register={register}
         errors={errors}
       />
@@ -285,7 +325,7 @@ const theme = useTheme();
       <PreviewContainer backgroundColor={theme.palette.tertiary.main}>
         <VenueInfoWrapper>
         <Typography variant="h5">
-  {previewData.name ? previewData.name : "Venue Preview"}
+  {previewData.name ? previewData.name : data?.name || "Your venue name goes here"}
 </Typography>
 {previewData.price || previewData.maxGuests ? (
   <Typography variant="subtitle1" sx={{ fontStyle: "italic" }}>
@@ -298,7 +338,7 @@ const theme = useTheme();
               fontSize: "14px",
             }}
           >
-  {previewData.description ? previewData.description : "Your description goes here"}
+  {previewData.description ? previewData.description : data?.description || "Your description goes here"}
           </Typography>
 <Metas path={metaCollection} />
         </VenueInfoWrapper>
