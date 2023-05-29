@@ -1,6 +1,6 @@
 import React, { useContext, useState, useEffect } from 'react';
 import useApi from '../../hooks/useApi';
-import { BASE_URL_PROFILES } from '../../utils/constants';
+import { BASE_URL_PROFILES, BASE_URL_VENUES } from '../../utils/constants';
 import { AuthContext } from '../../context/auth';
 import { Typography, Button, Tooltip, Fade, useTheme, Tab, Tabs, Box } from "@mui/material";
 import defaultVenue from "../../assets/defaultVenue.webp";
@@ -89,6 +89,21 @@ const Profile = () => {
     await startFetch(BASE_URL_PROFILES + name + '/media', options);
   }
 
+  const handleDelete = async (id) => {
+    const options = {
+      method: 'DELETE',
+      headers: {
+        Authorization: `Bearer ${user.accessToken}`,
+      },
+    };
+    await startFetch(BASE_URL_VENUES + id, options);
+    data.venues = data.venues.filter((venue) => venue.id !== id);
+
+
+  };
+
+
+
   useEffect(() => {
     if (information && !isItLoading && !isItError) {
       if (!information.avatar) {
@@ -129,10 +144,7 @@ const Profile = () => {
     }
     return description.substring(0, 150) + "...";
   };
-
-  if (data) {
-    console.log(data.venues);
-  }
+  
 
   return (
     <div>
@@ -387,15 +399,24 @@ const Profile = () => {
                       component={Link}
                       to={`/Venue/${venue.id}`}
                     >
-                      View Details
+                      View Venue
                     </Button>
                     <Button
                       variant="contained"
                       color="success"
+                      style={{ marginTop: "1rem" }}
                       component={Link}
                       to={`/Venue/edit/${venue.id}`}
                     >
                       Edit Venue
+                    </Button>
+                    <Button
+                      variant="contained"
+                      color="error"
+                      style={{ marginTop: "1rem" }}
+                      onClick={() => handleDelete(venue.id)}
+                    >
+                      Delete Venue
                     </Button>
                   </VenueImageWrapper>
                 </VenueWrapper>

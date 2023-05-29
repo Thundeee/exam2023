@@ -12,7 +12,14 @@ const useCallApi = () => {
       setIsItLoading(true);
       setIsItError(false);
       const response = await fetch(url, options);
+      if (options.method === "DELETE" && response.ok) {
+        setModalTitle("Success");
+        setModalInfo("The item has been deleted successfully.");
 
+        setOpenModal(true);
+        return;
+        
+      }
       const json = await response.json();
       console.log(json)
             if (!response.ok) {
