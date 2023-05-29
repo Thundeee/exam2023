@@ -36,5 +36,4 @@ export const StyledImage = styled.img`
     width: 100px !important;
     height: 100px !important;
   }
-
 `;

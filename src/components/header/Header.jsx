@@ -1,13 +1,13 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext } from "react";
 import { Button } from "@mui/material";
-import { Link } from 'react-router-dom';
-import SwipeableDrawer from '@mui/material/SwipeableDrawer';
-import { useTheme } from '@mui/material';
-import Logo from '../../Logo.svg';
+import { Link } from "react-router-dom";
+import SwipeableDrawer from "@mui/material/SwipeableDrawer";
+import { useTheme } from "@mui/material";
+import Logo from "../../Logo.svg";
 import { AuthContext } from "../../context/auth";
 import { ModalContext } from "../../context/modalContent";
 import { ThemeContext } from "../../context/themeSelect";
-import InfoModal from '../Modal';	
+import InfoModal from "../Modal";
 import {
   HeaderContainer,
   Title,
@@ -15,29 +15,34 @@ import {
   HeaderButtons,
   MobileButtons,
   ProfileImage,
-} from './header.styles';
-import Login from '../Login';
-import Register from '../Register';
+} from "./header.styles";
+import Login from "../Login";
+import Register from "../Register";
 
 const Header = () => {
-  const { openModal, setOpenModal, setModalInfo, setModalTitle } = useContext(ModalContext);
+  const { openModal, setOpenModal, setModalInfo, setModalTitle } =
+    useContext(ModalContext);
 
   const theme = useTheme();
   const { toggleDarkMode } = useContext(ThemeContext);
   const [drawer, setDrawer] = useState(false);
-  const [formType, setFormType] = useState('');
+  const [formType, setFormType] = useState("");
   const { token, setToken } = useContext(AuthContext);
 
   function logout() {
-    localStorage.removeItem('userInfo');
+    localStorage.removeItem("userInfo");
     setToken(false);
     setOpenModal(true);
-    setModalTitle('Success!');
-    setModalInfo('You have been logged out');
+    setModalTitle("Success!");
+    setModalInfo("You have been logged out");
   }
 
   const toggleDrawer = (type) => (event) => {
-    if (event && event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
+    if (
+      event &&
+      event.type === "keydown" &&
+      (event.key === "Tab" || event.key === "Shift")
+    ) {
       return;
     }
 
@@ -45,102 +50,165 @@ const Header = () => {
     setDrawer(true);
   };
 
-  const userInfo = JSON.parse(localStorage.getItem('userInfo'));
+  const userInfo = JSON.parse(localStorage.getItem("userInfo"));
 
-const ButtonForm = (props) => {
-  console.log('ButtonForm');
-  return(
-    <MobileButtons>
-    <Button onClick={toggleDarkMode} variant="contained" color="tertiary"   style={{ marginTop: '20px' }}>Toggle Dark Mode</Button>
-      {token ? (
-        <>
-        <Link to='/profile'>
-          <ProfileImage src={userInfo.avatar} style={{ marginTop: '20px', display: 'flex', marginLeft: 'auto', marginRight: 'auto' }} alt="Profile Pic" />
-        </Link>
-          <Button variant="contained" color="tertiary" style={{ marginTop: '20px' }} onClick={logout}>Log out</Button>
-        </>
-      ) : (
-        <>
-
-            <Button variant="contained" color="tertiary" style={{ marginTop: '20px' }}   onClick={() => {
-    setDrawer(false);
-    toggleDrawer('signup')();
-  }}>Sign up</Button>
-
-          <Button variant="contained" color="tertiary" style={{ marginTop: '20px' }} onClick={toggleDrawer('login')}>Log in</Button>
-        </> 
-      )}
-    </MobileButtons>
-  )
-}
-  return (
-    <>
-    <HeaderContainer backgroundColor={theme.palette.secondary.main}>
-        <Link to='/'>
-          <img src={Logo} alt="Holidaze Logo"  style={{marginLeft: '20px'}} width={100} />
-        </Link>
-        <Link to='/' style={{textDecoration: 'none', paddingLeft: '5px'}}>
-      <Title>Holidaze</Title>
-      </Link>
-      <span style={{flexGrow: '1'}} ></span>
-          <MenuButton
-          onClick={toggleDrawer('buttons')}
-          >
-          </MenuButton>
-
-      <HeaderButtons>
-      <Button onClick={toggleDarkMode} variant="contained" color="tertiary"   style={{ marginRight: '20px' }}>Toggle Dark Mode</Button>
+  const ButtonForm = (props) => {
+    console.log("ButtonForm");
+    return (
+      <MobileButtons>
+        <Button
+          onClick={toggleDarkMode}
+          variant="contained"
+          color="tertiary"
+          style={{ marginTop: "20px" }}
+        >
+          Toggle Dark Mode
+        </Button>
         {token ? (
           <>
-          <Link to='/profile'>
-            <ProfileImage src={userInfo.avatar} alt="Profile Pic" />
-          </Link>
-            <Button variant="contained" color="tertiary" onClick={logout}>Log out</Button>
+            <Link to="/profile">
+              <ProfileImage
+                src={userInfo.avatar}
+                style={{
+                  marginTop: "20px",
+                  display: "flex",
+                  marginLeft: "auto",
+                  marginRight: "auto",
+                }}
+                alt="Profile Pic"
+              />
+            </Link>
+            <Button
+              variant="contained"
+              color="tertiary"
+              style={{ marginTop: "20px" }}
+              onClick={logout}
+            >
+              Log out
+            </Button>
           </>
         ) : (
           <>
+            <Button
+              variant="contained"
+              color="tertiary"
+              style={{ marginTop: "20px" }}
+              onClick={() => {
+                setDrawer(false);
+                toggleDrawer("signup")();
+              }}
+            >
+              Sign up
+            </Button>
 
-              <Button variant="contained" color="tertiary" style={{ marginRight: '20px' }} onClick={toggleDrawer('signup')}>Sign up</Button>
-
-            <Button variant="contained" color="tertiary" onClick={toggleDrawer('login')}>Log in</Button>
-          </> 
+            <Button
+              variant="contained"
+              color="tertiary"
+              style={{ marginTop: "20px" }}
+              onClick={toggleDrawer("login")}
+            >
+              Log in
+            </Button>
+          </>
         )}
-      </HeaderButtons>
+      </MobileButtons>
+    );
+  };
+  return (
+    <>
+      <HeaderContainer backgroundColor={theme.palette.secondary.main}>
+        <Link to="/">
+          <img
+            src={Logo}
+            alt="Holidaze Logo"
+            style={{ marginLeft: "20px" }}
+            width={100}
+          />
+        </Link>
+        <Link to="/" style={{ textDecoration: "none", paddingLeft: "5px" }}>
+          <Title>Holidaze</Title>
+        </Link>
+        <span style={{ flexGrow: "1" }}></span>
+        <MenuButton onClick={toggleDrawer("buttons")}></MenuButton>
+
+        <HeaderButtons>
+          <Button
+            onClick={toggleDarkMode}
+            variant="contained"
+            color="tertiary"
+            style={{ marginRight: "20px" }}
+          >
+            Toggle Dark Mode
+          </Button>
+          {token ? (
+            <>
+              <Link to="/profile">
+                <ProfileImage src={userInfo.avatar} alt="Profile Pic" />
+              </Link>
+              <Button variant="contained" color="tertiary" onClick={logout}>
+                Log out
+              </Button>
+            </>
+          ) : (
+            <>
+              <Button
+                variant="contained"
+                color="tertiary"
+                style={{ marginRight: "20px" }}
+                onClick={toggleDrawer("signup")}
+              >
+                Sign up
+              </Button>
+
+              <Button
+                variant="contained"
+                color="tertiary"
+                onClick={toggleDrawer("login")}
+              >
+                Log in
+              </Button>
+            </>
+          )}
+        </HeaderButtons>
       </HeaderContainer>
-      <InfoModal open={openModal} handleClose={()=> {setOpenModal(false)}} />
+      <InfoModal
+        open={openModal}
+        handleClose={() => {
+          setOpenModal(false);
+        }}
+      />
       <SwipeableDrawer
-  PaperProps={{
-    sx: {
-      width: '25%',
-      display: 'flex',
-      flexDirection: 'column',
-      alignItems: 'center',
-      padding: '16px',
-      '@media (max-width: 1024px)': {
-        width: '40%',
-      },
-      '@media (max-width: 728px)': {
-        width: '50%',
-      },
-      '@media (max-width: 480px)': {
-        width: '75%',
-
-      },
-    },
-  }}
-  anchor="right"
-  open={drawer}
-  onClose={() => setDrawer(false)}
-  onOpen={toggleDrawer(true)}
->
-{formType === 'login' ? (
-  <Login children={setDrawer} />
-) : formType === 'signup' ? (
-  <Register children={setDrawer} />
-) : (
-  <ButtonForm children={setDrawer} />
-)}</SwipeableDrawer>
-
+        PaperProps={{
+          sx: {
+            width: "25%",
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            padding: "16px",
+            "@media (max-width: 1024px)": {
+              width: "40%",
+            },
+            "@media (max-width: 728px)": {
+              width: "50%",
+            },
+            "@media (max-width: 480px)": {
+              width: "75%",
+            },
+          },
+        }}
+        anchor="right"
+        open={drawer}
+        onClose={() => setDrawer(false)}
+        onOpen={toggleDrawer(true)}
+      >
+        {formType === "login" ? (
+          <Login children={setDrawer} />
+        ) : formType === "signup" ? (
+          <Register children={setDrawer} />
+        ) : (
+          <ButtonForm children={setDrawer} />
+        )}
+      </SwipeableDrawer>
     </>
   );
 };

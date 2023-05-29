@@ -19,7 +19,6 @@ const FormField = ({
   const { ...rest } = inputProps;
   const isTextarea = type === "textarea";
 
-
   return (
     <FormFieldContainer>
       <FieldLabel htmlFor={name}>{label}</FieldLabel>
@@ -46,4 +45,4 @@ const FormField = ({
   );
 };
 
-export  {FormField};
+export { FormField };

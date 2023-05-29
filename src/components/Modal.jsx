@@ -1,13 +1,12 @@
-import React from 'react';
+import React from "react";
 import { Modal } from "@mui/material/";
 import { Button } from "@mui/material";
-import styled from 'styled-components';
-import Fade from '@mui/material/Fade';
-import Backdrop from '@mui/material/Backdrop';
-import { useTheme } from '@mui/material';
-import { useContext } from 'react';
+import styled from "styled-components";
+import Fade from "@mui/material/Fade";
+import Backdrop from "@mui/material/Backdrop";
+import { useTheme } from "@mui/material";
+import { useContext } from "react";
 import { ModalContext } from "../context/modalContent";
-
 
 const InfoModal = ({ open, handleClose }) => {
   const { modalInfo, modalTitle } = useContext(ModalContext);
@@ -27,8 +26,8 @@ const InfoModal = ({ open, handleClose }) => {
     border-radius: 10px;
     display: grid;
     max-height: 80vh;
-    overflow: auto; 
-    @media (max-width: 768px) {
+    overflow: auto;
+    @media (max-width: 728px) {
       width: 75vw;
     }
   `;

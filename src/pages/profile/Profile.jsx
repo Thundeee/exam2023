@@ -1,28 +1,35 @@
-import React, { useContext, useState, useEffect } from 'react';
-import useApi from '../../hooks/useApi';
-import { BASE_URL_PROFILES, BASE_URL_VENUES } from '../../utils/constants';
-import { AuthContext } from '../../context/auth';
+import React, { useContext, useState, useEffect } from "react";
+import useApi from "../../hooks/useApi";
+import { BASE_URL_PROFILES, BASE_URL_VENUES } from "../../utils/constants";
+import { AuthContext } from "../../context/auth";
 import { Typography, Button, useTheme, Tab, Tabs, Box } from "@mui/material";
 import defaultVenue from "../../assets/defaultVenue.webp";
 import { Link } from "react-router-dom";
-import defaultPfp from '../../assets/defaultPfp.png';
-import TabPanel from '../../components/TabPanel';
-import useCallApi from '../../hooks/useCallApi';
-import { ModalContext } from '../../context/modalContent';
-import useLocalStorage from '../../hooks/useLocalStorage';
-import { ProfilePicture, VenueWrapper, VenueInfoWrapper, VenueImageWrapper, StyledImage } from './profile.styles';
-import Metas from '../../components/Metas';
+import defaultPfp from "../../assets/defaultPfp.png";
+import TabPanel from "../../components/TabPanel";
+import useCallApi from "../../hooks/useCallApi";
+import { ModalContext } from "../../context/modalContent";
+import useLocalStorage from "../../hooks/useLocalStorage";
+import {
+  ProfilePicture,
+  VenueWrapper,
+  VenueInfoWrapper,
+  VenueImageWrapper,
+  StyledImage,
+} from "./profile.styles";
+import Metas from "../../components/Metas";
 import Loader from "../../components/Loader";
 import Errorer from "../../components/Errorer";
 const Profile = () => {
-  const [userInfo, setUserInfo] = useLocalStorage('userInfo', '');
+  const [userInfo, setUserInfo] = useLocalStorage("userInfo", "");
   const theme = useTheme();
   //eslint-disable-next-line
   const { token } = useContext(AuthContext);
-  const { setOpenModal, setModalInfo, setModalTitle } = useContext(ModalContext);
+  const { setOpenModal, setModalInfo, setModalTitle } =
+    useContext(ModalContext);
   const { startFetch, information, isItLoading, isItError } = useCallApi();
 
-  const user = JSON.parse(localStorage.getItem('userInfo'));
+  const user = JSON.parse(localStorage.getItem("userInfo"));
   let options;
   let name;
   if (user) {
@@ -34,13 +41,16 @@ const Profile = () => {
     name = user.name;
   }
 
-  const { data, isLoading, isError } = useApi(BASE_URL_PROFILES + name + '?_bookings=true&_venues=true', options);
+  const { data, isLoading, isError } = useApi(
+    BASE_URL_PROFILES + name + "?_bookings=true&_venues=true",
+    options
+  );
 
   const [tabValue, setTabValue] = useState(0);
 
   if (data && !data.avatar) {
     data.avatar =
-      'https://www.pngitem.com/pimgs/m/146-1468479_my-profile-icon-blank-profile-picture-circle-hd.png';
+      "https://www.pngitem.com/pimgs/m/146-1468479_my-profile-icon-blank-profile-picture-circle-hd.png";
   }
 
   const handleTabChange = (event, newValue) => {
@@ -49,11 +59,20 @@ const Profile = () => {
 
   const pfpChanger = () => {
     setOpenModal(true);
-    setModalTitle('Change profile picture');
+    setModalTitle("Change profile picture");
     setModalInfo(
       <form id="changePfpForm" onSubmit={onSubmit}>
-        <input type="text" name="avatar" placeholder="Enter image URL" aria-label='input to change profile picture' />
-        <Button type="submit" variant="contained" style={{marginLeft: '1rem'}}>
+        <input
+          type="text"
+          name="avatar"
+          placeholder="Enter image URL"
+          aria-label="input to change profile picture"
+        />
+        <Button
+          type="submit"
+          variant="contained"
+          style={{ marginLeft: "1rem" }}
+        >
           Submit
         </Button>
       </form>
@@ -64,10 +83,12 @@ const Profile = () => {
     event.preventDefault();
     let link = {};
     link.avatar = event.target.avatar.value;
-    let validLink = link.avatar.match(/(^(http(s?):)([/|.|\w|\s|-])*\.(?:jpg|jpeg|gif|png)$)|(^$)/);
+    let validLink = link.avatar.match(
+      /(^(http(s?):)([/|.|\w|\s|-])*\.(?:jpg|jpeg|gif|png)$)|(^$)/
+    );
     if (!validLink) {
       setOpenModal(true);
-      setModalTitle('Invalid link');
+      setModalTitle("Invalid link");
       setModalInfo(
         <div>
           <p>Please enter a valid image URL</p>
@@ -76,30 +97,26 @@ const Profile = () => {
       return;
     }
     const options = {
-      method: 'PUT',
+      method: "PUT",
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
         Authorization: `Bearer ${user.accessToken}`,
       },
       body: JSON.stringify(link),
     };
-    await startFetch(BASE_URL_PROFILES + name + '/media', options);
+    await startFetch(BASE_URL_PROFILES + name + "/media", options);
   }
 
   const handleDelete = async (id) => {
     const options = {
-      method: 'DELETE',
+      method: "DELETE",
       headers: {
         Authorization: `Bearer ${user.accessToken}`,
       },
     };
     await startFetch(BASE_URL_VENUES + id, options);
     data.venues = data.venues.filter((venue) => venue.id !== id);
-
-
   };
-
-
 
   useEffect(() => {
     if (information && !isItLoading && !isItError) {
@@ -107,17 +124,16 @@ const Profile = () => {
         information.avatar = defaultPfp;
       }
       setOpenModal(true);
-      setModalTitle('Success!');
-      setModalInfo('Your profile picture has been changed!');
+      setModalTitle("Success!");
+      setModalInfo("Your profile picture has been changed!");
       setUserInfo((userInfo) => ({ ...userInfo, avatar: information.avatar }));
     }
     //eslint-disable-next-line
-  }, [information, isItLoading, isItError,]);
+  }, [information, isItLoading, isItError]);
 
   if (isLoading) {
-    return <Loader />
+    return <Loader />;
   }
-
 
   if (!user) {
     return (
@@ -127,7 +143,7 @@ const Profile = () => {
     );
   }
   if (isError) {
-    return <Errorer />
+    return <Errorer />;
   }
   const descDecreaser = (description) => {
     if (description.length <= 150) {
@@ -135,19 +151,31 @@ const Profile = () => {
     }
     return description.substring(0, 150) + "...";
   };
-  
 
   return (
     <div>
       <div>
-        <ProfilePicture onClick={pfpChanger} src={userInfo?.avatar} alt="your profile picture"/>
-        <h2 style={{textAlign: 'center'}}>Hi, {data?.name}!</h2>
-        <Tabs value={tabValue} onChange={handleTabChange} centered sx={{ bgcolor: 'tertiary.main', width: 'fit-content', margin: '0 auto'}}>
-          <Tab label="Upcoming Bookings" sx={{ color: 'black',}} />
-          <Tab label="Your Venues" sx={{ color: 'black'}}/>
+        <ProfilePicture
+          onClick={pfpChanger}
+          src={userInfo?.avatar}
+          alt="your profile picture"
+        />
+        <h2 style={{ textAlign: "center" }}>Hi, {data?.name}!</h2>
+        <Tabs
+          value={tabValue}
+          onChange={handleTabChange}
+          centered
+          sx={{
+            bgcolor: "tertiary.main",
+            width: "fit-content",
+            margin: "0 auto",
+          }}
+        >
+          <Tab label="Upcoming Bookings" sx={{ color: "black" }} />
+          <Tab label="Your Venues" sx={{ color: "black" }} />
         </Tabs>
         <TabPanel value={tabValue} index={0}>
-          <div style={{ margin: "0 auto", minWidth: "100%", }}>
+          <div style={{ margin: "0 auto", minWidth: "100%" }}>
             {data?.bookings?.map((booking) => (
               <Box
                 sx={{
@@ -180,13 +208,15 @@ const Profile = () => {
                       {descDecreaser(booking.venue.description)}
                     </Typography>
                     <Metas path={booking.venue.meta} />
-
                   </VenueInfoWrapper>
                   <VenueImageWrapper>
                     <StyledImage
-                      src={booking.venue.media[0] ? booking.venue.media[0] : defaultVenue}
+                      src={
+                        booking.venue.media[0]
+                          ? booking.venue.media[0]
+                          : defaultVenue
+                      }
                       alt={booking.venue.name}
-
                     />
                     <Button
                       variant="contained"
@@ -235,7 +265,7 @@ const Profile = () => {
                     >
                       {descDecreaser(venue.description)}
                     </Typography>
-                  <Metas path={venue.meta} />
+                    <Metas path={venue.meta} />
                   </VenueInfoWrapper>
                   <VenueImageWrapper>
                     <StyledImage

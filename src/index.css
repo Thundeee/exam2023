@@ -16,6 +16,7 @@ footer h6 {
   border-radius: 100px !important;
   padding: 16px !important;
 }
+
 @media (max-width: 728px) {
   .MuiButton-root {
     font-size: 12px !important;
@@ -39,6 +40,7 @@ footer h6 {
   background-color: black !important;
 }
 
-.alice-carousel__next-btn-item, .alice-carousel__prev-btn-item {
+.alice-carousel__next-btn-item,
+.alice-carousel__prev-btn-item {
   color: black !important;
 }

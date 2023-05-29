@@ -22,7 +22,6 @@ export const TextInput = styled.input`
 
 export const TextArea = styled.textarea`
   display: block;
-  width: 100%;
   font-size: 1rem;
   padding: 0.5rem;
   border: 1px solid gray;

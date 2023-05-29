@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";	
+import { useState, useEffect } from "react";
 import { TextField, InputAdornment, IconButton, Box } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 import heroImage from "../../assets/heroImage.avif";
@@ -18,34 +18,27 @@ import { debounce } from "lodash";
 import Loader from "../../components/Loader";
 import Errorer from "../../components/Errorer";
 
-
 const VenueList = () => {
   const theme = useTheme();
   const { data, isLoading, isError } = useApi(BASE_URL_VENUES);
   const [search, setSearch] = useState([]);
   const [loading, setLoading] = useState(true);
 
-
   useEffect(() => {
     if (data) {
       setSearch(data);
       setLoading(false);
-
     }
   }, [data]);
 
-  const delayedSearch = (
-    debounce((value) => {
-      const searchFilter = data.filter(
-        (item) =>
-          item.name.toLowerCase().includes(value) ||
-          item.location.city.toLowerCase().includes(value)
-      );
-      setSearch(searchFilter);
-
-    }, 250)
-    
-  );
+  const delayedSearch = debounce((value) => {
+    const searchFilter = data.filter(
+      (item) =>
+        item.name.toLowerCase().includes(value) ||
+        item.location.city.toLowerCase().includes(value)
+    );
+    setSearch(searchFilter);
+  }, 250);
 
   const handleSearch = (event) => {
     const value = event.target.value.toLowerCase();
@@ -59,11 +52,11 @@ const VenueList = () => {
   };
 
   if (isLoading) {
-    return <Loader />
+    return <Loader />;
   }
 
   if (isError) {
-    return <Errorer />
+    return <Errorer />;
   }
 
   return (
@@ -129,7 +122,7 @@ const VenueList = () => {
       <Box
         sx={{
           width: "80%",
-          '@media (max-width: 728px)': {
+          "@media (max-width: 728px)": {
             width: "90%",
           },
 
@@ -138,10 +131,9 @@ const VenueList = () => {
           display: "grid",
           gridTemplateColumns: "repeat(2, 1fr)",
           gap: "16px",
-          '@media (max-width: 1300px)': {
+          "@media (max-width: 1300px)": {
             gridTemplateColumns: "repeat(1, 1fr)",
           },
-
         }}
       >
         {loading ? (
@@ -154,10 +146,7 @@ const VenueList = () => {
             >
               <VenueInfoWrapper>
                 <Typography variant="h5">{venue.name}</Typography>
-                <Typography
-                  variant="subtitle1"
-                  sx={{ fontStyle: "italic" }}
-                >
+                <Typography variant="subtitle1" sx={{ fontStyle: "italic" }}>
                   Price: {venue.price},- | Max Guests: {venue.maxGuests}
                 </Typography>
                 <Typography

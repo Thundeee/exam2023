@@ -2,8 +2,8 @@ import { useState, useContext } from "react";
 import { ModalContext } from "../context/modalContent";
 
 const useCallApi = () => {
-
-  const { setModalInfo, setModalTitle, setOpenModal } = useContext(ModalContext);
+  const { setModalInfo, setModalTitle, setOpenModal } =
+    useContext(ModalContext);
   const [information, setInformation] = useState();
   const [isItLoading, setIsItLoading] = useState(true);
   const [isItError, setIsItError] = useState(false);
@@ -18,11 +18,10 @@ const useCallApi = () => {
 
         setOpenModal(true);
         return;
-        
       }
       const json = await response.json();
-      console.log(json)
-            if (!response.ok) {
+      console.log(json);
+      if (!response.ok) {
         throw new Error(json.errors[0].message);
       }
       setInformation(json);

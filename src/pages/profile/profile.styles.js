@@ -1,18 +1,18 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 import { Box } from "@mui/system";
 
 export const ProfilePicture = styled.img`
-width: 200px;
-height: 200px;
-border-radius: 50%;
-cursor: pointer;
-object-fit: cover;
-margin-top: 20px;
-@media (max-width: 728px) {
-  display: flex;
-  margin-left: auto;
-  margin-right: auto;
-}
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  cursor: pointer;
+  object-fit: cover;
+  margin-top: 20px;
+  @media (max-width: 728px) {
+    display: flex;
+    margin-left: auto;
+    margin-right: auto;
+  }
 `;
 
 export const VenueWrapper = styled(Box)`
@@ -26,7 +26,7 @@ export const VenueWrapper = styled(Box)`
   color: black;
   inline-size: fit-content;
   min-width: 100%;
-  margin : 5% auto;
+  margin: 5% auto;
 `;
 
 export const VenueInfoWrapper = styled.div`
@@ -51,5 +51,4 @@ export const StyledImage = styled.img`
     width: 100px !important;
     height: 100px !important;
   }
-
 `;

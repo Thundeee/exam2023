@@ -1,20 +1,19 @@
 import { FormField } from "./formfield/Formfield";
-import {useState, useEffect} from "react";
+import { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { registerSchema } from "../utils/yupSchema";
 import { Button } from "@mui/material";
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Switch from '@mui/material/Switch';
-import useCallApi from '../hooks/useCallApi';
-import {BASE_URL_AUTH} from '../utils/constants';
+import FormControlLabel from "@mui/material/FormControlLabel";
+import Switch from "@mui/material/Switch";
+import useCallApi from "../hooks/useCallApi";
+import { BASE_URL_AUTH } from "../utils/constants";
 import { ModalContext } from "../context/modalContent";
 import { useContext } from "react";
 
-
 const Register = (props) => {
-
-  const {setOpenModal, setModalInfo, setModalTitle} = useContext(ModalContext);
+  const { setOpenModal, setModalInfo, setModalTitle } =
+    useContext(ModalContext);
 
   const {
     register,
@@ -29,27 +28,25 @@ const Register = (props) => {
   const { startFetch, information, isItLoading, isItError } = useCallApi();
 
   async function onSubmit(registrationData) {
-    
     registrationData.venueManager = manager;
     console.log(registrationData);
     const options = {
-      method: 'POST',
+      method: "POST",
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
       body: JSON.stringify(registrationData),
     };
 
-    await startFetch(BASE_URL_AUTH + 'register', options);
+    await startFetch(BASE_URL_AUTH + "register", options);
     console.log(registrationData);
   }
   useEffect(() => {
     if (information && !isItLoading && !isItError) {
       setOpenModal(true);
-      setModalTitle('Registration was a success!');
-      setModalInfo('Welcome ' + information.name + ' you can now login!');
-      props.children(false)
-
+      setModalTitle("Registration was a success!");
+      setModalInfo("Welcome " + information.name + " you can now login!");
+      props.children(false);
     }
     // eslint-disable-next-line
   }, [information, isItLoading, isItError]);
@@ -81,7 +78,10 @@ const Register = (props) => {
           errors={errors}
         />
 
-        <FormControlLabel control={<Switch onChange={()=>setManager(!manager)} />} label="Are you a Venue manager?" />
+        <FormControlLabel
+          control={<Switch onChange={() => setManager(!manager)} />}
+          label="Are you a Venue manager?"
+        />
 
         <FormField
           name="password"

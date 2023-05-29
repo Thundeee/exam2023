@@ -5,11 +5,9 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { venueSchema } from "../../utils/yupSchema";
 import useCallApi from "../../hooks/useCallApi";
 import { AuthContext } from "../../context/auth";
-import { Typography, useTheme } from "@mui/material";
+import { Typography, useTheme, Switch, Button, FormControlLabel } from "@mui/material";
 import defaultVenue from "../../assets/defaultVenue.webp";
 import { BASE_URL_VENUES } from "../../utils/constants";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import {Switch, Button} from "@mui/material/";
 import { ModalContext } from "../../context/modalContent";
 import {
   BoxContainer,
@@ -22,15 +20,16 @@ import {
   PreviewContainer,
   VenueInfoWrapper,
   VenueImageWrapper,
-  Form
-  
+  Form,
+  StyledImage,
 } from "./venueCreate.styles";
 import Metas from "../../components/Metas";
 
 const VenueCreate = () => {
-const theme = useTheme();
+  const theme = useTheme();
 
-  const { setOpenModal, setModalInfo, setModalTitle } = useContext(ModalContext);
+  const { setOpenModal, setModalInfo, setModalTitle } =
+    useContext(ModalContext);
   const { token } = useContext(AuthContext);
   const [internet, setInternet] = useState(false);
   const [parkingSpace, setParkingSpace] = useState(false);
@@ -101,7 +100,6 @@ const theme = useTheme();
       body: JSON.stringify(modifiedData),
     };
     await startFetch(BASE_URL_VENUES, options);
-   
   };
 
   useEffect(() => {
@@ -110,11 +108,20 @@ const theme = useTheme();
       setModalTitle("Success!");
       setModalInfo("Venue was created");
     }
-  }, [information, isItLoading, isItError, setOpenModal, setModalInfo, setModalTitle]);
+  }, [
+    information,
+    isItLoading,
+    isItError,
+    setOpenModal,
+    setModalInfo,
+    setModalTitle,
+  ]);
 
   const handleMediaInputChange = (event) => {
     const imageValue = event.target.value;
-    if (imageValue.match(/^(http(s?):)([/|.|\w|\s|-])*\.(?:jpg|jpeg|gif|png)$/i)) {
+    if (
+      imageValue.match(/^(http(s?):)([/|.|\w|\s|-])*\.(?:jpg|jpeg|gif|png)$/i)
+    ) {
       setMedia([...media, imageValue]);
       event.target.value = "";
     }
@@ -144,187 +151,196 @@ const theme = useTheme();
   previewData.media = media;
 
   return (
-    <BoxContainer className="App">
-     <FormContainer>
-  <Form id="venueForm" onSubmit={handleSubmit(onSubmit)}>
-    <FieldContainer>
-      <FormField
-        name="name"
-        label="Venue Name"
-        type="text"
-        placeholder={"Venue Name"}
-        register={register}
-        errors={errors}
-      />
-    </FieldContainer>
+    <div className="App">
+      <h2 style={{ textAlign: "center" }}>Create a new venue!</h2>
 
-    <FieldContainer>
-      <FormField
-        name="description"
-        label="Venue Description"
-        type="textarea"
-        placeholder={"Venue Description"}
-        register={register}
-        errors={errors}
-        inputProps={{ rows: 3 }}
-      />
-    </FieldContainer>
+      <BoxContainer>
+        <FormContainer>
+          <Form id="venueForm" onSubmit={handleSubmit(onSubmit)}>
+            <FieldContainer>
+              <FormField
+                name="name"
+                label="Venue Name"
+                type="text"
+                placeholder={"Venue Name"}
+                register={register}
+                errors={errors}
+              />
+            </FieldContainer>
 
-      <FieldContainer>
-        <FormField
-          name="price"
-          label="Price per night"
-          type="number"
-          placeholder={"Price per night"}
-          register={register}
-          errors={errors}
-        />
-      </FieldContainer>
+            <FieldContainer>
+              <FormField
+                name="description"
+                label="Venue Description"
+                type="textarea"
+                placeholder={"Venue Description"}
+                register={register}
+                errors={errors}
+                inputProps={{ rows: 3 }}
+              />
+            </FieldContainer>
 
-      <FieldContainer>
-        <FormField
-          name="maxGuests"
-          label="Maximum Guests"
-          type="number"
-          placeholder={"Maximum Guests"}
-          register={register}
-          errors={errors}
-        />
-      </FieldContainer>
+            <FieldContainer>
+              <FormField
+                name="price"
+                label="Price per night"
+                type="number"
+                placeholder={"Price per night"}
+                register={register}
+                errors={errors}
+              />
+            </FieldContainer>
 
-    <RowContainer>
-      <SwitchContainer>
-        <FormControlLabel
-          control={<Switch onChange={() => setInternet(!internet)} />}
-          label="Wifi?"
-        />
-      </SwitchContainer>
+            <FieldContainer>
+              <FormField
+                name="maxGuests"
+                label="Maximum Guests"
+                type="number"
+                placeholder={"Maximum Guests"}
+                register={register}
+                errors={errors}
+              />
+            </FieldContainer>
 
-      <SwitchContainer>
-        <FormControlLabel
-          control={<Switch onChange={() => setParkingSpace(!parkingSpace)} />}
-          label="Parking?"
-        />
-      </SwitchContainer>
+            <RowContainer>
+              <SwitchContainer>
+                <FormControlLabel
+                  control={<Switch onChange={() => setInternet(!internet)} />}
+                  label="Wifi?"
+                />
+              </SwitchContainer>
 
-      <SwitchContainer>
-        <FormControlLabel
-          control={<Switch onChange={() => setbreakfastMeal(!breakfastMeal)} />}
-          label="Breakfast?"
-        />
-      </SwitchContainer>
+              <SwitchContainer>
+                <FormControlLabel
+                  control={
+                    <Switch onChange={() => setParkingSpace(!parkingSpace)} />
+                  }
+                  label="Parking?"
+                />
+              </SwitchContainer>
 
-      <SwitchContainer>
-        <FormControlLabel
-          control={<Switch onChange={() => setpetFriendly(!petFriendly)} />}
-          label="Pets?"
-        />
-      </SwitchContainer>
-    </RowContainer>
+              <SwitchContainer>
+                <FormControlLabel
+                  control={
+                    <Switch onChange={() => setbreakfastMeal(!breakfastMeal)} />
+                  }
+                  label="Breakfast?"
+                />
+              </SwitchContainer>
 
-    <MediaContainer>
-      <FormField
-        name="media"
-        label="Media (Optional)"
-        type="text"
-        placeholder={"Media URL"}
-        register={register}
-        errors={errors}
-        inputProps={{ onChange: handleMediaInputChange }}
-      />
-      {media.map((mediaItem, index) => (
-        <div key={index}>
-          <img src={mediaItem} alt={`Media ${index}`} />
-          <button onClick={() => removeMedia(mediaItem)}>Remove</button>
-        </div>
-      ))}
-    </MediaContainer>
+              <SwitchContainer>
+                <FormControlLabel
+                  control={
+                    <Switch onChange={() => setpetFriendly(!petFriendly)} />
+                  }
+                  label="Pets?"
+                />
+              </SwitchContainer>
+            </RowContainer>
 
-    <FieldContainer>
-      <FormField
-        name="address"
-        label="Address (Optional)"
-        type="text"
-        placeholder={"Address"}
-        register={register}
-        errors={errors}
-      />
-    </FieldContainer>
+            <MediaContainer>
+              <FormField
+                name="media"
+                label="Media (Optional)"
+                type="text"
+                placeholder={"Media URL"}
+                register={register}
+                errors={errors}
+                inputProps={{ onChange: handleMediaInputChange }}
+              />
+              {media.map((mediaItem, index) => (
+                <div key={index}>
+                  <img src={mediaItem} alt={`Media ${index}`} />
+                  <button onClick={() => removeMedia(mediaItem)}>Remove</button>
+                </div>
+              ))}
+            </MediaContainer>
 
-    <FieldContainer>
-      <FormField
-        name="city"
-        label="City (Optional)"
-        type="text"
-        placeholder={"City"}
-        register={register}
-        errors={errors}
-      />
-    </FieldContainer>
+            <FieldContainer>
+              <FormField
+                name="address"
+                label="Address (Optional)"
+                type="text"
+                placeholder={"Address"}
+                register={register}
+                errors={errors}
+              />
+            </FieldContainer>
 
-    <FieldContainer>
-      <FormField
-        name="zip"
-        label="Zip Code (Optional)"
-        type="text"
-        placeholder={"Zip Code"}
-        register={register}
-        errors={errors}
-      />
-    </FieldContainer>
+            <FieldContainer>
+              <FormField
+                name="city"
+                label="City (Optional)"
+                type="text"
+                placeholder={"City"}
+                register={register}
+                errors={errors}
+              />
+            </FieldContainer>
 
-    <FieldContainer>
-      <FormField
-        name="country"
-        label="Country (Optional)"
-        type="text"
-        placeholder={"Country"}
-        register={register}
-        errors={errors}
-      />
-    </FieldContainer>
+            <FieldContainer>
+              <FormField
+                name="zip"
+                label="Zip Code (Optional)"
+                type="text"
+                placeholder={"Zip Code"}
+                register={register}
+                errors={errors}
+              />
+            </FieldContainer>
 
-    <ButtonContainer>
-      <Button type="submit" variant="contained" color="primary">
-        Submit
-      </Button>
-    </ButtonContainer>
-  </Form>
-</FormContainer>
-      <PreviewContainer backgroundColor={theme.palette.tertiary.main}>
-        <VenueInfoWrapper>
-        <Typography variant="h5">
-  {previewData.name ? previewData.name : "Venue Preview"}
-</Typography>
-{previewData.price || previewData.maxGuests ? (
-  <Typography variant="subtitle1" sx={{ fontStyle: "italic" }}>
-    Price: {previewData.price},- | Max Guests: {previewData.maxGuests}
-  </Typography>
-) : "Price and Guest limit goes here"}
-          <Typography
-            variant="body1"
-            sx={{
-              fontSize: "14px",
-            }}
-          >
-  {previewData.description ? previewData.description : "Your description goes here"}
-          </Typography>
-<Metas path={metaCollection} />
-        </VenueInfoWrapper>
-        <VenueImageWrapper>
-          <img
-            src={previewData.media[0] ? previewData.media[0] : defaultVenue}
-            alt={previewData.name}
-            style={{
-              width: "250px",
-              height: "250px",
-              objectFit: "cover",
-              marginBottom: "1rem",
-            }}
-          />
-        </VenueImageWrapper>
-      </PreviewContainer>
-    </BoxContainer>
+            <FieldContainer>
+              <FormField
+                name="country"
+                label="Country (Optional)"
+                type="text"
+                placeholder={"Country"}
+                register={register}
+                errors={errors}
+              />
+            </FieldContainer>
+
+            <ButtonContainer>
+              <Button type="submit" variant="contained" color="primary">
+                Submit
+              </Button>
+            </ButtonContainer>
+          </Form>
+        </FormContainer>
+        <PreviewContainer backgroundColor={theme.palette.tertiary.main}>
+          <VenueInfoWrapper>
+            <Typography variant="h5">
+              {previewData.name ? previewData.name : "Venue Preview"}
+            </Typography>
+            {previewData.price || previewData.maxGuests ? (
+              <Typography variant="subtitle1" sx={{ fontStyle: "italic" }}>
+                Price: {previewData.price},- | Max Guests:{" "}
+                {previewData.maxGuests}
+              </Typography>
+            ) : (
+              "Price and Guest limit goes here"
+            )}
+            <Typography
+              variant="body1"
+              sx={{
+                fontSize: "14px",
+              }}
+            >
+              {previewData.description
+                ? previewData.description
+                : "Your description goes here"}
+            </Typography>
+            <Metas path={metaCollection} />
+          </VenueInfoWrapper>
+          <VenueImageWrapper>
+            <StyledImage
+              src={previewData.media[0] ? previewData.media[0] : defaultVenue}
+              alt={previewData.name}
+            />
+          </VenueImageWrapper>
+        </PreviewContainer>
+      </BoxContainer>
+    </div>
   );
 };
 
