@@ -8,18 +8,12 @@ export const VenueContainer = styled(Container)`
   margin-top: 50px;
 `;
 
-export const VenueName = styled.h1`
-  text-align: center;
-`;
+
 
 export const VenueContentWrapper = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
-  margin-top: 20px;
-`;
-
-export const VenueMetaWrapper = styled.div`
   margin-top: 20px;
 `;
 

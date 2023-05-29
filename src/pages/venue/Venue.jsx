@@ -15,7 +15,7 @@ import {
   Calendar as GrommetCalendar,
   Text as GrommetText,
 } from "grommet";
-import { Button, Typography } from "@mui/material";
+import { Button, Typography, useTheme } from "@mui/material";
 import GuestField from "../../components/formfield/GuestField";
 import { ModalContext } from "../../context/modalContent";
 import { useContext } from "react";
@@ -23,9 +23,7 @@ import Carousel from "../../components/Carousel";
 import Metas from "../../components/Metas";
 import {
   VenueContainer,
-  VenueName,
   VenueContentWrapper,
-  VenueMetaWrapper,
   VenueBookingForm,
   VenueButtonWrapper,
 } from "./venue.styles";
@@ -33,6 +31,7 @@ import Loader from "../../components/Loader";
 import Errorer from "../../components/Errorer";
 
 const Venue = () => {
+  const theme = useTheme();
   const { id } = useParams();
   const { setOpenModal, setModalInfo, setModalTitle } =
     useContext(ModalContext);
@@ -252,7 +251,7 @@ const Venue = () => {
   return (
     <VenueContainer>
       <>
-        <VenueName>{data?.name}</VenueName>
+        <h1 style={{textAlign: 'center'}}>{data?.name}</h1>
         <Typography
           variant="body1"
           sx={{
@@ -264,9 +263,7 @@ const Venue = () => {
         </Typography>
         <VenueContentWrapper>
           <div>
-            <VenueMetaWrapper>
               <p>{data?.price},-</p>
-            </VenueMetaWrapper>
             <Metas path={data?.meta} />
           </div>
           {Array.isArray(data.media) && data.media.length > 0 && (
@@ -277,12 +274,13 @@ const Venue = () => {
           <GrommetBox gap="small" pad="large">
             <GrommetBox direction="row" gap="small">
               <GrommetButton
+              color={theme.palette.text.primary}
                 ref={startDateButton}
                 active={activeDate === "start"}
                 label={
                   <GrommetBox>
-                    <GrommetText>Start Date</GrommetText>
-                    <GrommetText>
+                    <GrommetText color={theme.palette.text.primary}>Start Date</GrommetText>
+                    <GrommetText color={theme.palette.text.primary}>
                       {pickedDates &&
                         pickedDates[0][0] &&
                         new Date(pickedDates[0][0]).toDateString()}
@@ -292,12 +290,13 @@ const Venue = () => {
                 onClick={() => setActiveDate("start")}
               />
               <GrommetButton
+                color={theme.palette.text.primary}
                 ref={endDateButton}
                 active={activeDate === "end"}
                 label={
                   <GrommetBox>
-                    <GrommetText>End Date</GrommetText>
-                    <GrommetText>
+                    <GrommetText color={theme.palette.text.primary}>End Date</GrommetText>
+                    <GrommetText color={theme.palette.text.primary}>
                       {pickedDates &&
                         pickedDates[0][1] &&
                         new Date(pickedDates[0][1]).toDateString()}
