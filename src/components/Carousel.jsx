@@ -7,18 +7,18 @@ const Carousel = ({ media, name }) => {
   const singleChecker = media.length === 1;
 
   const Image = styled.img`
-  width: 35vw;
-  height: 35vh;
-  object-fit: cover;
-  border: 1px solid black;
-  display: flex;
-  margin: 0 auto;
+    width: 35vw;
+    height: 35vh;
+    object-fit: cover;
+    border: 1px solid black;
+    display: flex;
+    margin: 0 auto;
 
-  @media (max-width: 768px) {
-    width: 60vw;
-    height: 45vh;
-  }
-`;
+    @media (max-width: 768px) {
+      width: 60vw;
+      height: 45vh;
+    }
+  `;
 
   return (
     <AliceCarousel
@@ -31,7 +31,7 @@ const Carousel = ({ media, name }) => {
     >
       {media.map((image, index) => (
         <div key={index}>
-          <Image  src={image} alt={name} />
+          <Image src={image} alt={name} />
         </div>
       ))}
     </AliceCarousel>

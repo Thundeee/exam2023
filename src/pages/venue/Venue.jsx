@@ -251,7 +251,7 @@ const Venue = () => {
   return (
     <VenueContainer>
       <>
-        <h1 style={{textAlign: 'center'}}>{data?.name}</h1>
+        <h1 style={{ textAlign: "center" }}>{data?.name}</h1>
         <Typography
           variant="body1"
           sx={{
@@ -263,7 +263,7 @@ const Venue = () => {
         </Typography>
         <VenueContentWrapper>
           <div>
-              <p>{data?.price},-</p>
+            <p>{data?.price},-</p>
             <Metas path={data?.meta} />
           </div>
           {Array.isArray(data.media) && data.media.length > 0 && (
@@ -274,12 +274,14 @@ const Venue = () => {
           <GrommetBox gap="small" pad="large">
             <GrommetBox direction="row" gap="small">
               <GrommetButton
-              color={theme.palette.text.primary}
+                color={theme.palette.text.primary}
                 ref={startDateButton}
                 active={activeDate === "start"}
                 label={
                   <GrommetBox>
-                    <GrommetText color={theme.palette.text.primary}>Start Date</GrommetText>
+                    <GrommetText color={theme.palette.text.primary}>
+                      Start Date
+                    </GrommetText>
                     <GrommetText color={theme.palette.text.primary}>
                       {pickedDates &&
                         pickedDates[0][0] &&
@@ -295,7 +297,9 @@ const Venue = () => {
                 active={activeDate === "end"}
                 label={
                   <GrommetBox>
-                    <GrommetText color={theme.palette.text.primary}>End Date</GrommetText>
+                    <GrommetText color={theme.palette.text.primary}>
+                      End Date
+                    </GrommetText>
                     <GrommetText color={theme.palette.text.primary}>
                       {pickedDates &&
                         pickedDates[0][1] &&

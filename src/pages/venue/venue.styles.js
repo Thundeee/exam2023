@@ -8,8 +8,6 @@ export const VenueContainer = styled(Container)`
   margin-top: 50px;
 `;
 
-
-
 export const VenueContentWrapper = styled.div`
   display: flex;
   justify-content: space-between;
