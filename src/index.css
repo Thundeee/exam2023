@@ -1,13 +1,46 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+header h1,
+footer h6 {
+  color: white;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+.App {
+
+  min-height: 85vh;
+
+}
+
+
+
+
+.MuiButton-root {
+  border-radius: 100px !important;
+  padding: 16px !important;
+}
+
+@media (max-width: 728px) {
+  .MuiButton-root {
+    font-size: 12px !important;
+    padding: 6px !important;
+  }
+}
+
+.Mui-selected {
+  color: black !important;
+}
+
+
+
+
+.alice-carousel__dots-item.__active {
+  background-color: gray !important;
+
+}
+
+.alice-carousel__dots-item {
+  background-color: black !important;
+}
+
+.alice-carousel__next-btn-item,
+.alice-carousel__prev-btn-item {
+  color: black !important;
 }
