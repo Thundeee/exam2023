@@ -48,7 +48,7 @@ const VenueList = () => {
     delayedSearch(value);
   };
 
-  //function to decrease the description length.
+  //decreases the description length if it's long
   const descDecreaser = (description) => {
     if (description.length <= 150) {
       return description;

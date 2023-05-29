@@ -47,7 +47,7 @@ The style guide can also be found here on [Figma](https://www.figma.com/file/kal
 
 ### Kanban board
 
-The Kanban board was used for project management in this project. It was created using [Github Projects](https://github.com/users/Thundeee/projects/4/views/1)/
+The Kanban board was used for project management in this project. It was created using [Github Projects](https://github.com/users/Thundeee/projects/4/views/1)\
 The Kanban has been my primary resource for project management while working on this project.
 
 ## Project
