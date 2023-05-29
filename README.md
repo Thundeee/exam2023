@@ -80,7 +80,7 @@ This project was made using [React](https://reactjs.org/)
 [react-alice-carousel](https://github.com/maxmarinich/react-alice-carousel) was used for the carousel in this project.
 
 
-### Css Framework
+### CSS Framework
 
 This project was made using mostly [Material-UI](https://material-ui.com/) and [Styled Components](https://styled-components.com/)\
 [Grommet](https://v2.grommet.io/) was also used for Calendar components.
