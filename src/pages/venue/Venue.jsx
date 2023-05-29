@@ -1,14 +1,24 @@
-import useApi from "../hooks/useApi";
-import useCallApi from "../hooks/useCallApi";
-import { BASE_URL_VENUES, BASE_URL_BOOKINGS } from "../utils/constants";
+import useApi from "../../hooks/useApi";
+import useCallApi from "../../hooks/useCallApi";
+import { BASE_URL_VENUES, BASE_URL_BOOKINGS } from "../../utils/constants";
 import { useParams } from "react-router-dom";
 import React, { useEffect, useRef, useState } from "react";
-import { Box, Button, Calendar, Text } from "grommet";
-import GuestField from "../components/formfield/GuestField";
-import { ModalContext } from "../context/modalContent";
+import { Box as GrommetBox, Button as GrommetButton, Calendar as GrommetCalendar, Text as GrommetText} from "grommet";
+import {Button} from "@mui/material";
+import { Typography } from "@mui/material";
+import GuestField from "../../components/formfield/GuestField";
+import { ModalContext } from "../../context/modalContent";
 import { useContext } from "react";
-import MediaCarousel from '../components/Carousel';
-import Metas from "../components/Metas";
+import Carousel from '../../components/Carousel';
+import Metas from "../../components/Metas";
+import {
+  VenueContainer,
+  VenueName,
+  VenueContentWrapper,
+  VenueMetaWrapper,
+  VenueBookingForm,
+  VenueButtonWrapper,
+} from "./venue.styles";
 
 const Venue = () => {
     const { id } = useParams();
@@ -131,7 +141,8 @@ console.log(data);
                         {new Date(booking.dateFrom).toDateString()} - {new Date(booking.dateTo).toDateString()}
                     </p>
                     <p>Guests: {booking.guests}</p>
-                    <Button onClick={() => moreInfo(booking.id)}>More info</Button>
+                    <Button onClick={() => moreInfo(booking.id)} variant="contained"
+            color="primary"style={{marginBottom: '1rem'}}>More info</Button>
                 </div>
             
 
@@ -165,7 +176,8 @@ console.log(data);
             <p>{information.customer.email}</p>
             <p>{new Date(information.dateFrom).toDateString()} - {new Date(information.dateTo).toDateString()}</p>
             <p>Guests: {information.guests}</p>
-            <Button onClick={upcoming}>Return</Button>
+            <Button onClick={upcoming} variant="contained"
+            color="primary" style={{marginBottom: '1rem'}}>Return</Button>
           </div>
         </>
       );
@@ -189,82 +201,104 @@ console.log(data);
     }
 
     return (
-        <div className="App">
-            <>
-                <h1>{data?.name}</h1>
-                <p>{data?.description}</p>
-                <p>{data?.maxGuests}</p>
-                <p>{data?.name} currently has {booked.length -1} booking(s).</p>
+        <VenueContainer>
+          <>
+            <VenueName>{data?.name}</VenueName>
+            <Typography
+                      variant="body1"
+                      sx={{
+                        fontSize: "14px",
+                        width: "100%",
+                      }}
+                    >
+                        {data?.description}
+                    </Typography>
+                                    <VenueContentWrapper>
+              <div>
+                <VenueMetaWrapper>
+                  <p>{data?.price},-</p>
+                </VenueMetaWrapper>
                 <Metas path={data?.meta} />
-                {Array.isArray(data.media) && data.media.length > 0 && (
-        <MediaCarousel media={data.media} name={data.name} />
-      )}            </>
-            <form id="venueForm" onSubmit={submitter}>
-                <Box gap="small" pad="large">
-                    <Box direction="row" gap="small">
-                        <Button
-                            ref={startDateButton}
-                            active={activeDate === "start"}
-                            label={
-                                <Box>
-                                    <Text>Start Date</Text>
-                                    <Text>
-                                        {pickedDates &&
-                                            pickedDates[0][0] &&
-                                            new Date(
-                                                pickedDates[0][0]
-                                            ).toDateString()}
-                                    </Text>
-                                </Box>
-                            }
-                            onClick={() => setActiveDate("start")}
-                        />
-                        <Button
-                            ref={endDateButton}
-                            active={activeDate === "end"}
-                            label={
-                                <Box>
-                                    <Text>End Date</Text>
-                                    <Text>
-                                        {pickedDates &&
-                                            pickedDates[0][1] &&
-                                            new Date(
-                                                pickedDates[0][1]
-                                            ).toDateString()}
-                                    </Text>
-                                </Box>
-                            }
-                            onClick={() => setActiveDate("end")}
-                        />
-                    </Box>
-                    <Calendar
-                        activeDate={activeDate}
-                        dates={pickedDates}
-                        onSelect={(arg) => {
-                            setPickedDates(arg);
-                            setActiveDate("end");
-                            dateCheck(arg);
-                        }}
-                        disabled={booked}
-                        range="array"
-                    />
-                </Box>
+              </div>
+              {Array.isArray(data.media) && data.media.length > 0 && (
+                <Carousel media={data.media} name={data.name} />
+              )}
+            </VenueContentWrapper>
+            <VenueBookingForm id="venueForm" onSubmit={submitter}>
+              <GrommetBox gap="small" pad="large">
+                <GrommetBox direction="row" gap="small">
+                  <GrommetButton
+                    ref={startDateButton}
+                    active={activeDate === "start"}
+                    label={
+                      <GrommetBox>
+                        <GrommetText>Start Date</GrommetText>
+                        <GrommetText>
+                          {pickedDates &&
+                            pickedDates[0][0] &&
+                            new Date(pickedDates[0][0]).toDateString()}
+                        </GrommetText>
+                      </GrommetBox>
+                    }
+                    onClick={() => setActiveDate("start")}
+                  />
+                  <GrommetButton
+                    ref={endDateButton}
+                    active={activeDate === "end"}
+                    label={
+                      <GrommetBox>
+                        <GrommetText>End Date</GrommetText>
+                        <GrommetText>
+                          {pickedDates &&
+                            pickedDates[0][1] &&
+                            new Date(pickedDates[0][1]).toDateString()}
+                        </GrommetText>
+                      </GrommetBox>
+                    }
+                    onClick={() => setActiveDate("end")}
+                  />
+                </GrommetBox>
+                <p>{data?.name} currently has {booked.length - 1} booking(s).</p>
+                <GrommetCalendar
+                  activeDate={activeDate}
+                  dates={pickedDates}
+                  onSelect={(arg) => {
+                    setPickedDates(arg);
+                    setActiveDate("end");
+                    dateCheck(arg);
+                  }}
+                  disabled={booked}
+                  range="array"
+                />
+              </GrommetBox>
+              {owner ? (
+                <VenueButtonWrapper>
+                  <Button type="button" variant="contained"
+            color="primary"
+            onClick={upcoming}>
+                    See upcoming bookings
+                    </Button>
+                </VenueButtonWrapper>
+              ) : (
+                <>
+                  <GuestField
+                    props={data.maxGuests}
+                    guests={guests}
+                    setGuests={setGuests}
+                  />
+                  <VenueButtonWrapper>
+                    <Button type="submit" variant="contained"
+            color="primary">
+                    Book Venue!
+                    </Button>
 
-                {owner ? (
-  <Button label="See upcoming bookings" onClick={upcoming} />
-) : (
-  <>
-    <GuestField
-      props={data.maxGuests}
-      guests={guests}
-      setGuests={setGuests}
-    />
-    <Button type="submit" label="Book Venue!" />
-  </>
-)}
-            </form>
-        </div>
-    );
-};
-
-export default Venue;
+                  </VenueButtonWrapper>
+                </>
+              )}
+            </VenueBookingForm>
+          </>
+        </VenueContainer>
+      );
+    };
+    
+    export default Venue;

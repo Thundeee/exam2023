@@ -18,3 +18,19 @@ footer h6 {
 .Mui-selected {
   color: black !important;
 }
+
+
+
+
+.alice-carousel__dots-item.__active {
+  background-color: gray !important;
+
+}
+
+.alice-carousel__dots-item {
+  background-color: black !important;
+}
+
+.alice-carousel__next-btn-item, .alice-carousel__prev-btn-item {
+  color: black !important;
+}

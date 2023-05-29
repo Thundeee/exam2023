@@ -1,27 +1,31 @@
 import React from 'react';
-import Slider from 'react-slick';
-import 'slick-carousel/slick/slick.css';
-import 'slick-carousel/slick/slick-theme.css';
-
+import AliceCarousel from 'react-alice-carousel';
+import 'react-alice-carousel/lib/alice-carousel.css';
 
 const Carousel = ({ media, name }) => {
-  const settings = {
-    dots: true,
-    infinite: true,
-    speed: 300,
-    slidesToShow: 1,
-    slidesToScroll: 1,
-    autoplay: true,
+
+
+
+  const singleChecker = media.length === 1; 
+
+
+  const imageStyles = {
+    width: '35vw',
+    height: '35vh',
+    objectFit: 'cover',
+    border: '1px solid black',
+    display: 'flex',
+    margin: '0 auto',
   };
 
   return (
-    <Slider {...settings}>
+    <AliceCarousel infinite={true} autoPlay={!singleChecker} autoPlayInterval={7500} disableButtonsControls={singleChecker}>
       {media.map((image, index) => (
         <div key={index}>
-          <img src={image} alt={name} width={100} height={100} />
+            <img src={image} alt={name} style={imageStyles} />
         </div>
       ))}
-    </Slider>
+    </AliceCarousel>
   );
 };
 

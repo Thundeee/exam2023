@@ -1,3 +1,4 @@
+import React from 'react';
 import TextField from '@mui/material/TextField';
 import InputAdornment from '@mui/material/InputAdornment';
 import IconButton from '@mui/material/IconButton';
@@ -6,6 +7,13 @@ import RemoveIcon from '@mui/icons-material/Remove';
 
 const GuestField = ({ props, guests, setGuests }) => {
   const maxGuests = props;
+
+  const handleInputChange = (event) => {
+    const value = parseInt(event.target.value);
+    if (!isNaN(value) && value >= 1 && value <= maxGuests) {
+      setGuests(value);
+    }
+  };
 
   const handleIncrease = () => {
     if (guests >= maxGuests) return;
@@ -22,6 +30,7 @@ const GuestField = ({ props, guests, setGuests }) => {
       label="Number of Guests"
       type="number"
       value={guests}
+      onChange={handleInputChange}
       InputProps={{
         inputProps: {
           min: 1,

@@ -50,8 +50,8 @@ const Profile = () => {
     setModalTitle('Change profile picture');
     setModalInfo(
       <form id="changePfpForm" onSubmit={onSubmit}>
-        <input type="text" name="avatar" placeholder="Enter image URL" />
-        <Button type="submit" variant="contained">
+        <input type="text" name="avatar" placeholder="Enter image URL" aria-label='input to change profile picture' />
+        <Button type="submit" variant="contained" style={{marginLeft: '1rem'}}>
           Submit
         </Button>
       </form>
