@@ -19,6 +19,8 @@ import {
   VenueBookingForm,
   VenueButtonWrapper,
 } from "./venue.styles";
+import Loader from "../../components/Loader";
+import Errorer from "../../components/Errorer";
 
 const Venue = () => {
     const { id } = useParams();
@@ -190,20 +192,13 @@ console.log(data);
   }, [information, isItLoading, isItError, owner, setOpenModal, setModalTitle, setModalInfo, upcoming]);
   
 
-    if (isLoading) {
-        
-        return (
-        <div className="App">
+  if (isLoading) {
+    return <Loader />
+  }
 
-        <p>Loading...</p>;
-        </div>)
-    }
-    if (isError) {
-        return (
-        <div className="App">
-        <p>An error occurred. Please try again.</p>;
-        </div>)
-    }
+  if (isError) {
+    return <Errorer />
+  }
 
     return (
         <VenueContainer>

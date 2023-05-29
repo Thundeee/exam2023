@@ -12,7 +12,8 @@ import { ModalContext } from '../../context/modalContent';
 import useLocalStorage from '../../hooks/useLocalStorage';
 import { ProfilePicture, VenueWrapper, VenueInfoWrapper, VenueImageWrapper } from './profile.styles';
 import Metas from '../../components/Metas';
-
+import Loader from "../../components/Loader";
+import Errorer from "../../components/Errorer";
 const Profile = () => {
   const [userInfo, setUserInfo] = useLocalStorage('userInfo', '');
   const theme = useTheme();
@@ -114,12 +115,10 @@ const Profile = () => {
   }, [information, isItLoading, isItError,]);
 
   if (isLoading) {
-    return (
-      <div className="App">
-        <p>Loading...</p>
-      </div>
-    );
+    return <Loader />
   }
+
+
   if (!user) {
     return (
       <div className="App">
@@ -128,13 +127,8 @@ const Profile = () => {
     );
   }
   if (isError) {
-    return (
-      <div className="App">
-        <p>Error fetching data. Please try again later.</p>
-      </div>
-    );
+    return <Errorer />
   }
-
   const descDecreaser = (description) => {
     if (description.length <= 150) {
       return description;

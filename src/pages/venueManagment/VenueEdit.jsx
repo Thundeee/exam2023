@@ -28,6 +28,8 @@ import {
   
 } from "./venueCreate.styles";
 import Metas from "../../components/Metas";
+import Loader from "../../components/Loader";
+import Errorer from "../../components/Errorer";
 
 const VenueCreate = () => {
 const theme = useTheme();
@@ -43,7 +45,6 @@ const { data, isLoading, isError } = useApi(
   const [petFriendly, setpetFriendly] = useState(false);
 
   const [media, setMedia] = useState([]);
-console.log(media);
 
   let metaCollection = {
     wifi: internet,
@@ -151,10 +152,14 @@ console.log(media);
     setMedia(media.filter((item) => item !== mediaValue));
   };
 
+  if (isLoading) {
+    return <Loader />
+  }
+
   if (!token) {
     return (
       <div className="App">
-        <p>Please log in before trying to create a venue</p>
+        <p>Please log in before trying to edit a venue</p>
       </div>
     );
   }
@@ -162,15 +167,17 @@ console.log(media);
   if (!userInfo?.venueManager) {
     return (
       <div className="App">
-        <p>Only Venue managers can list venues.</p>
+        <p>Only Venue managers can edit venues.</p>
       </div>
     );
   }
 
-  
+
+  if (isError) {
+    return <Errorer />
+  }
 
   const previewData = watch();
-  console.log(data?.media);
   previewData.media = media;
 
 

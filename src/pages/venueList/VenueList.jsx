@@ -14,6 +14,8 @@ import {
   VenueImageWrapper,
 } from "./venueList.styles";
 import { debounce } from "lodash";
+import Loader from "../../components/Loader";
+import Errorer from "../../components/Errorer";
 
 
 const VenueList = () => {
@@ -56,21 +58,11 @@ const VenueList = () => {
   };
 
   if (isLoading) {
-    
-    return (
-      <div className="App">
-
-    <p>Loading...</p>;
-      
-      </div>
-    )
+    return <Loader />
   }
 
   if (isError) {
-    return(        <div className="App">
-    <p>An error occurred. Please try again.</p>;
-    </div>)
-
+    return <Errorer />
   }
 
   return (
@@ -148,7 +140,7 @@ const VenueList = () => {
         }}
       >
         {loading ? (
-          <p>loading...</p>
+          <Loader />
         ) : search.length > 0 ? (
           search.map((venue) => (
             <VenueWrapper
