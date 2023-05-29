@@ -5,18 +5,12 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { venueSchema } from "../../utils/yupSchema";
 import useCallApi from "../../hooks/useCallApi";
 import { AuthContext } from "../../context/auth";
-import { Typography, useTheme, Tooltip, Fade } from "@mui/material";
+import { Typography, useTheme } from "@mui/material";
 import defaultVenue from "../../assets/defaultVenue.webp";
 import { BASE_URL_VENUES } from "../../utils/constants";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import {Switch, Button} from "@mui/material/";
 import { ModalContext } from "../../context/modalContent";
-import WifiIcon from "@mui/icons-material/Wifi";
-import PetsIcon from "@mui/icons-material/Pets";
-import LocalParkingIcon from "@mui/icons-material/LocalParking";
-import FreeBreakfastIcon from "@mui/icons-material/FreeBreakfast";
-import CheckIcon from "@mui/icons-material/Check";
-import ClearIcon from "@mui/icons-material/Clear";
 import {
   BoxContainer,
   FormContainer,
@@ -31,6 +25,7 @@ import {
   Form
   
 } from "./venueCreate.styles";
+import Metas from "../../components/Metas";
 
 const VenueCreate = () => {
 const theme = useTheme();
@@ -44,6 +39,12 @@ const theme = useTheme();
 
   const [media, setMedia] = useState([]);
 
+  let metaCollection = {
+    wifi: internet,
+    parking: parkingSpace,
+    breakfast: breakfastMeal,
+    pets: petFriendly,
+  };
   const {
     register,
     handleSubmit,
@@ -299,72 +300,7 @@ const theme = useTheme();
           >
   {previewData.description ? previewData.description : "Your description goes here"}
           </Typography>
-          <ul>
-                  <li>
-                    <Tooltip
-                      title="WiFi"
-                      placement="right-end"
-                      arrow
-                      TransitionComponent={Fade}
-                      TransitionProps={{ timeout: 600 }}
-                    >
-                      <WifiIcon />
-                    </Tooltip>
-                    {internet ? (
-                      <CheckIcon style={{ color: "green" }} />
-                    ) : (
-                      <ClearIcon style={{ color: "red" }} />
-                    )}
-                  </li>
-                  <li>
-                    <Tooltip
-                      title="Parking"
-                      placement="right-end"
-                      arrow
-                      TransitionComponent={Fade}
-                      TransitionProps={{ timeout: 600 }}
-                    >
-                      <LocalParkingIcon />
-                    </Tooltip>
-                    {parkingSpace ? (
-                      <CheckIcon style={{ color: "green" }} />
-                    ) : (
-                      <ClearIcon style={{ color: "red" }} />
-                    )}
-                  </li>
-                  <li>
-                    <Tooltip
-                      title="Breakfast"
-                      placement="right-end"
-                      arrow
-                      TransitionComponent={Fade}
-                      TransitionProps={{ timeout: 600 }}
-                    >
-                      <FreeBreakfastIcon />
-                    </Tooltip>
-                    {breakfastMeal ? (
-                      <CheckIcon style={{ color: "green" }} />
-                    ) : (
-                      <ClearIcon style={{ color: "red" }} />
-                    )}
-                  </li>
-                  <li>
-                    <Tooltip
-                      title="Pets"
-                      placement="right-end"
-                      arrow
-                      TransitionComponent={Fade}
-                      TransitionProps={{ timeout: 600 }}
-                    >
-                      <PetsIcon />
-                    </Tooltip>
-                    {petFriendly ? (
-                      <CheckIcon style={{ color: "green" }} />
-                    ) : (
-                      <ClearIcon style={{ color: "red" }} />
-                    )}
-                  </li>
-                </ul>
+<Metas path={metaCollection} />
         </VenueInfoWrapper>
         <VenueImageWrapper>
           <img

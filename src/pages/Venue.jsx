@@ -7,6 +7,9 @@ import { Box, Button, Calendar, Text } from "grommet";
 import GuestField from "../components/formfield/GuestField";
 import { ModalContext } from "../context/modalContent";
 import { useContext } from "react";
+import MediaCarousel from '../components/Carousel';
+import Metas from "../components/Metas";
+
 const Venue = () => {
     const { id } = useParams();
     const { setOpenModal, setModalInfo, setModalTitle } =
@@ -192,7 +195,10 @@ console.log(data);
                 <p>{data?.description}</p>
                 <p>{data?.maxGuests}</p>
                 <p>{data?.name} currently has {booked.length -1} booking(s).</p>
-            </>
+                <Metas path={data?.meta} />
+                {Array.isArray(data.media) && data.media.length > 0 && (
+        <MediaCarousel media={data.media} name={data.name} />
+      )}            </>
             <form id="venueForm" onSubmit={submitter}>
                 <Box gap="small" pad="large">
                     <Box direction="row" gap="small">

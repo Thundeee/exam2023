@@ -2,7 +2,7 @@ import React, { useContext, useState, useEffect } from 'react';
 import useApi from '../../hooks/useApi';
 import { BASE_URL_PROFILES, BASE_URL_VENUES } from '../../utils/constants';
 import { AuthContext } from '../../context/auth';
-import { Typography, Button, Tooltip, Fade, useTheme, Tab, Tabs, Box } from "@mui/material";
+import { Typography, Button, useTheme, Tab, Tabs, Box } from "@mui/material";
 import defaultVenue from "../../assets/defaultVenue.webp";
 import { Link } from "react-router-dom";
 import defaultPfp from '../../assets/defaultPfp.png';
@@ -11,12 +11,7 @@ import useCallApi from '../../hooks/useCallApi';
 import { ModalContext } from '../../context/modalContent';
 import useLocalStorage from '../../hooks/useLocalStorage';
 import { ProfilePicture, VenueWrapper, VenueInfoWrapper, VenueImageWrapper } from './profile.styles';
-import WifiIcon from "@mui/icons-material/Wifi";
-import PetsIcon from "@mui/icons-material/Pets";
-import LocalParkingIcon from "@mui/icons-material/LocalParking";
-import FreeBreakfastIcon from "@mui/icons-material/FreeBreakfast";
-import CheckIcon from "@mui/icons-material/Check";
-import ClearIcon from "@mui/icons-material/Clear";
+import Metas from '../../components/Metas';
 
 const Profile = () => {
   const [userInfo, setUserInfo] = useLocalStorage('userInfo', '');
@@ -188,72 +183,8 @@ const Profile = () => {
                     >
                       {descDecreaser(booking.venue.description)}
                     </Typography>
-                    <ul>
-                      <li>
-                        <Tooltip
-                          title="WiFi"
-                          placement="right-end"
-                          arrow
-                          TransitionComponent={Fade}
-                          TransitionProps={{ timeout: 600 }}
-                        >
-                          <WifiIcon />
-                        </Tooltip>
-                        {booking.venue.meta.wifi ? (
-                          <CheckIcon style={{ color: "green" }} />
-                        ) : (
-                          <ClearIcon style={{ color: "red" }} />
-                        )}
-                      </li>
-                      <li>
-                        <Tooltip
-                          title="Parking"
-                          placement="right-end"
-                          arrow
-                          TransitionComponent={Fade}
-                          TransitionProps={{ timeout: 600 }}
-                        >
-                          <LocalParkingIcon />
-                        </Tooltip>
-                        {booking.venue.meta.parking ? (
-                          <CheckIcon style={{ color: "green" }} />
-                        ) : (
-                          <ClearIcon style={{ color: "red" }} />
-                        )}
-                      </li>
-                      <li>
-                        <Tooltip
-                          title="Breakfast"
-                          placement="right-end"
-                          arrow
-                          TransitionComponent={Fade}
-                          TransitionProps={{ timeout: 600 }}
-                        >
-                          <FreeBreakfastIcon />
-                        </Tooltip>
-                        {booking.venue.meta.breakfast ? (
-                          <CheckIcon style={{ color: "green" }} />
-                        ) : (
-                          <ClearIcon style={{ color: "red" }} />
-                        )}
-                      </li>
-                      <li>
-                        <Tooltip
-                          title="Pets"
-                          placement="right-end"
-                          arrow
-                          TransitionComponent={Fade}
-                          TransitionProps={{ timeout: 600 }}
-                        >
-                          <PetsIcon />
-                        </Tooltip>
-                        {booking.venue.meta.pets ? (
-                          <CheckIcon style={{ color: "green" }} />
-                        ) : (
-                          <ClearIcon style={{ color: "red" }} />
-                        )}
-                      </li>
-                    </ul>
+                    <Metas path={booking.venue.meta} />
+
                   </VenueInfoWrapper>
                   <VenueImageWrapper>
                     <img
@@ -314,72 +245,7 @@ const Profile = () => {
                     >
                       {descDecreaser(venue.description)}
                     </Typography>
-                    <ul>
-                      <li>
-                        <Tooltip
-                          title="WiFi"
-                          placement="right-end"
-                          arrow
-                          TransitionComponent={Fade}
-                          TransitionProps={{ timeout: 600 }}
-                        >
-                          <WifiIcon />
-                        </Tooltip>
-                        {venue.meta.wifi ? (
-                          <CheckIcon style={{ color: "green" }} />
-                        ) : (
-                          <ClearIcon style={{ color: "red" }} />
-                        )}
-                      </li>
-                      <li>
-                        <Tooltip
-                          title="Parking"
-                          placement="right-end"
-                          arrow
-                          TransitionComponent={Fade}
-                          TransitionProps={{ timeout: 600 }}
-                        >
-                          <LocalParkingIcon />
-                        </Tooltip>
-                        {venue.meta.parking ? (
-                          <CheckIcon style={{ color: "green" }} />
-                        ) : (
-                          <ClearIcon style={{ color: "red" }} />
-                        )}
-                      </li>
-                      <li>
-                        <Tooltip
-                          title="Breakfast"
-                          placement="right-end"
-                          arrow
-                          TransitionComponent={Fade}
-                          TransitionProps={{ timeout: 600 }}
-                        >
-                          <FreeBreakfastIcon />
-                        </Tooltip>
-                        {venue.meta.breakfast ? (
-                          <CheckIcon style={{ color: "green" }} />
-                        ) : (
-                          <ClearIcon style={{ color: "red" }} />
-                        )}
-                      </li>
-                      <li>
-                        <Tooltip
-                          title="Pets"
-                          placement="right-end"
-                          arrow
-                          TransitionComponent={Fade}
-                          TransitionProps={{ timeout: 600 }}
-                        >
-                          <PetsIcon />
-                        </Tooltip>
-                        {venue.meta.pets ? (
-                          <CheckIcon style={{ color: "green" }} />
-                        ) : (
-                          <ClearIcon style={{ color: "red" }} />
-                        )}
-                      </li>
-                    </ul>
+                  <Metas path={venue.meta} />
                   </VenueInfoWrapper>
                   <VenueImageWrapper>
                     <img
