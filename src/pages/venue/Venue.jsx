@@ -2,7 +2,7 @@ import useApi from "../../hooks/useApi";
 import useCallApi from "../../hooks/useCallApi";
 import { BASE_URL_VENUES, BASE_URL_BOOKINGS } from "../../utils/constants";
 import { useParams } from "react-router-dom";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState, useMemo, useCallback } from "react";
 import { Box as GrommetBox, Button as GrommetButton, Calendar as GrommetCalendar, Text as GrommetText} from "grommet";
 import {Button} from "@mui/material";
 import { Typography } from "@mui/material";
@@ -35,10 +35,14 @@ const Venue = () => {
     const [guests, setGuests] = useState(1);
     const [owner, setOwner] = useState();
 
-    const today = new Date();
-    const yesterday = new Date(today);
-    yesterday.setDate(yesterday.getDate() - 1);
-    const thePast = ["1970-01-01", yesterday.toISOString().split("T")[0]];
+    const yesterday = useMemo(() => {
+      const today = new Date();
+      const yesterday = new Date(today);
+      yesterday.setDate(yesterday.getDate() - 1);
+      return yesterday;
+    }, []);
+    const thePast = useMemo(() => ["1970-01-01", yesterday.toISOString().split("T")[0]], [yesterday]);
+    const userInfo = JSON.parse(localStorage.getItem("userInfo"));
 
     useEffect(() => {
         if (data) {
@@ -56,8 +60,7 @@ const Venue = () => {
             }
             
         }
-    }, [data]);
-    const userInfo = JSON.parse(localStorage.getItem("userInfo"));
+    }, [data, thePast, userInfo?.name]);
 
     async function submitter(event) {
         event.preventDefault();
@@ -93,7 +96,7 @@ const Venue = () => {
                 "Booking was created, you can view it in your profile! Enjoy your stay!"
             );
         }
-    }, [information, isItLoading, isItError]);
+    }, [information, isItLoading, isItError, owner, setOpenModal, setModalTitle, setModalInfo]);
 
     function dateCheck(dateArray) {
         if (!dateArray || !dateArray[0][0] || !dateArray[0][1]) {
@@ -129,31 +132,8 @@ const Venue = () => {
     const startDateButton = useRef();
     const endDateButton = useRef();
 console.log(data);
- async function upcoming() {
 
-
-    setModalTitle(`Upcoming bookings for ${data.name}`);
-    setModalInfo(
-        data.bookings.map((booking) => {
-            return (
-                <div style={{marginBottom: '10px', border: '1px black solid', textAlign: 'center'}}>
-                    <p>
-                        {new Date(booking.dateFrom).toDateString()} - {new Date(booking.dateTo).toDateString()}
-                    </p>
-                    <p>Guests: {booking.guests}</p>
-                    <Button onClick={() => moreInfo(booking.id)} variant="contained"
-            color="primary"style={{marginBottom: '1rem'}}>More info</Button>
-                </div>
-            
-
-    );
-            })
-        );
-    setOpenModal(true);
- }
-
-
- async function moreInfo(BookId) {
+ const moreInfo = useCallback(async(BookId) => {
     const options = {
         method: "GET",
         headers: {
@@ -162,7 +142,31 @@ console.log(data);
         },
     };
     await startFetch(BASE_URL_BOOKINGS  + BookId + '?_customer=true', options);
- }
+ }, [startFetch, userInfo.accessToken]);
+
+
+ const upcoming = useCallback(async () => {
+
+
+  setModalTitle(`Upcoming bookings for ${data.name}`);
+  setModalInfo(
+      data.bookings.map((booking) => {
+          return (
+              <div style={{marginBottom: '10px', border: '1px black solid', textAlign: 'center'}}>
+                  <p>
+                      {new Date(booking.dateFrom).toDateString()} - {new Date(booking.dateTo).toDateString()}
+                  </p>
+                  <p>Guests: {booking.guests}</p>
+                  <Button onClick={() => moreInfo(booking.id)} variant="contained"
+          color="primary"style={{marginBottom: '1rem'}}>More info</Button>
+              </div>
+          
+
+  );
+          })
+      );
+  setOpenModal(true);
+}, [ data, setModalInfo, setModalTitle, setOpenModal, moreInfo ]);
 
  useEffect(() => {
     if (information && !isItLoading && !isItError && owner) {
@@ -182,7 +186,7 @@ console.log(data);
         </>
       );
     }
-  }, [information, isItLoading, isItError]);
+  }, [information, isItLoading, isItError, owner, setOpenModal, setModalTitle, setModalInfo, upcoming]);
   
 
     if (isLoading) {

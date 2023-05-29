@@ -10,7 +10,7 @@ import { ModalContext } from "../context/modalContent";
 
 
 const InfoModal = ({ open, handleClose }) => {
-  const { modalInfo, modalTitle, rerender } = useContext(ModalContext);
+  const { modalInfo, modalTitle } = useContext(ModalContext);
   const theme = useTheme();
 
   // Define styles for the modal

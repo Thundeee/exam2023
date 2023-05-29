@@ -26,6 +26,7 @@ const useApi = (url, options = {}) => {
     };
 
     accesData();
+    //eslint-disable-next-line
   }, [url]);
 
   return { data, isLoading, isError };

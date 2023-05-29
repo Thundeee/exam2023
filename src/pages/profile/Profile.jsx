@@ -16,6 +16,7 @@ import Metas from '../../components/Metas';
 const Profile = () => {
   const [userInfo, setUserInfo] = useLocalStorage('userInfo', '');
   const theme = useTheme();
+  //eslint-disable-next-line
   const { token } = useContext(AuthContext);
   const { setOpenModal, setModalInfo, setModalTitle } = useContext(ModalContext);
   const { startFetch, information, isItLoading, isItError } = useCallApi();
@@ -109,7 +110,7 @@ const Profile = () => {
       setModalInfo('Your profile picture has been changed!');
       setUserInfo((userInfo) => ({ ...userInfo, avatar: information.avatar }));
     }
-  }, [information, isItLoading, isItError]);
+  }, [information, isItLoading, isItError, setUserInfo, setOpenModal, setModalTitle, setModalInfo]);
 
   if (isLoading) {
     return (

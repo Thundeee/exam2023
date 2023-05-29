@@ -110,7 +110,7 @@ const theme = useTheme();
       setModalTitle("Success!");
       setModalInfo("Venue was created");
     }
-  }, [information, isItLoading, isItError]);
+  }, [information, isItLoading, isItError, setOpenModal, setModalInfo, setModalTitle]);
 
   const handleMediaInputChange = (event) => {
     const imageValue = event.target.value;
