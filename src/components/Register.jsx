@@ -94,7 +94,7 @@ const Register = (props) => {
           errors={errors}
         />
         <Button type="submit" variant="contained" color="primary">
-          Submit
+          Register
         </Button>
       </form>
     </div>

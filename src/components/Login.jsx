@@ -79,7 +79,7 @@ const Login = (props) => {
           errors={errors}
         />
         <Button type="submit" variant="contained" color="primary">
-          Submit
+          Login
         </Button>
       </form>
     </div>

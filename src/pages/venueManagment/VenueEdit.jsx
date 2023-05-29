@@ -359,7 +359,7 @@ const VenueCreate = () => {
 
             <ButtonContainer>
               <Button type="submit" variant="contained" color="primary">
-                Submit
+                Edit Venue
               </Button>
             </ButtonContainer>
           </Form>

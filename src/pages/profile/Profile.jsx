@@ -75,7 +75,7 @@ const Profile = () => {
           variant="contained"
           style={{ marginLeft: "1rem" }}
         >
-          Submit
+          Confirm
         </Button>
       </form>
     );

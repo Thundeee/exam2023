@@ -4,7 +4,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ## Setup
 
-To run this project you  need to have [Node.js](https://nodejs.org/en/) installed.
+To run this project you need to have [Node.js](https://nodejs.org/en/) installed.
 
 
 ### `npm i`
@@ -39,11 +39,11 @@ The Gantt chart was used for project timing in this project. It was created usin
 
 ### Design Prototypes
 
-Wireframes and Design Prototype can be found here on [Figma](https://www.figma.com/)
+Wireframes and Design Prototype can be found here on [Figma](https://www.figma.com/file/kalQPF9eeccoghl9QtIsm7/Holidaze?type=design&node-id=0%3A1&t=iRLhWPnLWfyYyy2Y-1)
 
 ### Style Guide
 
-The style guide can also be found here on [Figma](https://www.figma.com/)
+The style guide can also be found here on [Figma](https://www.figma.com/file/kalQPF9eeccoghl9QtIsm7/Holidaze?type=design&node-id=0%3A1&t=iRLhWPnLWfyYyy2Y-1) under the page: "Styletile".
 
 ### Kanban board
 
@@ -59,13 +59,47 @@ The repository for this project can be found here on [Github](https://github.com
 
 ### Hosting
 
-The project is hosted on [Netlify](https://www.netlify.com/)
+The project is hosted on [Netlify](https://lustrous-dodol-648b21.netlify.app/)
+
+## Resources
+
+### Javascript Framework
+
+This project was made using [React](https://reactjs.org/)
+
+### Javascript Libraries
+
+[React Router](https://reactrouter.com/) was used for routing in this project.
+
+[React Hook Form](https://react-hook-form.com/) was used for form validation in this project.
+
+[Yup](https://github.com/jquense/yup) was used for form validation in this project.
+
+[Lodash](https://lodash.com/) was used for debouncing in this project.
+
+[react-alice-carousel](https://github.com/maxmarinich/react-alice-carousel) was used for the carousel in this project.
+
+
+### Css Framework
+
+This project was made using mostly [Material-UI](https://material-ui.com/) and [Styled Components](https://styled-components.com/)\
+[Grommet](https://v2.grommet.io/) was also used for Calendar components.
 
 ## Extra
+
+### Note from developer
+Under this project I focused mostly on the functionality of the website and not as much on the design.\
+Since this is a school project The website only gets 100 venues from the API starting at the bottom of the list.\
+This makes it hard to search for venues that are not in the bottom of the list.\
+If this was a real project the API would be changed to allow for more venues to be fetched at once or to allow for searching for venues.\
+I would also use pagination for the venues and implemented lazy loading for the images.\
+Filters were also not implemented in this project since it was not a requirement for the project but would be a good addition to the project.
 
 ### Pictures
 
 All pictures used in this project are from [Unsplash](https://unsplash.com/)
+
+
 
 ### Difference from design prototype
 
