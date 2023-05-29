@@ -1,7 +1,7 @@
 import React, { createContext, useState } from "react";
 
 export const ModalContext = createContext();
-
+// Context to display modal with information
 export const ModalContentProvider = ({ children }) => {
   const [modalInfo, setModalInfo] = useState("qwdqwdqx");
   const [modalTitle, setModalTitle] = useState("ssaddqqwd");

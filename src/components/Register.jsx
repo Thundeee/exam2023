@@ -11,6 +11,7 @@ import { BASE_URL_AUTH } from "../utils/constants";
 import { ModalContext } from "../context/modalContent";
 import { useContext } from "react";
 
+// The Register component that allows users to register to the website via a drawer.
 const Register = (props) => {
   const { setOpenModal, setModalInfo, setModalTitle } =
     useContext(ModalContext);
@@ -41,6 +42,8 @@ const Register = (props) => {
     await startFetch(BASE_URL_AUTH + "register", options);
     console.log(registrationData);
   }
+
+  //useEffect to check if the user has registered successfully.
   useEffect(() => {
     if (information && !isItLoading && !isItError) {
       setOpenModal(true);

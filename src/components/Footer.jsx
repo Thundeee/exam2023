@@ -1,6 +1,7 @@
 import { Typography } from "@mui/material";
 import { useTheme } from "@mui/material";
 
+// The footer component that displays the current year and the copyright.
 const Footer = () => {
   const theme = useTheme();
   return (

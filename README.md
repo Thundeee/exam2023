@@ -2,13 +2,20 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
+## Setup
 
-In the project directory, you can run:
+To run this project you  need to have [Node.js](https://nodejs.org/en/) installed.
+
+
+### `npm i`
+
+Installs all dependencies for the project.
+
 
 ### `npm start`
 
 Runs the app in the development mode.\
+If you want to run for production skip this step.\
 Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
 The page will reload when you make changes.\
@@ -24,9 +31,48 @@ Your app is ready to be deployed!
 
 See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-## Todo
+## Planning
 
- 1. A user may view a list of Venues ✔️
+### Gantt Chart
+
+The Gantt chart was used for project timing in this project. It was created using [Github Projects](https://github.com/users/Thundeee/projects/4/views/2)
+
+### Design Prototypes
+
+Wireframes and Design Prototype can be found here on [Figma](https://www.figma.com/)
+
+### Style Guide
+
+The style guide can also be found here on [Figma](https://www.figma.com/)
+
+### Kanban board
+
+The Kanban board was used for project management in this project. It was created using [Github Projects](https://github.com/users/Thundeee/projects/4/views/1)/
+The Kanban has been my primary resource for project management while working on this project.
+
+## Project
+
+### Repository
+
+The repository for this project can be found here on [Github](https://github.com/Thundeee/exam2023)
+
+
+### Hosting
+
+The project is hosted on [Netlify](https://www.netlify.com/)
+
+## Extra
+
+### Pictures
+
+All pictures used in this project are from [Unsplash](https://unsplash.com/)
+
+### Difference from design prototype
+
+The design prototype was made before the project was started. The design prototype was made with the intention of being a guide for the project and was not followed 100% as the project progressed. It was used as a guide for the project and was changed as the project progressed. The design prototype was mostly not updated to reflect the changes made to the project.
+
+### User Stories
+1. A user may view a list of Venues ✔️
 2. A user may search for a specific Venue ✔️
 3. A user may view a specific Venue page by id ✔️
 4. A user may view a calendar with available dates for a Venue ✔️

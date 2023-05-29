@@ -8,6 +8,7 @@ import { useTheme } from "@mui/material";
 import { useContext } from "react";
 import { ModalContext } from "../context/modalContent";
 
+// The Modal component that displays bunch of  information to the user, also used for chaning pfp.
 const InfoModal = ({ open, handleClose }) => {
   const { modalInfo, modalTitle } = useContext(ModalContext);
   const theme = useTheme();

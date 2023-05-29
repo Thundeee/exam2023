@@ -24,6 +24,7 @@ const VenueList = () => {
   const [search, setSearch] = useState([]);
   const [loading, setLoading] = useState(true);
 
+  // useEffect to set the search state to the data state when the data loads.
   useEffect(() => {
     if (data) {
       setSearch(data);
@@ -31,6 +32,7 @@ const VenueList = () => {
     }
   }, [data]);
 
+  //debounce function to delay the search function to prevent lag.
   const delayedSearch = debounce((value) => {
     const searchFilter = data.filter(
       (item) =>
@@ -40,10 +42,13 @@ const VenueList = () => {
     setSearch(searchFilter);
   }, 250);
 
+  //function to call the debounce function.
   const handleSearch = (event) => {
     const value = event.target.value.toLowerCase();
     delayedSearch(value);
   };
+
+  //function to decrease the description length.
   const descDecreaser = (description) => {
     if (description.length <= 150) {
       return description;

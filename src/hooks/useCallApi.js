@@ -1,6 +1,7 @@
 import { useState, useContext } from "react";
 import { ModalContext } from "../context/modalContent";
 
+// Custom hook to call the API inside functions
 const useCallApi = () => {
   const { setModalInfo, setModalTitle, setOpenModal } =
     useContext(ModalContext);

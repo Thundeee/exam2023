@@ -7,6 +7,7 @@ import CheckIcon from "@mui/icons-material/Check";
 import ClearIcon from "@mui/icons-material/Clear";
 import { Tooltip, Fade } from "@mui/material/";
 
+// A component that displays all the "meta" stuff for a venue.
 const Metas = ({ path }) => {
   return (
     <ul>

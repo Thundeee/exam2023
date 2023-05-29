@@ -4,6 +4,7 @@ import AlertTitle from "@mui/material/AlertTitle";
 import { Link } from "react-router-dom";
 import { Button } from "@mui/material";
 
+// An universal Error component that displays an error message and a button to return to the home page.
 const Errorer = () => {
   return (
     <div

@@ -5,6 +5,7 @@ import IconButton from "@mui/material/IconButton";
 import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
 
+// A GuestField component that allows users to select the number of guests for a reservation.
 const GuestField = ({ props, guests, setGuests }) => {
   const maxGuests = props;
 

@@ -5,7 +5,13 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { venueSchema } from "../../utils/yupSchema";
 import useCallApi from "../../hooks/useCallApi";
 import { AuthContext } from "../../context/auth";
-import { Typography, useTheme, Switch, Button, FormControlLabel } from "@mui/material";
+import {
+  Typography,
+  useTheme,
+  Switch,
+  Button,
+  FormControlLabel,
+} from "@mui/material";
 import defaultVenue from "../../assets/defaultVenue.webp";
 import { BASE_URL_VENUES } from "../../utils/constants";
 import { ModalContext } from "../../context/modalContent";
@@ -57,6 +63,7 @@ const VenueCreate = () => {
 
   const { startFetch, information, isItLoading, isItError } = useCallApi();
 
+  // submit function that sends the new venue to the api
   const onSubmit = async (venueData) => {
     console.log(venueData);
     if (media[0]) {
@@ -102,6 +109,7 @@ const VenueCreate = () => {
     await startFetch(BASE_URL_VENUES, options);
   };
 
+  // if the api call is successful, a modal will pop up
   useEffect(() => {
     if (information && !isItLoading && !isItError) {
       setOpenModal(true);
@@ -117,6 +125,7 @@ const VenueCreate = () => {
     setModalTitle,
   ]);
 
+  //Checks if the image is a valid url and adds it to the media array
   const handleMediaInputChange = (event) => {
     const imageValue = event.target.value;
     if (
@@ -127,6 +136,7 @@ const VenueCreate = () => {
     }
   };
 
+  //Removes the image from the media array via button click
   const removeMedia = (mediaValue) => {
     setMedia(media.filter((item) => item !== mediaValue));
   };
@@ -147,6 +157,7 @@ const VenueCreate = () => {
     );
   }
 
+  //watching the form data for changes making the preview in real time
   const previewData = watch();
   previewData.media = media;
 
@@ -250,7 +261,7 @@ const VenueCreate = () => {
               />
               {media.map((mediaItem, index) => (
                 <div key={index}>
-                  <img src={mediaItem} alt={`Media ${index}`} />
+                  <img src={mediaItem} alt={`Media item ${index}`} />
                   <button onClick={() => removeMedia(mediaItem)}>Remove</button>
                 </div>
               ))}

@@ -7,7 +7,13 @@ import { venueSchema } from "../../utils/yupSchema";
 import useApi from "../../hooks/useApi";
 import useCallApi from "../../hooks/useCallApi";
 import { AuthContext } from "../../context/auth";
-import { Typography, useTheme, Switch, Button, FormControlLabel } from "@mui/material";
+import {
+  Typography,
+  useTheme,
+  Switch,
+  Button,
+  FormControlLabel,
+} from "@mui/material";
 import defaultVenue from "../../assets/defaultVenue.webp";
 import { BASE_URL_VENUES } from "../../utils/constants";
 import { ModalContext } from "../../context/modalContent";
@@ -60,6 +66,7 @@ const VenueCreate = () => {
     resolver: yupResolver(venueSchema),
   });
 
+  //UseEffect to set the form fields to the data from the venue when data loads.
   useEffect(() => {
     if (data) {
       setValue("name", data.name);
@@ -75,8 +82,6 @@ const VenueCreate = () => {
       setValue("city", data.location.city);
       setValue("country", data.location.country);
       setValue("zip", data.location.zip);
-
-      // Set other form fields using setValue
     }
   }, [data, setValue]);
 
@@ -84,6 +89,7 @@ const VenueCreate = () => {
 
   const { startFetch, information, isItLoading, isItError } = useCallApi();
 
+  // submit function that sends the PUT request to the API.
   const onSubmit = async (venueData) => {
     console.log(venueData);
     if (media[0]) {
@@ -129,6 +135,7 @@ const VenueCreate = () => {
     await startFetch(BASE_URL_VENUES + id, options);
   };
 
+  // useEffect that checks if the PUT request was successful and if so, opens a modal.
   useEffect(() => {
     if (information && !isItLoading && !isItError) {
       setOpenModal(true);
@@ -144,6 +151,7 @@ const VenueCreate = () => {
     setModalTitle,
   ]);
 
+  // checks if the image url is valid and if so, adds it to the media array.
   const handleMediaInputChange = (event) => {
     const imageValue = event.target.value;
     if (
@@ -154,6 +162,7 @@ const VenueCreate = () => {
     }
   };
 
+  // removes the image from the media array via button click.
   const removeMedia = (mediaValue) => {
     setMedia(media.filter((item) => item !== mediaValue));
   };
@@ -298,7 +307,7 @@ const VenueCreate = () => {
               />
               {media.map((mediaItem, index) => (
                 <div key={index}>
-                  <img src={mediaItem} alt={`Media ${index}`} />
+                  <img src={mediaItem} alt={`Media item ${index}`} />
                   <button onClick={() => removeMedia(mediaItem)}>Remove</button>
                 </div>
               ))}

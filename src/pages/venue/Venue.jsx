@@ -46,6 +46,7 @@ const Venue = () => {
   const [guests, setGuests] = useState(1);
   const [owner, setOwner] = useState();
 
+  // calculates all dates in the past to be disabled in the calendar
   const yesterday = useMemo(() => {
     const today = new Date();
     const yesterday = new Date(today);
@@ -58,6 +59,7 @@ const Venue = () => {
   );
   const userInfo = JSON.parse(localStorage.getItem("userInfo"));
 
+  // sets the dates that are booked to be disabled in the calendar
   useEffect(() => {
     if (data) {
       const bookingDates = data.bookings.map((booking) => {
@@ -66,15 +68,17 @@ const Venue = () => {
           new Date(booking.dateTo).toISOString().split("T")[0],
         ];
       });
-
+      // adds the past dates to the array of booked dates
       const allBookedDates = [thePast, ...bookingDates];
       setBooked(allBookedDates);
+      // checks if the user is the owner of the venue
       if (data.owner.name === userInfo?.name) {
         setOwner(data.owner);
       }
     }
   }, [data, thePast, userInfo?.name]);
 
+  // function to handle submit, checks if the user has picked 2 dates and sends the booking request
   async function submitter(event) {
     event.preventDefault();
     if (!pickedDates || !pickedDates[0][0] || !pickedDates[0][1]) {
@@ -100,6 +104,8 @@ const Venue = () => {
     console.log(options);
     await startFetch(BASE_URL_BOOKINGS, options);
   }
+
+  // checks if the booking was successful and displays a modal
   useEffect(() => {
     if (information && !isItLoading && !isItError && !owner) {
       setOpenModal(true);
@@ -118,6 +124,7 @@ const Venue = () => {
     setModalInfo,
   ]);
 
+  // checks the dates picked by the user and displays a modal if the dates are invalid (having a booking inbetween)
   function dateCheck(dateArray) {
     if (!dateArray || !dateArray[0][0] || !dateArray[0][1]) {
       return;
@@ -126,8 +133,6 @@ const Venue = () => {
     const startDate = dateArray[0][0];
     const endDate = dateArray[0][1];
 
-    console.log(startDate);
-    console.log(endDate);
     const hasBookedDateBetween = booked.some((booking) => {
       const [bookingStartDate, bookingEndDate] = booking;
       return (
@@ -150,8 +155,8 @@ const Venue = () => {
 
   const startDateButton = useRef();
   const endDateButton = useRef();
-  console.log(data);
 
+  // Api call to get the booking info for the venue by the owner
   const moreInfo = useCallback(async (BookId) => {
     const options = {
       method: "GET",
@@ -164,6 +169,7 @@ const Venue = () => {
     //eslint-disable-next-line
   }, []);
 
+  // displays a modal with the upcoming bookings for the venue. Only for the owner
   const upcoming = useCallback(async () => {
     setModalTitle(`Upcoming bookings for ${data.name}`);
     setModalInfo(
@@ -196,6 +202,7 @@ const Venue = () => {
     setOpenModal(true);
   }, [data, setModalInfo, setModalTitle, setOpenModal, moreInfo]);
 
+  // displays a modal with the booking info for owner after pressing the more info button
   useEffect(() => {
     if (information && !isItLoading && !isItError && owner) {
       console.log(information);
@@ -344,9 +351,13 @@ const Venue = () => {
                 setGuests={setGuests}
               />
               <VenueButtonWrapper>
-                <Button type="submit" variant="contained" color="primary">
-                  Book Venue!
-                </Button>
+                {userInfo?.accessToken ? (
+                  <Button type="submit" variant="contained" color="primary">
+                    Book Venue!
+                  </Button>
+                ) : (
+                  <p>Please login to book a Venue.</p>
+                )}
               </VenueButtonWrapper>
             </>
           )}

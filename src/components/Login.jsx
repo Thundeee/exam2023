@@ -11,6 +11,7 @@ import { AuthContext } from "../context/auth";
 import { ModalContext } from "../context/modalContent";
 import defaultPfp from "../assets/defaultPfp.png";
 
+// The Login component that allows users to login to the website via a drawer.
 const Login = (props) => {
   const { setOpenModal, setModalInfo, setModalTitle } =
     useContext(ModalContext);
@@ -42,6 +43,7 @@ const Login = (props) => {
     await startFetch(BASE_URL_AUTH + "login", options);
   }
 
+  //useEffect to check if the user has logged in successfully.
   useEffect(() => {
     if (information && !isItLoading && !isItError) {
       if (!information.avatar) {

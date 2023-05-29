@@ -6,7 +6,7 @@ import {
   TextArea,
   ErrorMessage,
 } from "./styles";
-
+// A FormField component able to handle both text inputs and textareas. It is Yup + React Hook Form compatible, making it easy to use with the Form component.
 const FormField = ({
   name,
   label,

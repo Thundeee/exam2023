@@ -30,6 +30,8 @@ const Profile = () => {
   const { startFetch, information, isItLoading, isItError } = useCallApi();
 
   const user = JSON.parse(localStorage.getItem("userInfo"));
+
+  //readies the options if the user is logged in (should always be true)
   let options;
   let name;
   if (user) {
@@ -79,6 +81,7 @@ const Profile = () => {
     );
   };
 
+  // checks the new pfp link and sends it to the API
   async function onSubmit(event) {
     event.preventDefault();
     let link = {};
@@ -118,6 +121,7 @@ const Profile = () => {
     data.venues = data.venues.filter((venue) => venue.id !== id);
   };
 
+  // checks if pfp change was successful and updates the user info
   useEffect(() => {
     if (information && !isItLoading && !isItError) {
       if (!information.avatar) {
@@ -145,6 +149,8 @@ const Profile = () => {
   if (isError) {
     return <Errorer />;
   }
+
+  // decreases the description length if it's long
   const descDecreaser = (description) => {
     if (description.length <= 150) {
       return description;

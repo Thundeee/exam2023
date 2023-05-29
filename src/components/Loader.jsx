@@ -1,6 +1,7 @@
 import React from "react";
 import CircularProgress from "@mui/material/CircularProgress";
 
+// An Universal Loader component that displays a loading spinner.
 const Loader = () => {
   return (
     <div
