@@ -60,7 +60,7 @@ const Login = (props) => {
       setModalInfo('Welcome ' + information.name);
       props.children(false)
     }
-    //eslint-disable-next-line
+    // eslint-disable-next-line
   }, [information, isItLoading, isItError]);
     return (
 <div>

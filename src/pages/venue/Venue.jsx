@@ -142,7 +142,8 @@ console.log(data);
         },
     };
     await startFetch(BASE_URL_BOOKINGS  + BookId + '?_customer=true', options);
- }, [startFetch, userInfo.accessToken]);
+    //eslint-disable-next-line
+ }, []);
 
 
  const upcoming = useCallback(async () => {

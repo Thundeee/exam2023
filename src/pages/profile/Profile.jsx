@@ -110,7 +110,8 @@ const Profile = () => {
       setModalInfo('Your profile picture has been changed!');
       setUserInfo((userInfo) => ({ ...userInfo, avatar: information.avatar }));
     }
-  }, [information, isItLoading, isItError, setUserInfo, setOpenModal, setModalTitle, setModalInfo]);
+    //eslint-disable-next-line
+  }, [information, isItLoading, isItError,]);
 
   if (isLoading) {
     return (

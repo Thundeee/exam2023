@@ -51,7 +51,7 @@ const Register = (props) => {
       props.children(false)
 
     }
-    //eslint-disable-next-line
+    // eslint-disable-next-line
   }, [information, isItLoading, isItError]);
   return (
     <div>
